@@ -107,8 +107,9 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 ## 8. Current Status
 - [x] Project folder + this file created (Day 0)
 - [x] Scope analysis vs official statement + decisions locked (project rollup, Folium, alerts, FastAPI, mock RBAC, incremental training)
-- [ ] schema.json
-- [ ] data_generator.py + generated data
+- [x] schema.json (3 tables + villages + hidden admin_capacity confound, all fields tagged)
+- [x] data_generator.py + generated data (100k parcels / 5k projects / 227 villages + live subset)
+- [x] sanity_check.py (volumes, rule recovery, confound leak check, overrun-while-ongoing eyeball)
 - [ ] features.py + train.py + models
 - [ ] SHAP + cold-start validation
 - [ ] INTERFACES.md (prediction contract + API spec)

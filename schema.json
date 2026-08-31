@@ -1,0 +1,100 @@
+{
+  "name": "SIH26017 land acquisition schema",
+  "version": "1.0",
+  "description": "Column definitions for the SIH26017 early-warning system. Mirrors HimBhoomi-style land records + RFCTLARR lifecycle timelines.",
+  "granularity": {
+    "atomic_unit": "parcel",
+    "rollup_path": ["parcel", "project", "village", "tehsil", "district", "state"],
+    "note": "Parcel is atomic; project/village/district/state risk is a weighted rollup."
+  },
+  "stages": ["SIA", "NOTIFICATION", "DECLARATION", "AWARD", "POSSESSION"],
+  "statutory_days": {
+    "SIA": 180,
+    "NOTIFICATION": 60,
+    "DECLARATION": 365,
+    "AWARD": 365,
+    "POSSESSION": 90,
+    "note": "RFCTLARR-aligned. Declaration/Award are <=12 months; Notification/Possession are shorter administrative steps."
+  },
+  "target": {
+    "delay_days": "actual_days - statutory_days (per stage). Positive = overrun. Computed ONLY for completed stages.",
+    "delay_flag": "1 if delay_days > 0 else 0 (per stage, binary classification target).",
+    "overrun_while_ongoing": "1 if status=ongoing AND elapsed_days > statutory_days (live money-shot signal, not a training target)."
+  },
+  "field_roles": {
+    "identifier": "primary/foreign key, never a feature",
+    "feature": "used as model input",
+    "geo_only": "geographic identifier used for rollup/validation/map; STRIPPED before training",
+    "hidden": "present in data but NEVER a feature and NEVER exposed (confound for cold-start stress test)",
+    "support": "auxiliary column needed to compute/derive target (not a feature)"
+  },
+  "hidden_fields": ["district_admin_capacity"],
+  "tables": {
+    "districts": {
+      "description": "District-level metadata. district_admin_capacity is the HIDDEN confound.",
+      "fields": [
+        {"name": "state", "dtype": "string", "role": "geo_only", "domain": "Himachal Pradesh (demo pilot)", "description": "State name"},
+        {"name": "district", "dtype": "string", "role": "geo_only", "domain": "12 HP districts", "description": "District name"},
+        {"name": "admin_capacity", "dtype": "float", "role": "hidden", "domain": "0.0-1.0", "description": "Hidden administrative capacity; drives between-district delay variance; NOT exposed to models or UI"}
+      ]
+    },
+    "projects": {
+      "description": "Project-level record. One land acquisition project aggregates many parcels.",
+      "fields": [
+        {"name": "project_id", "dtype": "string", "role": "identifier", "description": "Unique project key (e.g. PRJ_00001)"},
+        {"name": "project_type", "dtype": "category", "role": "feature", "domain": ["road", "rail", "irrigation", "dam", "industrial"], "description": "Type of infrastructure project; drives base pace"},
+        {"name": "affected_families", "dtype": "int", "role": "feature", "domain": "0-5000", "description": "Number of families affected (R&R dimension)"},
+        {"name": "compensation_status", "dtype": "category", "role": "feature", "domain": ["pending", "partial", "paid"], "description": "Compensation disbursement status"},
+        {"name": "rehab_progress_pct", "dtype": "float", "role": "feature", "domain": "0-100", "description": "Rehabilitation & resettlement progress percentage"},
+        {"name": "stakeholder_responsiveness", "dtype": "float", "role": "feature", "domain": "0.0-1.0", "description": "Responsiveness score of stakeholders/authorities"},
+        {"name": "historical_performance_score", "dtype": "float", "role": "feature", "domain": "0.0-1.0", "description": "Dept/region historical track-record score"},
+        {"name": "state", "dtype": "string", "role": "geo_only", "description": "State"},
+        {"name": "district", "dtype": "string", "role": "geo_only", "description": "District"},
+        {"name": "tehsil", "dtype": "string", "role": "geo_only", "description": "Tehsil"}
+      ]
+    },
+    "parcels": {
+      "description": "Parcel-level land record (HimBhoomi-style).",
+      "fields": [
+        {"name": "parcel_id", "dtype": "string", "role": "identifier", "description": "Unique parcel key (e.g. PRCL_0000001)"},
+        {"name": "project_id", "dtype": "string", "role": "identifier", "description": "FK to projects"},
+        {"name": "khasra_number", "dtype": "string", "role": "identifier", "description": "Khasra/revenue record number (not a model feature)"},
+        {"name": "owner_count", "dtype": "int", "role": "feature", "domain": "1-30", "description": "Number of joint owners (consent complexity)"},
+        {"name": "land_class", "dtype": "category", "role": "feature", "domain": ["agri", "orchard", "barren", "residential"], "description": "Land use classification"},
+        {"name": "area_sqm", "dtype": "float", "role": "feature", "domain": ">0", "description": "Parcel area in square meters"},
+        {"name": "pending_mutations", "dtype": "int", "role": "feature", "domain": "0-10", "description": "Pending mutation (ownership-transfer) count"},
+        {"name": "court_stay", "dtype": "int", "role": "feature", "domain": "0/1", "description": "Active court stay flag"},
+        {"name": "encumbrances", "dtype": "int", "role": "feature", "domain": "0-5", "description": "Number of encumbrances/liens"},
+        {"name": "village", "dtype": "string", "role": "geo_only", "description": "Village name"},
+        {"name": "tehsil", "dtype": "string", "role": "geo_only", "description": "Tehsil"},
+        {"name": "district", "dtype": "string", "role": "geo_only", "description": "District"},
+        {"name": "state", "dtype": "string", "role": "geo_only", "description": "State"},
+        {"name": "is_live", "dtype": "int", "role": "support", "domain": "0/1", "description": "1 = in-progress parcel (live/early-warning set), 0 = historical completed (training)"}
+      ]
+    },
+    "villages": {
+      "description": "Village geo table for the Folium map (seeded fake coordinates).",
+      "fields": [
+        {"name": "village", "dtype": "string", "role": "geo_only", "description": "Village name"},
+        {"name": "tehsil", "dtype": "string", "role": "geo_only", "description": "Tehsil"},
+        {"name": "district", "dtype": "string", "role": "geo_only", "description": "District"},
+        {"name": "state", "dtype": "string", "role": "geo_only", "description": "State"},
+        {"name": "lat", "dtype": "float", "role": "geo_only", "description": "Latitude (seeded fake, within HP bounding box)"},
+        {"name": "lon", "dtype": "float", "role": "geo_only", "description": "Longitude (seeded fake, within HP bounding box)"}
+      ]
+    },
+    "stage_timelines": {
+      "description": "Long format: one row per parcel per stage (parcel x 5 stages).",
+      "fields": [
+        {"name": "parcel_id", "dtype": "string", "role": "identifier", "description": "FK to parcels"},
+        {"name": "stage", "dtype": "category", "role": "support", "domain": ["SIA", "NOTIFICATION", "DECLARATION", "AWARD", "POSSESSION"], "description": "RFCTLARR stage"},
+        {"name": "statutory_days", "dtype": "int", "role": "support", "description": "Statutory limit for this stage"},
+        {"name": "actual_days", "dtype": "int", "role": "support", "domain": "nullable", "description": "Actual days taken (NULL for ongoing/pending stages)"},
+        {"name": "elapsed_days", "dtype": "int", "role": "support", "domain": "nullable", "description": "Days elapsed so far (for ongoing stages; may exceed statutory)"},
+        {"name": "status", "dtype": "category", "role": "support", "domain": ["completed", "ongoing", "pending"], "description": "completed iff actual_days set; ongoing iff started but unfinished; pending otherwise"},
+        {"name": "delay_days", "dtype": "int", "role": "target", "domain": "nullable", "description": "actual_days - statutory_days; NULL for non-completed stages"},
+        {"name": "delay_flag", "dtype": "int", "role": "target", "domain": "0/1", "description": "1 if delay_days > 0 (binary classification target)"}
+      ]
+    }
+  }
+}
