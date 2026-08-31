@@ -117,6 +117,17 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - [ ] FastAPI endpoint
 - [ ] README + demo rehearsal
 
+### Day 1 results (verified by sanity_check.py)
+- Generated: 12 HP districts → 227 villages (40 tehsils) → 5,000 projects → 100,000
+  parcels (20/project avg) → 500,000 historical timeline rows + 12,005 live parcels.
+- Delay rules recoverable: court_stay → award delay 283d vs 41d base; orchard → 156d
+  vs 35d; owner_count>4 → declaration 61d vs 27d.
+- Hidden confound works without leaking: district mean delays span 27→63 days, max
+  feature↔district correlation 0.14 (no visible column encodes admin_capacity).
+- Balanced targets: delay-flag rate 58–88% per stage (fixed from ~98% over-positive).
+- Money-shot ready: ~25% of ongoing live stages already past statutory deadline.
+- Fixed realism: parcels spread across all 227 villages (was hardcoded to 1 village/district).
+
 ## 9. Demo Script (90 seconds, for judges)
 1. Show village/district risk table (red/yellow/green).
 2. Click a red corridor/village → per-stage delay probability bars vs statutory clocks.
@@ -130,3 +141,19 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 ## 10. Session Resume Protocol
 Open a new chat and say:
 > "Read ~/sih-land-delay/PROJECT_CONTEXT.md and continue from the Status checklist."
+
+## 11. Environment & Run Credentials (setup is done — reuse, don't redo)
+- **Python:** 3.14.4 (system). No `pip`/`venv`/`ensurepip` on the machine → use **uv**.
+- **uv:** installed at `~/.local/bin/uv`; add to PATH via `export PATH="$HOME/.local/bin:$PATH"`.
+- **venv:** `~/sih-land-delay/.venv` (created with `uv venv .venv`). Activate:
+  `source .venv/bin/activate` (or call `.venv/bin/python` directly).
+- **Installed deps (locked versions):** pandas 3.0.5, numpy 2.5.2, scikit-learn 1.9.0,
+  shap 0.52.0, pyarrow 25.0.1, joblib 1.6.0. (Streamlit/Plotly/Folium/FastAPI not yet
+  installed — add on Day 3.)
+- **Seed:** `SEED = 42` in `data_generator.py` (fully reproducible).
+- **Run commands (from repo root):**
+  - regen data: `.venv/bin/python src/data_generator.py`
+  - sanity check: `.venv/bin/python src/sanity_check.py`
+- **Data outputs:** `data/generated/*.parquet` (historical = training, live = demo).
+- **Git ignore:** add `.gitignore` for `.venv/`, `__pycache__/`, `models/`, `*.pyc`
+  (generated data is committed — only ~7MB, makes demo work out-of-the-box).
