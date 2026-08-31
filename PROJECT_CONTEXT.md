@@ -5,17 +5,24 @@
 Ministry of Rural Development PS SIH26017: build an AI-powered early-warning system that
 predicts which land acquisition projects will get delayed, using (a) static land-record
 features and (b) historical stage-wise timelines under the RFCTLARR Act, 2013. Output per
-parcel: risk score, per-stage delay probability, explainable contributing factors, and
-recommended actions.
+parcel (rolled to project/village/district/state): risk score, per-stage delay
+probability, explainable contributing factors, and recommended actions.
 
 ## 2. Core Architecture (LOCKED)
 - Two data types merged:
   - **A. Static land features** (HimBhoomi-style): khasra number, owner count, land class
     (orchard/barren/agri/residential), area, pending mutations, court stays, encumbrances.
   - **B. Historical lifecycle timelines**: actual days taken per legal stage vs statutory limits.
+- **Project/R&R features (NEW, from statement):** project_type (road/rail/irrigation/dam…),
+  affected_families, compensation_status, rehab_progress_pct, stakeholder_responsiveness,
+  historical_performance_score. These sit at the project level and join down to parcels.
 - **Target variable:** Delay = Actual Days − Statutory Days (per stage).
 - Models NEVER see district/city names → cold-start for new regions works via feature
   similarity ("parcels with these features behaved like X historically").
+- **Granularity hierarchy (LOCKED):** parcel (atomic) → **project** → village → tehsil →
+  district → state. Parcel is the atomic prediction unit; project-level risk is a rollup of
+  its parcels (satisfies "project-wise scoring" in the statement). Rollups use weighted
+  aggregation (e.g., parcel area × risk).
 
 ## 3. The 5 RFCTLARR Stages + Statutory Clocks (the legal backbone)
 | Stage | Plain meaning | Statutory limit |
@@ -30,8 +37,9 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 ## 4. Locked Decisions
 - **Regional strategy:** Pan-India architecture, Himachal Pradesh as demo pilot. Model is
   region-agnostic (features only); pitch: "plug in Bhoomi/Bhulekh data to extend states."
-- **Granularity:** Per-PARCEL risk scores, rolled up to village/tehsil/district views.
-  Village-level rollup is the primary dashboard "portfolio" view; drill-down to parcels.
+- **Granularity:** Per-PARCEL risk scores, rolled up parcel → project → village → tehsil →
+  district → state. Village-level rollup is the primary dashboard "portfolio" view;
+  drill-down to project → parcels.
 - **Synthetic data strategy:** scraping is blocked/slow → hand-sample real schemas,
   generate 100k+ parcels + ~5k historical projects with realistic embedded delay rules
   (e.g., many joint owners → consent delays; court stay → award freeze; orchard land →
@@ -48,43 +56,64 @@ Delay per stage = actual − statutory. Always expose days-overrun.
   risk table (red/yellow/green), parcel/village detail with per-stage probability bars,
   SHAP "why" chart, recommended actions panel, what-if widget ("clear the court stay →
   score drops live").
-- **Explicitly NOT building:** maps/GIS, login/accounts, live scraping, databases, Docker.
+- **GIS (NEW — supersedes "no maps"):** lightweight Folium map (pure-Python, offline)
+  showing district/state risk hotspots. Covers statement deliverable #7 without
+  Node/Docker/GIS servers.
+- **Alerts (NEW):** rule-based alert feed, e.g. red project > threshold days overrun,
+  active court stay, award pending past statutory clock. No notification transport —
+  surface in-dashboard as a feed.
+- **API (NEW):** FastAPI endpoint wrapping predict.py (POST → risk JSON) alongside the
+  CSV/JSON contract. Covers statement deliverable #11.
+- **Auth/RBAC/audit (DEFERRED):** documented out-of-scope; UI gets a mock role-switcher
+  (Admin/Officer/Viewer) for demo flavor. Real RBAC + audit trails noted as production
+  extension. Covers statement deliverable #12 nominally.
+- **Continuous learning (NEW):** explicit incremental retraining path — `train.py
+  --incremental` refits on new records; pitch: "updates as new project data arrives".
+- **Explicitly NOT building:** live scraping, databases, Docker, real auth/audit.
 
 ## 5. Tech Stack (machine: Python 3.14, 8GB RAM, 12 cores, no Node)
 - venv + pandas, numpy, scikit-learn (HistGradientBoostingClassifier/Regressor)
 - SHAP (fallback: sklearn permutation_importance if Py3.14 wheels break)
 - Streamlit + Plotly (UI, later)
+- Folium (GIS hotspot map)
+- FastAPI + uvicorn (prediction API)
 - joblib (models), parquet (data)
 
 ## 6. Repo Layout
 ```
 ~/sih-land-delay/
 ├── PROJECT_CONTEXT.md      ← THIS FILE, updated every session
-├── INTERFACES.md           ← predict.py output contract for frontend builders
+├── INTERFACES.md           ← predict.py output contract + API spec
 ├── schema.json             ← land record + lifecycle column definitions
 ├── requirements.txt
 ├── data/{raw_sample,generated}/
 ├── src/{data_generator.py, features.py, train.py, predict.py}
 ├── models/                 ← saved .joblib per-stage models
-└── app/streamlit_app.py    ← Phase 2 only
+└── app/{streamlit_app.py, api.py}   ← Phase 2 only (FastAPI beside Streamlit)
 ```
 
 ## 7. Execution Plan (4 days)
-- **Day 1:** schema.json (RFCTLARR-aligned) + data_generator.py with delay-rule logic →
+- **Day 1:** schema.json (RFCTLARR-aligned + project/R&R/compensation/rehab params) +
+  data_generator.py with delay-rule logic (incl. project-level aggregation) →
   generate & eyeball sanity-check data.
-- **Day 2:** features.py + train.py → 5 per-stage models + cold-start validation
-  (district hold-out) → SHAP explanations → metrics report.
-- **Day 3:** Streamlit dashboard (risk table, detail page, SHAP, actions, what-if).
-- **Day 4:** End-to-end test, README + architecture diagram, rehearse demo script.
+- **Day 2:** features.py + train.py → 5 per-stage models + project rollup + cold-start
+  validation (district hold-out) → SHAP explanations → metrics report. Add
+  `--incremental` retrain path.
+- **Day 3:** predict.py + FastAPI endpoint + Streamlit dashboard (risk table, detail
+  page, SHAP, actions, what-if, alerts feed, Folium map, mock role-switcher).
+- **Day 4:** End-to-end test, README + architecture diagram, INTERFACES.md (contract +
+  API spec), rehearse demo script.
 
 ## 8. Current Status
 - [x] Project folder + this file created (Day 0)
+- [x] Scope analysis vs official statement + decisions locked (project rollup, Folium, alerts, FastAPI, mock RBAC, incremental training)
 - [ ] schema.json
 - [ ] data_generator.py + generated data
 - [ ] features.py + train.py + models
 - [ ] SHAP + cold-start validation
-- [ ] INTERFACES.md (prediction contract)
-- [ ] Streamlit UI
+- [ ] INTERFACES.md (prediction contract + API spec)
+- [ ] Streamlit UI (incl. Folium map, alerts feed, role-switcher)
+- [ ] FastAPI endpoint
 - [ ] README + demo rehearsal
 
 ## 9. Demo Script (90 seconds, for judges)
@@ -94,6 +123,8 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 4. Recommended actions panel (rule-based factor→action mapping).
 5. What-if: toggle "court stay cleared" → risk drops live.
 6. Cold start: brand-new district scored instantly ("region-agnostic by design").
+7. Folium hotspot map + alert feed ("high-risk projects auto-flagged").
+8. FastAPI endpoint demo + mock role-switch (Admin/Officer/Viewer).
 
 ## 10. Session Resume Protocol
 Open a new chat and say:
