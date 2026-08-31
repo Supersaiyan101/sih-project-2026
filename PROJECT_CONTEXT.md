@@ -56,9 +56,9 @@ Delay per stage = actual − statutory. Always expose days-overrun.
   risk table (red/yellow/green), parcel/village detail with per-stage probability bars,
   SHAP "why" chart, recommended actions panel, what-if widget ("clear the court stay →
   score drops live").
-- **GIS (NEW — supersedes "no maps"):** lightweight Folium map (pure-Python, offline)
-  showing district/state risk hotspots. Covers statement deliverable #7 without
-  Node/Docker/GIS servers.
+- **GIS (LOCKED — offline plotly):** offline Plotly lat/lon scatter of district risk
+  hotspots (chosen over Folium to stay fully offline — no tile server). Covers statement
+  deliverable #7.
 - **Alerts (NEW):** rule-based alert feed, e.g. red project > threshold days overrun,
   active court stay, award pending past statutory clock. No notification transport —
   surface in-dashboard as a feed.
@@ -74,8 +74,7 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 ## 5. Tech Stack (machine: Python 3.14, 8GB RAM, 12 cores, no Node)
 - venv + pandas, numpy, scikit-learn (HistGradientBoostingClassifier/Regressor)
 - SHAP (fallback: sklearn permutation_importance if Py3.14 wheels break)
-- Streamlit + Plotly (UI, later)
-- Folium (GIS hotspot map)
+- Streamlit + Plotly (UI + offline risk map)
 - FastAPI + uvicorn (prediction API)
 - joblib (models), parquet (data)
 
@@ -112,9 +111,10 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - [x] sanity_check.py (volumes, rule recovery, confound leak check, overrun-while-ongoing eyeball)
 - [x] features.py (12 geo-free features, ordinal encoding, per-stage targets, risk + rollup)
 - [x] train.py + models (10 models: 5 stages x classifier+regressor) + LODO cold-start + SHAP + metrics report
-- [ ] INTERFACES.md (prediction contract + API spec)
-- [ ] Streamlit UI (incl. Folium map, alerts feed, role-switcher)
-- [ ] FastAPI endpoint
+- [x] INTERFACES.md (prediction contract + API spec)
+- [x] predict.py + actions.py (score_parcel/score_batch/--refresh-portfolio, rule-based actions)
+- [x] Streamlit UI (6 views: portfolio/detail/what-if/alerts/offline-map + role-gating)
+- [x] FastAPI endpoint (/predict, /predict/batch, /health)
 - [ ] README + demo rehearsal
 
 ### Day 1 results (verified by sanity_check.py)
@@ -143,6 +143,17 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - Risk-score fix: max-prob saturated (delay near-universal) → headline risk_score is now
   severity-based (1-exp(-overrun/250)) with clean spread (median 0.55); max_delay_prob kept
   for per-stage bars. District ranking: Mandi 0.64 (worst) … Sirmaur 0.40 (best).
+
+### Day 3 results (verified via AppTest + curl)
+- predict.py contract works end-to-end: score_parcel emits risk_score/level,
+  expected_overrun_days, max_delay_prob, per-stage delay_prob + overrun + statutory, signed
+  SHAP top_factors (global + per-stage), rule-based actions, overrun_while_ongoing_days.
+- portfolio cache: 11,959 live parcels scored in 0.37s (live refresh is demo-able).
+- FastAPI: /health, /predict, /predict/batch all verified via curl (court-stay+orchard+dam
+  parcel → risk 0.97 RED, 909 expected overrun days).
+- Streamlit dashboard: all 6 views render with 0 exceptions (AppTest). Viewer role correctly
+  hides What-if/Alerts (nav → Portfolio/Detail/Map only). Map is offline Plotly lat/lon scatter.
+- Folium dropped from requirements; GIS decision updated to offline plotly.
 
 ## 9. Demo Script (90 seconds, for judges)
 1. Show village/district risk table (red/yellow/green).

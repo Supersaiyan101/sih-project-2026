@@ -4,7 +4,6 @@ scikit-learn
 shap
 streamlit
 plotly
-folium
 fastapi
 uvicorn
 joblib
