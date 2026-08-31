@@ -1,6 +1,5 @@
 .venv/
 __pycache__/
 *.pyc
-models/
 data/raw_sample/
 .DS_Store

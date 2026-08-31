@@ -1,0 +1,497 @@
+{
+  "generated_at": "2026-08-31T20:16:26.117531+00:00",
+  "n_parcels": 88041,
+  "n_features": 12,
+  "feature_columns": [
+    "project_type",
+    "compensation_status",
+    "land_class",
+    "affected_families",
+    "rehab_progress_pct",
+    "stakeholder_responsiveness",
+    "historical_performance_score",
+    "owner_count",
+    "area_sqm",
+    "pending_mutations",
+    "court_stay",
+    "encumbrances"
+  ],
+  "stages": {
+    "SIA": {
+      "delay_rate": 0.5860639445737975,
+      "classifier": {
+        "auroc": 0.7627627472532148,
+        "average_precision": 0.8159295160860927
+      },
+      "regressor": {
+        "mae": 17.13198594593559,
+        "rmse": 21.52821752777429,
+        "r2": 0.3238160160196204
+      }
+    },
+    "NOTIFICATION": {
+      "delay_rate": 0.766426259299222,
+      "classifier": {
+        "auroc": 0.8590165967177099,
+        "average_precision": 0.9520875007585312
+      },
+      "regressor": {
+        "mae": 17.228192569069744,
+        "rmse": 21.5018458508856,
+        "r2": 0.5763139984637617
+      }
+    },
+    "DECLARATION": {
+      "delay_rate": 0.8717133284116076,
+      "classifier": {
+        "auroc": 0.9100510444649199,
+        "average_precision": 0.9854805858548192
+      },
+      "regressor": {
+        "mae": 17.238855252439027,
+        "rmse": 21.68503585698699,
+        "r2": 0.7775049646624659
+      }
+    },
+    "AWARD": {
+      "delay_rate": 0.7485376795956613,
+      "classifier": {
+        "auroc": 0.9063696790711933,
+        "average_precision": 0.9685875590736813
+      },
+      "regressor": {
+        "mae": 17.225915915218188,
+        "rmse": 21.57056188774015,
+        "r2": 0.939614093803682
+      }
+    },
+    "POSSESSION": {
+      "delay_rate": 0.7348514963938895,
+      "classifier": {
+        "auroc": 0.9136968885837498,
+        "average_precision": 0.9709976385407095
+      },
+      "regressor": {
+        "mae": 17.367567888216172,
+        "rmse": 21.89793989813111,
+        "r2": 0.9453887669789828
+      }
+    }
+  },
+  "shap_importance": {
+    "SIA": [
+      [
+        "project_type",
+        0.7147156057904884
+      ],
+      [
+        "stakeholder_responsiveness",
+        0.5171066829546883
+      ],
+      [
+        "historical_performance_score",
+        0.20695135715278204
+      ],
+      [
+        "owner_count",
+        0.041435186773584
+      ],
+      [
+        "pending_mutations",
+        0.03811478917048567
+      ],
+      [
+        "area_sqm",
+        0.024787436570405327
+      ],
+      [
+        "encumbrances",
+        0.023608640534273456
+      ],
+      [
+        "rehab_progress_pct",
+        0.023380787367531897
+      ],
+      [
+        "affected_families",
+        0.020328342978986887
+      ],
+      [
+        "compensation_status",
+        0.012913656846259308
+      ],
+      [
+        "land_class",
+        0.003752423010799834
+      ],
+      [
+        "court_stay",
+        0.0032306333110562043
+      ]
+    ],
+    "NOTIFICATION": [
+      [
+        "pending_mutations",
+        1.2526294623079435
+      ],
+      [
+        "project_type",
+        0.7318985332126217
+      ],
+      [
+        "stakeholder_responsiveness",
+        0.43862813628073516
+      ],
+      [
+        "historical_performance_score",
+        0.2162983647281274
+      ],
+      [
+        "owner_count",
+        0.04455310740983642
+      ],
+      [
+        "rehab_progress_pct",
+        0.035394735824491375
+      ],
+      [
+        "area_sqm",
+        0.028678823503122675
+      ],
+      [
+        "affected_families",
+        0.02505546072582105
+      ],
+      [
+        "encumbrances",
+        0.016708753657138507
+      ],
+      [
+        "land_class",
+        0.01606843047249046
+      ],
+      [
+        "compensation_status",
+        0.005324060305860858
+      ],
+      [
+        "court_stay",
+        0.0023410843614400816
+      ]
+    ],
+    "DECLARATION": [
+      [
+        "owner_count",
+        1.29052402062891
+      ],
+      [
+        "affected_families",
+        0.8577052170272366
+      ],
+      [
+        "project_type",
+        0.6128955515823964
+      ],
+      [
+        "pending_mutations",
+        0.5851512101323236
+      ],
+      [
+        "stakeholder_responsiveness",
+        0.19826477242939558
+      ],
+      [
+        "historical_performance_score",
+        0.1797520158835994
+      ],
+      [
+        "rehab_progress_pct",
+        0.023117243520069986
+      ],
+      [
+        "area_sqm",
+        0.020787424236378336
+      ],
+      [
+        "compensation_status",
+        0.01190657513254297
+      ],
+      [
+        "encumbrances",
+        0.010992722645651515
+      ],
+      [
+        "land_class",
+        0.008469412637572955
+      ],
+      [
+        "court_stay",
+        0.0025097838148410868
+      ]
+    ],
+    "AWARD": [
+      [
+        "encumbrances",
+        1.190450070398675
+      ],
+      [
+        "land_class",
+        1.1180754927220848
+      ],
+      [
+        "court_stay",
+        0.8395242884472597
+      ],
+      [
+        "project_type",
+        0.5270037191724892
+      ],
+      [
+        "stakeholder_responsiveness",
+        0.1974867757388376
+      ],
+      [
+        "historical_performance_score",
+        0.16611796862673595
+      ],
+      [
+        "owner_count",
+        0.037665233261243
+      ],
+      [
+        "pending_mutations",
+        0.03276488808451898
+      ],
+      [
+        "area_sqm",
+        0.023666898673632968
+      ],
+      [
+        "affected_families",
+        0.02306202744375492
+      ],
+      [
+        "rehab_progress_pct",
+        0.022025276204290414
+      ],
+      [
+        "compensation_status",
+        0.00750072121483601
+      ]
+    ],
+    "POSSESSION": [
+      [
+        "compensation_status",
+        3.781915407568115
+      ],
+      [
+        "court_stay",
+        0.6293306520563102
+      ],
+      [
+        "project_type",
+        0.4126623777645188
+      ],
+      [
+        "affected_families",
+        0.23755207304519688
+      ],
+      [
+        "rehab_progress_pct",
+        0.14969666818587263
+      ],
+      [
+        "stakeholder_responsiveness",
+        0.14439684527110616
+      ],
+      [
+        "historical_performance_score",
+        0.1018868982695256
+      ],
+      [
+        "pending_mutations",
+        0.026707681925070236
+      ],
+      [
+        "area_sqm",
+        0.014682175973220203
+      ],
+      [
+        "owner_count",
+        0.013476126360562987
+      ],
+      [
+        "encumbrances",
+        0.012995925927987812
+      ],
+      [
+        "land_class",
+        0.011140962732647227
+      ]
+    ]
+  },
+  "cold_start_lodo": {
+    "per_district": {
+      "Bilaspur": {
+        "SIA": 0.7292092022130339,
+        "NOTIFICATION": 0.8515981693078916,
+        "DECLARATION": 0.913303269591614,
+        "AWARD": 0.9040402783653089,
+        "POSSESSION": 0.8780903400381537
+      },
+      "Chamba": {
+        "SIA": 0.7318499626257755,
+        "NOTIFICATION": 0.837515171313831,
+        "DECLARATION": 0.9010559381004574,
+        "AWARD": 0.8986478080505185,
+        "POSSESSION": 0.9054672432200355
+      },
+      "Hamirpur": {
+        "SIA": 0.7399061048337867,
+        "NOTIFICATION": 0.8195031350715061,
+        "DECLARATION": 0.8962075108570448,
+        "AWARD": 0.8995413108986468,
+        "POSSESSION": 0.9195573620315275
+      },
+      "Kangra": {
+        "SIA": 0.7256683834253256,
+        "NOTIFICATION": 0.8321699077563263,
+        "DECLARATION": 0.9089653347460882,
+        "AWARD": 0.8966697001462982,
+        "POSSESSION": 0.898518605037891
+      },
+      "Kinnaur": {
+        "SIA": 0.7246765620298867,
+        "NOTIFICATION": 0.818081238647081,
+        "DECLARATION": 0.8771458231650725,
+        "AWARD": 0.8927978946004326,
+        "POSSESSION": 0.9098394090712812
+      },
+      "Kullu": {
+        "SIA": 0.7293659831969994,
+        "NOTIFICATION": 0.7996779650735013,
+        "DECLARATION": 0.8788031137341068,
+        "AWARD": 0.8977201717882475,
+        "POSSESSION": 0.934564091116583
+      },
+      "Lahaul and Spiti": {
+        "SIA": 0.7275279669792745,
+        "NOTIFICATION": 0.8349238365114524,
+        "DECLARATION": 0.9060492639093747,
+        "AWARD": 0.899074397539741,
+        "POSSESSION": 0.9068787445003046
+      },
+      "Mandi": {
+        "SIA": 0.7441888169229012,
+        "NOTIFICATION": 0.886495377407586,
+        "DECLARATION": 0.9430125034944555,
+        "AWARD": 0.9181210773770216,
+        "POSSESSION": 0.8933527557667977
+      },
+      "Shimla": {
+        "SIA": 0.738271078221146,
+        "NOTIFICATION": 0.8164696954336976,
+        "DECLARATION": 0.8824135107326447,
+        "AWARD": 0.8950343384602362,
+        "POSSESSION": 0.9268533721667627
+      },
+      "Sirmaur": {
+        "SIA": 0.7445500870772389,
+        "NOTIFICATION": 0.8018234136279966,
+        "DECLARATION": 0.860952474229884,
+        "AWARD": 0.9041199153878494,
+        "POSSESSION": 0.9377317439904049
+      },
+      "Solan": {
+        "SIA": 0.7368624528556111,
+        "NOTIFICATION": 0.8618757487798406,
+        "DECLARATION": 0.9138768481896917,
+        "AWARD": 0.9074090972883979,
+        "POSSESSION": 0.8877322993546747
+      },
+      "Una": {
+        "SIA": 0.7225685880119019,
+        "NOTIFICATION": 0.842129793329601,
+        "DECLARATION": 0.8987561126379036,
+        "AWARD": 0.8989929373318757,
+        "POSSESSION": 0.8876836201594999
+      }
+    },
+    "heldout_auroc_avg": {
+      "SIA": 0.7328870990327402,
+      "NOTIFICATION": 0.8335219543550262,
+      "DECLARATION": 0.8983784752823613,
+      "AWARD": 0.9010140772695477,
+      "POSSESSION": 0.907189132204493
+    },
+    "drop_pct": {
+      "SIA": 3.92,
+      "NOTIFICATION": 2.97,
+      "DECLARATION": 1.28,
+      "AWARD": 0.59,
+      "POSSESSION": 0.71
+    }
+  },
+  "rollup_district_risk": [
+    {
+      "district": "Mandi",
+      "risk_score": 0.6371328574523994,
+      "n_parcels": 7005
+    },
+    {
+      "district": "Solan",
+      "risk_score": 0.5919494457495617,
+      "n_parcels": 7500
+    },
+    {
+      "district": "Bilaspur",
+      "risk_score": 0.5684182340529041,
+      "n_parcels": 6917
+    },
+    {
+      "district": "Kangra",
+      "risk_score": 0.5382525424360838,
+      "n_parcels": 6998
+    },
+    {
+      "district": "Lahaul and Spiti",
+      "risk_score": 0.5375810593338336,
+      "n_parcels": 7011
+    },
+    {
+      "district": "Chamba",
+      "risk_score": 0.5334634730250561,
+      "n_parcels": 7654
+    },
+    {
+      "district": "Una",
+      "risk_score": 0.5294127613035658,
+      "n_parcels": 7332
+    },
+    {
+      "district": "Shimla",
+      "risk_score": 0.475767263402518,
+      "n_parcels": 7350
+    },
+    {
+      "district": "Hamirpur",
+      "risk_score": 0.4737444030775759,
+      "n_parcels": 7227
+    },
+    {
+      "district": "Kinnaur",
+      "risk_score": 0.44542530681366577,
+      "n_parcels": 7325
+    },
+    {
+      "district": "Kullu",
+      "risk_score": 0.44312699987534976,
+      "n_parcels": 7758
+    },
+    {
+      "district": "Sirmaur",
+      "risk_score": 0.3966688222589509,
+      "n_parcels": 7964
+    }
+  ]
+}

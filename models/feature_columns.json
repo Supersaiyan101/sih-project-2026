@@ -1,0 +1,70 @@
+{
+  "feature_columns": [
+    {
+      "name": "project_type",
+      "type": "categorical",
+      "categories": [
+        "dam",
+        "industrial",
+        "irrigation",
+        "rail",
+        "road"
+      ]
+    },
+    {
+      "name": "compensation_status",
+      "type": "categorical",
+      "categories": [
+        "paid",
+        "partial",
+        "pending"
+      ]
+    },
+    {
+      "name": "land_class",
+      "type": "categorical",
+      "categories": [
+        "agri",
+        "barren",
+        "orchard",
+        "residential"
+      ]
+    },
+    {
+      "name": "affected_families",
+      "type": "numeric"
+    },
+    {
+      "name": "rehab_progress_pct",
+      "type": "numeric"
+    },
+    {
+      "name": "stakeholder_responsiveness",
+      "type": "numeric"
+    },
+    {
+      "name": "historical_performance_score",
+      "type": "numeric"
+    },
+    {
+      "name": "owner_count",
+      "type": "numeric"
+    },
+    {
+      "name": "area_sqm",
+      "type": "numeric"
+    },
+    {
+      "name": "pending_mutations",
+      "type": "numeric"
+    },
+    {
+      "name": "court_stay",
+      "type": "numeric"
+    },
+    {
+      "name": "encumbrances",
+      "type": "numeric"
+    }
+  ]
+}

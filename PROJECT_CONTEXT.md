@@ -115,7 +115,8 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - [x] predict.py + actions.py (score_parcel/score_batch/--refresh-portfolio, rule-based actions)
 - [x] Streamlit UI (6 views: portfolio/detail/what-if/alerts/offline-map + role-gating)
 - [x] FastAPI endpoint (/predict, /predict/batch, /health)
-- [ ] README + demo rehearsal
+- [x] bootstrap.sh + e2e_test.py (25 checks incl. fresh-clone proof) + demo_numbers.py
+- [x] README.md + DEMO_SCRIPT.md (architecture diagram + timed 90s walkthrough)
 
 ### Day 1 results (verified by sanity_check.py)
 - Generated: 12 HP districts → 227 villages (40 tehsils) → 5,000 projects → 100,000
@@ -154,6 +155,17 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - Streamlit dashboard: all 6 views render with 0 exceptions (AppTest). Viewer role correctly
   hides What-if/Alerts (nav → Portfolio/Detail/Map only). Map is offline Plotly lat/lon scatter.
 - Folium dropped from requirements; GIS decision updated to offline plotly.
+
+### Day 4 results (verified by e2e_test.py)
+- bootstrap.sh: fresh-clone one-command setup (venv → install → data → train → portfolio).
+- e2e_test.py: 25/25 checks pass — artifacts, contract, FastAPI (TestClient), dashboard
+  (all views + Viewer gating), AND a fresh-clone proof (copy code-only → bootstrap →
+  regenerated data+models+portfolio → models score).
+- demo_numbers.py: demo facts auto-sourced from metrics_report.json + portfolio (no stale
+  hardcoded numbers). Curated money-shot parcel PRCL_0000006: court stay + 124d overrun
+  ongoing at Award → clear stay flips RED 0.85 → GREEN 0.23.
+- README.md (mermaid + ASCII diagram, results, defenses) + DEMO_SCRIPT.md (90s timed).
+- models/ committed (removed from .gitignore) so the demo works out-of-the-box after clone.
 
 ## 9. Demo Script (90 seconds, for judges)
 1. Show village/district risk table (red/yellow/green).
