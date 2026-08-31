@@ -111,9 +111,24 @@ def check_confound_leak(projects, parcels, villages, districts, hist):
     print("  -> no direct leak (no visible column encodes the hidden confound)")
 
 
+def check_institutional_proxy(projects):
+    print("=" * 60)
+    print("[4] INSTITUTIONAL PROXY (stakeholder/hist_perf vs district)")
+    print("=" * 60)
+    # stakeholder_responsiveness & historical_performance_score must be MODERATE proxies
+    # of the hidden district confound: correlated enough to transfer cold-start signal,
+    # but not near-perfect (that would leak the confound and make LODO trivially easy).
+    dummies = pd.get_dummies(projects["district"]).astype(float)
+    for f in ["stakeholder_responsiveness", "historical_performance_score"]:
+        corr = dummies.corrwith(projects[f]).abs().max()
+        print(f"  max |corr(district, {f})| = {corr:.3f}")
+        assert 0.15 <= corr <= 0.70, f"{f} proxy correlation out of band: {corr:.3f}"
+    print("  -> moderate: partial proxy present, residual confound remains (honest LODO)")
+
+
 def check_ongoing_eyeball(live):
     print("=" * 60)
-    print("[4] ONGOING-ROW EYEBALL (overrun-while-ongoing money shot)")
+    print("[5] ONGOING-ROW EYEBALL (overrun-while-ongoing money shot)")
     print("=" * 60)
     ongoing = live[live["status"] == "ongoing"].copy()
     ongoing["overrun"] = ongoing["elapsed_days"] > ongoing["statutory_days"]
@@ -133,6 +148,7 @@ def main():
     check_volumes(projects, parcels, villages, hist, live)
     check_rules(parcels, hist)
     check_confound_leak(projects, parcels, villages, districts, hist)
+    check_institutional_proxy(projects)
     check_ongoing_eyeball(live)
     print("\nALL SANITY CHECKS PASSED.")
 

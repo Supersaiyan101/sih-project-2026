@@ -110,8 +110,8 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - [x] schema.json (3 tables + villages + hidden admin_capacity confound, all fields tagged)
 - [x] data_generator.py + generated data (100k parcels / 5k projects / 227 villages + live subset)
 - [x] sanity_check.py (volumes, rule recovery, confound leak check, overrun-while-ongoing eyeball)
-- [ ] features.py + train.py + models
-- [ ] SHAP + cold-start validation
+- [x] features.py (12 geo-free features, ordinal encoding, per-stage targets, risk + rollup)
+- [x] train.py + models (10 models: 5 stages x classifier+regressor) + LODO cold-start + SHAP + metrics report
 - [ ] INTERFACES.md (prediction contract + API spec)
 - [ ] Streamlit UI (incl. Folium map, alerts feed, role-switcher)
 - [ ] FastAPI endpoint
@@ -127,6 +127,22 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - Balanced targets: delay-flag rate 58–88% per stage (fixed from ~98% over-positive).
 - Money-shot ready: ~25% of ongoing live stages already past statutory deadline.
 - Fixed realism: parcels spread across all 227 villages (was hardcoded to 1 village/district).
+- Refinement (pre-Day-2): stakeholder_responsiveness + historical_performance_score are now
+  MODERATE partial proxies of the hidden confound (corr ~0.27 with district, band 0.15–0.70)
+  so cold-start is learnable but not leaked. Sanity check [4] enforces the band.
+
+### Day 2 results (verified in metrics_report.json)
+- 10 models trained (5 stages x classifier+regressor) on 88,041 historical parcels / 12 features.
+- In-sample AUROC by stage: SIA 0.76, NOTIFICATION 0.86, DECLARATION 0.91, AWARD 0.91,
+  POSSESSION 0.91. Regressor MAE ~17 days, RMSE ~22 days.
+- Cold-start (leave-one-district-out) drop is small & believable: SIA -3.9%, NOTIFICATION
+  -3.0%, DECLARATION -1.3%, AWARD -0.6%, POSSESSION -0.7% → model generalizes to unseen
+  districts via feature similarity (the pitch proof).
+- SHAP top features align with embedded rules (AWARD: encumbrances/land_class/court_stay;
+  DECLARATION: owner_count/affected_families; POSSESSION: compensation_status/court_stay).
+- Risk-score fix: max-prob saturated (delay near-universal) → headline risk_score is now
+  severity-based (1-exp(-overrun/250)) with clean spread (median 0.55); max_delay_prob kept
+  for per-stage bars. District ranking: Mandi 0.64 (worst) … Sirmaur 0.40 (best).
 
 ## 9. Demo Script (90 seconds, for judges)
 1. Show village/district risk table (red/yellow/green).

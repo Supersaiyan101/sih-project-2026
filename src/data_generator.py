@@ -133,11 +133,20 @@ def generate_projects(districts: pd.DataFrame, rng: np.random.Generator) -> pd.D
     rehab = 100.0 - (affected / 5000.0) * 40.0 - rng.normal(10, 8, size=n)
     rehab = np.clip(rehab, 0, 100)
 
-    stakeholder = np.clip(rng.beta(4, 2, size=n), 0, 1)  # mostly responsive
-    hist_perf = np.clip(rng.beta(4, 2, size=n), 0, 1)
-
-    # geo: assign project to a district + tehsil (tehsil derived in villages; here reuse district)
+    # geo: assign project to a district first so institutional features can partially
+    # reflect the district's hidden admin capacity (see below)
     district = rng.choice(district_names, size=n)
+    cap = np.array([capacity_by_district[d] for d in district])
+
+    # stakeholder responsiveness + historical performance are PARTIAL PROXIES of the hidden
+    # admin_capacity (institutional capacity). Blend individual variation with district
+    # capacity so they correlate MODERATELY (~0.5): enough that cold-start is learnable via
+    # feature similarity, but not so strong that the confound is fully leaked (residual
+    # between-district variance remains for an honest LODO test).
+    base_resp = rng.beta(4, 2, size=n)
+    base_perf = rng.beta(4, 2, size=n)
+    stakeholder = np.clip(0.55 * base_resp + 0.45 * cap + rng.normal(0, 0.02, size=n), 0, 1)
+    hist_perf = np.clip(0.55 * base_perf + 0.45 * cap + rng.normal(0, 0.02, size=n), 0, 1)
 
     rows = {
         "project_id": [f"PRJ_{i:05d}" for i in range(n)],
