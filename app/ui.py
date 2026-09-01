@@ -23,15 +23,6 @@ TEXT = "#1A1A1A"
 COLORS = {"RED": RED, "YELLOW": YEL, "GREEN": GRN}
 EMOJI = {"RED": "🔴", "YELLOW": "🟡", "GREEN": "🟢"}
 
-# --- dark palette ----------------------------------------------------------- #
-DARK_BG = "#0F1B2D"
-DARK_CARD = "#16283E"
-DARK_SIDEBAR = "#0B1626"
-DARK_TEXT = "#E5EAF0"
-DARK_MUTED = "#93A3B5"
-DARK_GRID = "#26364F"
-DARK_HEADING = "#A9C4E8"
-
 NAME = "BhoomiSetu"
 TAGLINE = "Predicting delays before they cost the project."
 SUB = "Bhoomi = land · Setu = bridge"
@@ -83,47 +74,21 @@ h3 {{ color:{NAVY}; }}
 </style>
 """
 
-_DARK_CSS = f"""
-<style>
-:root {{ --bg:{DARK_BG}; --card:{DARK_CARD}; --txt:{DARK_TEXT}; }}
-.stApp {{ background-color:{DARK_BG} !important; }}
-[data-testid="stAppViewContainer"] {{ background-color:{DARK_BG}; }}
-[data-testid="stSidebar"] {{ background-color:{DARK_SIDEBAR}; }}
-[data-testid="stSidebar"] * {{ color:{DARK_TEXT} !important; }}
-h3 {{ color:{DARK_HEADING}; }}
-.bk-kpi {{ background:{DARK_CARD}; box-shadow:0 1px 3px rgba(0,0,0,.35); }}
-.bk-kpi .k-label {{ color:{DARK_MUTED}; }}
-.bk-kpi .k-value {{ color:{DARK_TEXT}; }}
-.bk-kpi .k-delta {{ color:{DARK_MUTED}; }}
-.bk-section {{ color:{DARK_HEADING}; }}
-.bk-footer {{ color:{DARK_MUTED}; border-top:1px solid {DARK_GRID}; }}
-[data-testid="stDataFrame"] {{ background:{DARK_CARD}; }}
-[data-testid="stDataFrame"] table, [data-testid="stDataFrame"] th,
-[data-testid="stDataFrame"] td {{ color:{DARK_TEXT}; }}
-[data-testid="stDataFrame"] thead tr th {{ background:{DARK_SIDEBAR}; }}
-[data-testid="stExpander"] {{ background:{DARK_CARD}; }}
-</style>
-"""
+
+def inject_css() -> None:
+    st.markdown(_CSS, unsafe_allow_html=True)
 
 
-def inject_css(theme: str = "Light") -> None:
-    st.markdown(_CSS + (_DARK_CSS if theme == "Dark" else ""), unsafe_allow_html=True)
-
-
-def setup_plotly(theme: str = "Light") -> None:
-    """Register the branded 'sih' template (theme-aware) and make it the default."""
-    dark = theme == "Dark"
-    grid = DARK_GRID if dark else "#E8EDF2"
-    zero = "#3A4C66" if dark else "#D5DCE4"
-    font_color = DARK_TEXT if dark else TEXT
+def setup_plotly() -> None:
+    """Register the branded 'sih' template and make it the default."""
     t = go.layout.Template()
     t.layout = dict(
-        font=dict(family="'Segoe UI','Helvetica Neue',Arial,sans-serif", size=13, color=font_color),
+        font=dict(family="'Segoe UI','Helvetica Neue',Arial,sans-serif", size=13, color=TEXT),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         colorway=[NAVY, STEEL, YEL, GRN, RED, "#8E44AD"],
-        xaxis=dict(gridcolor=grid, zerolinecolor=zero),
-        yaxis=dict(gridcolor=grid, zerolinecolor=zero),
+        xaxis=dict(gridcolor="#E8EDF2", zerolinecolor="#D5DCE4"),
+        yaxis=dict(gridcolor="#E8EDF2", zerolinecolor="#D5DCE4"),
         margin=dict(l=10, r=10, t=30, b=10),
     )
     pio.templates["sih"] = t
