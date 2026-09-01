@@ -784,8 +784,9 @@ def view_compare(df: pd.DataFrame) -> None:
 # --------------------------------------------------------------------------- #
 
 def main() -> None:
-    inject_css()
-    setup_plotly()
+    theme = st.session_state.get("theme", "Light")
+    inject_css(theme)
+    setup_plotly(theme)
     hero(ui.NAME, ui.TAGLINE, ui.SUB)
 
     df = load_portfolio()
@@ -821,6 +822,9 @@ def main() -> None:
         selected = st.radio("Go to", nav, index=nav.index(current_nav))
         if selected != current_nav:
             st.session_state["nav"] = selected
+
+        # theme toggle (keyed to session_state so CSS/plotly re-theme on change)
+        st.radio("Theme", ["Light", "Dark"], horizontal=True, key="theme")
 
         if is_admin and st.button("Refresh portfolio cache"):
             refresh()

@@ -65,6 +65,13 @@ LANDING_HTML = f"""<!DOCTYPE html>
 
   footer {{ border-top:1px solid #e2e8f0; padding:26px 0 40px; color:#6b7280; font-size:.84rem; }}
   footer b {{ color:var(--navy); }}
+  @media (prefers-color-scheme: dark) {{
+    body {{ background:#0F1B2D; color:#E5EAF0; }}
+    .card {{ background:#16283E; }}
+    .card p {{ color:#B8C4D4; }}
+    .card h3 {{ color:#A9C4E8; }}
+    footer {{ border-top:1px solid #26364F; color:#93A3B5; }}
+  }}
 </style>
 </head>
 <body>

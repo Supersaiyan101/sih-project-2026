@@ -153,6 +153,8 @@ The API contract is documented in [`INTERFACES.md`](INTERFACES.md).
 - **Area of Interest** — pick a center village + radius → catchment risk profile.
 - **Map** — point projects as markers, linear corridors as polylines, colored by risk.
 - **Role switcher** (mock) — Admin / Officer / Viewer with functional gating.
+- **Light/Dark theme toggle** — sidebar switch re-themes the app (custom components,
+  charts, tables, shell) at runtime; the landing page respects OS dark mode too.
 
 ## 8. Data & cold-start defense (the honest framing)
 
