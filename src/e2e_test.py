@@ -79,7 +79,6 @@ def check_data_invariants() -> None:
     ok("some linear cross state", lin_state > 0)
     ok("point stays in 1 district", pt_bad == 0)
 
-    import json
     report = json.loads((ROOT / "models/metrics_report.json").read_text())
     ok("LOSO present", "cold_start_loso" in report)
     ok("gates passed", report.get("gates_ok") is True)

@@ -99,7 +99,7 @@ Delay per stage = actual − statutory. Always expose days-overrun.
   validation (district hold-out) → SHAP explanations → metrics report. Add
   `--incremental` retrain path.
 - **Day 3:** predict.py + FastAPI endpoint + Streamlit dashboard (risk table, detail
-  page, SHAP, actions, what-if, alerts feed, Folium map, mock role-switcher).
+  page, SHAP, actions, what-if, alerts feed, offline plotly map, mock role-switcher).
 - **Day 4:** End-to-end test, README + architecture diagram, INTERFACES.md (contract +
   API spec), rehearse demo script.
 
@@ -115,7 +115,12 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - [x] Stage 4 — new-project onboarding (CSV + record pull + parquet persistence)
 - [x] Stage 5 — Area of Interest + incremental hook
 - [x] Stage 6 — docs (README/INTERFACES/DEMO_SCRIPT) + e2e refresh
-- [ ] Stage 6 — fresh-state e2e gate + final commit
+- [x] Stage 6 — fresh-state e2e gate (38/38) + final commit (6a4be02)
+
+### ⚠️ Historical Phase-1 results (HP single-state — SUPERSEDED by Phase 2)
+The Day 1–4 blocks below record the ORIGINAL single-state build. After Phase 2 the data
+was regenerated (3 states, semantic IDs); these numbers/IDs are no longer current.
+Current results live in `models/metrics_report.json` + `src/demo_numbers.py`.
 
 ### Day 1 results (verified by sanity_check.py)
 - Generated: 12 HP districts → 227 villages (40 tehsils) → 5,000 projects → 100,000
@@ -167,14 +172,14 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - models/ committed (removed from .gitignore) so the demo works out-of-the-box after clone.
 
 ## 9. Demo Script (90 seconds, for judges)
-1. Show village/district risk table (red/yellow/green).
-2. Click a red corridor/village → per-stage delay probability bars vs statutory clocks.
-3. SHAP chart: "Delay driven by: 14 joint owners, court stay, orchard land."
-4. Recommended actions panel (rule-based factor→action mapping).
-5. What-if: toggle "court stay cleared" → risk drops live.
-6. Cold start: brand-new district scored instantly ("region-agnostic by design").
-7. Folium hotspot map + alert feed ("high-risk projects auto-flagged").
-8. FastAPI endpoint demo + mock role-switch (Admin/Officer/Viewer).
+**Authoritative walkthrough: see `DEMO_SCRIPT.md`** (timed, auto-sourced numbers, curated
+point-dam + cross-state-highway parcels, fallbacks). Short arc:
+1. Portfolio — cascading filter (State → District → Type) + risk table (R/Y/G).
+2. Project detail — per-stage bottleneck bars + segment profile.
+3. Parcel detail + What-if — "clear the court stay" → risk drops live.
+4. New Project — CSV onboarding + instant scoring.
+5. Area of Interest — village center + radius catchment.
+6. Map — point markers + linear corridors; then cold-start close (LOSO proof).
 
 ## 10. Session Resume Protocol
 Open a new chat and say:
@@ -222,14 +227,14 @@ Execute in order (dependency-sequenced). See README/DEMO_SCRIPT after Stage 6.
 
 ### Stages
 - **Stage 0 — Lock design:** schema.json (IDs, spatial_type, coord_path, hidden
-  state_admin_capacity); states dict (HP 12 / Punjab ~22 / Uttarakhand ~13 districts);
-  state-confound formula (state_effect = (1-state_cap)*K_state; proxy blend
+  state_admin_capacity); states dict (HP 12 / Punjab 23 / Uttarakhand 13 districts, 48
+  total); state-confound formula (state_effect = (1-state_cap)*K_state; proxy blend
   w_ind*base + w_state*state_cap + w_dist*district_cap + noise); cold-start split by
   parcel's own district/state. No data touched.
 - **Stage 1 — Generator + calibration + single regen:** states hierarchy, semantic IDs,
   point/linear geometry (adjacency routing); ~12k calibration sample → tune K_state +
   blend weights until LOSO 2–15%; then ONE clean ~100k regeneration; extend sanity_check.
-- **Stage 2 — Retrain + gates:** 10 models; LODO (~47 districts) ≤10% + AUROC≥0.70;
+- **Stage 2 — Retrain + gates:** 10 models; LODO (48 districts) ≤10% + AUROC≥0.70;
   LOSO (3-fold) 2–15%; metrics_report with both. Fail ⇒ stop.
 - **Stage 3 — Dashboard:** score_batch(include_stages=True); cascading filter
   State→District→Type→Project (+risk/village); clickable tables; project detail dashboard;

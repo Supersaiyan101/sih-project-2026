@@ -17,7 +17,6 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 GEN = Path(__file__).resolve().parent.parent / "data" / "generated"
@@ -117,7 +116,6 @@ def check_confound(projects, parcels):
     print("=" * 60); print("[6] HIDDEN CONFOUND (leak + proxy band)"); print("=" * 60)
     feats = ["owner_count", "pending_mutations", "court_stay", "encumbrances"]
     d_dummies = pd.get_dummies(parcels["district_code"]).astype(float)
-    s_dummies = pd.get_dummies(parcels["state_code"]).astype(float)
     worst = 0.0
     for f in feats:
         c = d_dummies.corrwith(parcels[f]).abs().max()
@@ -146,7 +144,7 @@ def check_ongoing(live):
 
 
 def main():
-    projects, parcels, villages, districts, states, hist, live = load()
+    projects, parcels, villages, _districts, states, hist, live = load()
     check_volumes(projects, parcels, villages, states, hist, live)
     check_ids(projects, parcels)
     check_spatial(projects, parcels)

@@ -199,12 +199,11 @@ def view_project(df: pd.DataFrame) -> None:
     if sub.empty:
         st.warning("Project not found in the live portfolio.")
         return
-    projects = load_projects()
-    proj = projects[projects["project_id"] == pid]
-    ptype = sub["project_type"].iloc[0]
-    spatial = sub["spatial_type"].iloc[0]
-    state = sub["state"].iloc[0]
-    district = sub["district"].iloc[0]
+    p0 = sub.iloc[0]
+    ptype = p0["project_type"]
+    spatial = p0["spatial_type"]
+    state = p0["state"]
+    district = p0["district"]
 
     c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("Project", pid)
@@ -212,6 +211,11 @@ def view_project(df: pd.DataFrame) -> None:
     c3.metric("State / District", f"{state} / {district}")
     c4.metric("Parcels", f"{len(sub):,}")
     c5.metric("Aggregate risk", f"{sub['risk_score'].mean():.3f}")
+
+    st.markdown(f"Affected families **{int(p0['affected_families']):,}** · "
+                f"compensation **{p0['compensation_status']}** · "
+                f"rehab **{p0['rehab_progress_pct']:.0f}%** · "
+                f"responsiveness **{p0['stakeholder_responsiveness']:.2f}**")
 
     red = (sub["risk_level"] == "RED").sum()
     yel = (sub["risk_level"] == "YELLOW").sum()

@@ -8,20 +8,20 @@ custom dashboard, or an external consumer) can render. The FastAPI endpoint
 
 ```json
 {
-  "parcel_id": "PRCL_0000006",
-  "risk_score": 0.8517,
+  "parcel_id": "HP-LAS-0008-0004",
+  "risk_score": 0.98,
   "risk_level": "RED",
-  "expected_overrun_days": 477.1,
-  "max_delay_prob": 0.9997,
+  "expected_overrun_days": 978.4,
+  "max_delay_prob": 0.9999,
   "stages": {
     "SIA": {
-      "delay_prob": 0.4982,
-      "expected_overrun": -1.8,
+      "delay_prob": 0.9585,
+      "expected_overrun": 40.8,
       "statutory_days": 180,
       "status": null,
       "elapsed_days": null,
       "actual_days": null,
-      "top_factors": [["stakeholder_responsiveness", -0.984], ["project_type", 0.517]]
+      "top_factors": [["project_type", 1.965], ["historical_performance_score", 0.162]]
     }
   },
   "top_factors": [["court_stay", 11.67], ["affected_families", 3.57]],

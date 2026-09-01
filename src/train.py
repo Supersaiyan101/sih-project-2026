@@ -176,9 +176,9 @@ def load_incremental_extra() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         name = p.stem.replace("append_", "")
         if name in extra:
             extra[name].append(pd.read_parquet(p))
-    for k in extra:
-        if extra[k]:
-            print(f"  appended {len(extra[k])} file(s) for '{k}'")
+    for k, v in extra.items():
+        if v:
+            print(f"  appended {len(v)} file(s) for '{k}'")
     return (pd.concat(extra["parcels"]) if extra["parcels"] else None,
             pd.concat(extra["projects"]) if extra["projects"] else None,
             pd.concat(extra["stage_timelines_historical"]) if extra["stage_timelines_historical"] else None)
@@ -310,7 +310,6 @@ def main() -> None:
     if cold_start and cold_start_state:
         lodo_drop = max(report["cold_start_lodo"]["drop_pct"].values())
         loso_drop_avg = float(np.mean(list(report["cold_start_loso"]["drop_pct"].values())))
-        loso_drop_max = max(report["cold_start_loso"]["drop_pct"].values())
         min_auroc = min(metrics[s]["classifier"]["auroc"] for s in STAGES)
         print("\n================= GATES =================")
         print(f"LODO max drop: {lodo_drop:.2f}%  (gate: <=10%)")
@@ -326,7 +325,7 @@ def main() -> None:
     report["gates_ok"] = gates_ok
     (MODELS / "metrics_report.json").write_text(json.dumps(report, indent=2))
 
-    print(f"\nDistrict risk ranking (area-weighted):")
+    print("\nDistrict risk ranking (area-weighted):")
     print(district_risk[["district", "risk_score", "n_parcels"]].to_string(index=False))
     print(f"\nDone in {time.time() - t0:.1f}s. Models + report in {MODELS}/")
 
