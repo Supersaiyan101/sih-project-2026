@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-31T20:16:26.117531+00:00",
-  "n_parcels": 88041,
+  "generated_at": "2026-09-01T15:29:29.212066+00:00",
+  "n_parcels": 87951,
   "n_features": 12,
   "feature_columns": [
     "project_type",
@@ -18,63 +18,63 @@
   ],
   "stages": {
     "SIA": {
-      "delay_rate": 0.5860639445737975,
+      "delay_rate": 0.6951850378034222,
       "classifier": {
-        "auroc": 0.7627627472532148,
-        "average_precision": 0.8159295160860927
+        "auroc": 0.7719433712289372,
+        "average_precision": 0.8818197855996466
       },
       "regressor": {
-        "mae": 17.13198594593559,
-        "rmse": 21.52821752777429,
-        "r2": 0.3238160160196204
+        "mae": 17.5305297963767,
+        "rmse": 21.905452485952182,
+        "r2": 0.3439768361928254
       }
     },
     "NOTIFICATION": {
-      "delay_rate": 0.766426259299222,
+      "delay_rate": 0.8358251378545847,
       "classifier": {
-        "auroc": 0.8590165967177099,
-        "average_precision": 0.9520875007585312
+        "auroc": 0.8690701819384854,
+        "average_precision": 0.9703663886232843
       },
       "regressor": {
-        "mae": 17.228192569069744,
-        "rmse": 21.5018458508856,
-        "r2": 0.5763139984637617
+        "mae": 17.61457167161325,
+        "rmse": 22.018217974501834,
+        "r2": 0.5744383028561297
       }
     },
     "DECLARATION": {
-      "delay_rate": 0.8717133284116076,
+      "delay_rate": 0.9209254732533682,
       "classifier": {
-        "auroc": 0.9100510444649199,
-        "average_precision": 0.9854805858548192
+        "auroc": 0.9146014724285753,
+        "average_precision": 0.9919190576913046
       },
       "regressor": {
-        "mae": 17.238855252439027,
-        "rmse": 21.68503585698699,
-        "r2": 0.7775049646624659
+        "mae": 17.588185755385318,
+        "rmse": 22.0640158044749,
+        "r2": 0.7781168587429635
       }
     },
     "AWARD": {
-      "delay_rate": 0.7485376795956613,
+      "delay_rate": 0.8125177647660735,
       "classifier": {
-        "auroc": 0.9063696790711933,
-        "average_precision": 0.9685875590736813
+        "auroc": 0.9017980999490138,
+        "average_precision": 0.9764969864914511
       },
       "regressor": {
-        "mae": 17.225915915218188,
-        "rmse": 21.57056188774015,
-        "r2": 0.939614093803682
+        "mae": 17.40159340329562,
+        "rmse": 21.886513773410428,
+        "r2": 0.9392788721660381
       }
     },
     "POSSESSION": {
-      "delay_rate": 0.7348514963938895,
+      "delay_rate": 0.8146211130691831,
       "classifier": {
-        "auroc": 0.9136968885837498,
-        "average_precision": 0.9709976385407095
+        "auroc": 0.9065319206259431,
+        "average_precision": 0.9788074268711622
       },
       "regressor": {
-        "mae": 17.367567888216172,
-        "rmse": 21.89793989813111,
-        "r2": 0.9453887669789828
+        "mae": 17.524975637701914,
+        "rmse": 21.989325395543585,
+        "r2": 0.945899351854443
       }
     }
   },
@@ -82,416 +82,888 @@
     "SIA": [
       [
         "project_type",
-        0.7147156057904884
+        0.7435026779182997
       ],
       [
         "stakeholder_responsiveness",
-        0.5171066829546883
+        0.5143210703043639
       ],
       [
         "historical_performance_score",
-        0.20695135715278204
+        0.24177664075644453
       ],
       [
         "owner_count",
-        0.041435186773584
+        0.038418324366387334
       ],
       [
         "pending_mutations",
-        0.03811478917048567
-      ],
-      [
-        "area_sqm",
-        0.024787436570405327
-      ],
-      [
-        "encumbrances",
-        0.023608640534273456
-      ],
-      [
-        "rehab_progress_pct",
-        0.023380787367531897
+        0.03699812255838434
       ],
       [
         "affected_families",
-        0.020328342978986887
+        0.018617972369956
       ],
       [
-        "compensation_status",
-        0.012913656846259308
+        "area_sqm",
+        0.018087723608625553
+      ],
+      [
+        "rehab_progress_pct",
+        0.01754170937786117
+      ],
+      [
+        "encumbrances",
+        0.012874054977487356
       ],
       [
         "land_class",
-        0.003752423010799834
+        0.010541265697624381
+      ],
+      [
+        "compensation_status",
+        0.007742442313454114
       ],
       [
         "court_stay",
-        0.0032306333110562043
+        0.00224101157300215
       ]
     ],
     "NOTIFICATION": [
       [
         "pending_mutations",
-        1.2526294623079435
+        1.3330923016289113
       ],
       [
         "project_type",
-        0.7318985332126217
+        0.7035007732220075
       ],
       [
         "stakeholder_responsiveness",
-        0.43862813628073516
+        0.46998788428375254
       ],
       [
         "historical_performance_score",
-        0.2162983647281274
+        0.2337711502427867
       ],
       [
         "owner_count",
-        0.04455310740983642
-      ],
-      [
-        "rehab_progress_pct",
-        0.035394735824491375
-      ],
-      [
-        "area_sqm",
-        0.028678823503122675
+        0.0574095879138212
       ],
       [
         "affected_families",
-        0.02505546072582105
+        0.02749430581291898
+      ],
+      [
+        "rehab_progress_pct",
+        0.022939018774487514
+      ],
+      [
+        "area_sqm",
+        0.018367463587076093
       ],
       [
         "encumbrances",
-        0.016708753657138507
+        0.013435928613350457
       ],
       [
         "land_class",
-        0.01606843047249046
+        0.005939215184242391
       ],
       [
         "compensation_status",
-        0.005324060305860858
+        0.004557247043815457
       ],
       [
         "court_stay",
-        0.0023410843614400816
+        0.0009419465597623142
       ]
     ],
     "DECLARATION": [
       [
         "owner_count",
-        1.29052402062891
+        1.3789168642897167
       ],
       [
         "affected_families",
-        0.8577052170272366
-      ],
-      [
-        "project_type",
-        0.6128955515823964
+        0.9868121305959972
       ],
       [
         "pending_mutations",
-        0.5851512101323236
+        0.6703607567008093
+      ],
+      [
+        "project_type",
+        0.5658380905954716
       ],
       [
         "stakeholder_responsiveness",
-        0.19826477242939558
+        0.27830663654744553
       ],
       [
         "historical_performance_score",
-        0.1797520158835994
+        0.2154946230610811
       ],
       [
         "rehab_progress_pct",
-        0.023117243520069986
+        0.049224631366788466
       ],
       [
         "area_sqm",
-        0.020787424236378336
-      ],
-      [
-        "compensation_status",
-        0.01190657513254297
+        0.047330013824871606
       ],
       [
         "encumbrances",
-        0.010992722645651515
+        0.03710802871212376
       ],
       [
         "land_class",
-        0.008469412637572955
+        0.01203681775178585
+      ],
+      [
+        "compensation_status",
+        0.010700517813577143
       ],
       [
         "court_stay",
-        0.0025097838148410868
+        0.004706189721685777
       ]
     ],
     "AWARD": [
       [
         "encumbrances",
-        1.190450070398675
+        1.1822368490681334
       ],
       [
         "land_class",
-        1.1180754927220848
+        1.0856882839361517
       ],
       [
         "court_stay",
-        0.8395242884472597
+        0.7656273065088834
       ],
       [
         "project_type",
-        0.5270037191724892
+        0.5336260232682101
       ],
       [
         "stakeholder_responsiveness",
-        0.1974867757388376
+        0.23325689573000066
       ],
       [
         "historical_performance_score",
-        0.16611796862673595
-      ],
-      [
-        "owner_count",
-        0.037665233261243
+        0.1918072033146805
       ],
       [
         "pending_mutations",
-        0.03276488808451898
+        0.055457516559248965
       ],
       [
         "area_sqm",
-        0.023666898673632968
+        0.04186290467487117
       ],
       [
-        "affected_families",
-        0.02306202744375492
+        "owner_count",
+        0.037102228403218536
       ],
       [
         "rehab_progress_pct",
-        0.022025276204290414
+        0.033167151391406684
+      ],
+      [
+        "affected_families",
+        0.029431378971360965
       ],
       [
         "compensation_status",
-        0.00750072121483601
+        0.007157443902188853
       ]
     ],
     "POSSESSION": [
       [
         "compensation_status",
-        3.781915407568115
+        3.204437062284257
       ],
       [
         "court_stay",
-        0.6293306520563102
+        0.5425693807476707
       ],
       [
         "project_type",
-        0.4126623777645188
+        0.3704909718489941
       ],
       [
         "affected_families",
-        0.23755207304519688
-      ],
-      [
-        "rehab_progress_pct",
-        0.14969666818587263
+        0.25108661419273803
       ],
       [
         "stakeholder_responsiveness",
-        0.14439684527110616
+        0.1576419348814813
+      ],
+      [
+        "rehab_progress_pct",
+        0.1407449034101408
       ],
       [
         "historical_performance_score",
-        0.1018868982695256
-      ],
-      [
-        "pending_mutations",
-        0.026707681925070236
-      ],
-      [
-        "area_sqm",
-        0.014682175973220203
+        0.12384133682698546
       ],
       [
         "owner_count",
-        0.013476126360562987
+        0.0204715865499216
+      ],
+      [
+        "area_sqm",
+        0.019687313918577802
+      ],
+      [
+        "pending_mutations",
+        0.015125362719540979
       ],
       [
         "encumbrances",
-        0.012995925927987812
+        0.00722127838682581
       ],
       [
         "land_class",
-        0.011140962732647227
+        0.0018710955483199237
       ]
     ]
   },
   "cold_start_lodo": {
+    "heldout_auroc_avg": {
+      "SIA": 0.7176270747893608,
+      "NOTIFICATION": 0.8357129607952158,
+      "DECLARATION": 0.9023846581789353,
+      "AWARD": 0.8937975066995959,
+      "POSSESSION": 0.8916357725001661
+    },
     "per_district": {
+      "Almora": {
+        "SIA": 0.7214327663787056,
+        "NOTIFICATION": 0.8148385438589303,
+        "DECLARATION": 0.8981875658587988,
+        "AWARD": 0.9049518722797902,
+        "POSSESSION": 0.9140585391424794
+      },
+      "Amritsar": {
+        "SIA": 0.6988218230330108,
+        "NOTIFICATION": 0.847634216565432,
+        "DECLARATION": 0.8851984696317552,
+        "AWARD": 0.8908720801338252,
+        "POSSESSION": 0.8993088334457181
+      },
+      "Bageshwar": {
+        "SIA": 0.7009835933810896,
+        "NOTIFICATION": 0.7784137990151725,
+        "DECLARATION": 0.864956767679185,
+        "AWARD": 0.885828358396937,
+        "POSSESSION": 0.9219321881260595
+      },
+      "Barnala": {
+        "SIA": 0.7141349879215658,
+        "NOTIFICATION": 0.8651441967414609,
+        "DECLARATION": 0.9088333333333333,
+        "AWARD": 0.8946366106047693,
+        "POSSESSION": 0.8543307250132908
+      },
+      "Bathinda": {
+        "SIA": 0.7670541362030723,
+        "NOTIFICATION": 0.8615928669320629,
+        "DECLARATION": 0.9174843463653024,
+        "AWARD": 0.9198661853000039,
+        "POSSESSION": 0.8902219670876387
+      },
       "Bilaspur": {
-        "SIA": 0.7292092022130339,
-        "NOTIFICATION": 0.8515981693078916,
-        "DECLARATION": 0.913303269591614,
-        "AWARD": 0.9040402783653089,
-        "POSSESSION": 0.8780903400381537
+        "SIA": 0.6987858882254557,
+        "NOTIFICATION": 0.8366843271072797,
+        "DECLARATION": 0.9017871201385608,
+        "AWARD": 0.8888238594120947,
+        "POSSESSION": 0.8865051280028002
       },
       "Chamba": {
-        "SIA": 0.7318499626257755,
-        "NOTIFICATION": 0.837515171313831,
-        "DECLARATION": 0.9010559381004574,
-        "AWARD": 0.8986478080505185,
-        "POSSESSION": 0.9054672432200355
+        "SIA": 0.7375177256471162,
+        "NOTIFICATION": 0.8670161841805333,
+        "DECLARATION": 0.916877150073717,
+        "AWARD": 0.9094493077543925,
+        "POSSESSION": 0.8936720397630327
+      },
+      "Chamoli": {
+        "SIA": 0.7185845291856046,
+        "NOTIFICATION": 0.795937552510116,
+        "DECLARATION": 0.8596083392925904,
+        "AWARD": 0.8874927539845293,
+        "POSSESSION": 0.9145284910637381
+      },
+      "Champawat": {
+        "SIA": 0.6725980748556764,
+        "NOTIFICATION": 0.795948195835265,
+        "DECLARATION": 0.8547422638270041,
+        "AWARD": 0.8817206983728711,
+        "POSSESSION": 0.9230606340615581
+      },
+      "Dehradun": {
+        "SIA": 0.7197265087853324,
+        "NOTIFICATION": 0.8033992473729055,
+        "DECLARATION": 0.8802360399244672,
+        "AWARD": 0.8996059282880076,
+        "POSSESSION": 0.9101941747572816
+      },
+      "Faridkot": {
+        "SIA": 0.7024669020039145,
+        "NOTIFICATION": 0.818779069767442,
+        "DECLARATION": 0.9389607722324912,
+        "AWARD": 0.8741467134799126,
+        "POSSESSION": 0.8692537592000019
+      },
+      "Fatehgarh Sahib": {
+        "SIA": 0.7029651148575131,
+        "NOTIFICATION": 0.8443886954740938,
+        "DECLARATION": 0.8843134672052768,
+        "AWARD": 0.8781146448375141,
+        "POSSESSION": 0.8789001230665283
+      },
+      "Fazilka": {
+        "SIA": 0.743170135017961,
+        "NOTIFICATION": 0.8727226757205808,
+        "DECLARATION": 0.9398993765722412,
+        "AWARD": 0.8989548417132216,
+        "POSSESSION": 0.8980555735895605
+      },
+      "Ferozepur": {
+        "SIA": 0.7017755883962782,
+        "NOTIFICATION": 0.8088619043382854,
+        "DECLARATION": 0.888820143884892,
+        "AWARD": 0.8840323615282699,
+        "POSSESSION": 0.8717959507550255
+      },
+      "Gurdaspur": {
+        "SIA": 0.7182655948714096,
+        "NOTIFICATION": 0.8594204442884363,
+        "DECLARATION": 0.9452791329743235,
+        "AWARD": 0.9034147863158989,
+        "POSSESSION": 0.8748765128185325
       },
       "Hamirpur": {
-        "SIA": 0.7399061048337867,
-        "NOTIFICATION": 0.8195031350715061,
-        "DECLARATION": 0.8962075108570448,
-        "AWARD": 0.8995413108986468,
-        "POSSESSION": 0.9195573620315275
+        "SIA": 0.7094661529994497,
+        "NOTIFICATION": 0.8414324005233097,
+        "DECLARATION": 0.9085452556740498,
+        "AWARD": 0.8755812098735893,
+        "POSSESSION": 0.8728765995659657
+      },
+      "Haridwar": {
+        "SIA": 0.7006333954929043,
+        "NOTIFICATION": 0.8233740105540897,
+        "DECLARATION": 0.9014423076923077,
+        "AWARD": 0.9073356465417535,
+        "POSSESSION": 0.8878447088047507
+      },
+      "Hoshiarpur": {
+        "SIA": 0.7043033040760119,
+        "NOTIFICATION": 0.8154305412785929,
+        "DECLARATION": 0.900278951641443,
+        "AWARD": 0.8635834746561146,
+        "POSSESSION": 0.8908141030909851
+      },
+      "Jalandhar": {
+        "SIA": 0.7444626204895897,
+        "NOTIFICATION": 0.8525239353788528,
+        "DECLARATION": 0.9178327168678901,
+        "AWARD": 0.8990748968268073,
+        "POSSESSION": 0.8950673325744716
       },
       "Kangra": {
-        "SIA": 0.7256683834253256,
-        "NOTIFICATION": 0.8321699077563263,
-        "DECLARATION": 0.9089653347460882,
-        "AWARD": 0.8966697001462982,
-        "POSSESSION": 0.898518605037891
+        "SIA": 0.7614364766402155,
+        "NOTIFICATION": 0.8433501167091999,
+        "DECLARATION": 0.9295848798336359,
+        "AWARD": 0.8973433011803369,
+        "POSSESSION": 0.8938087889476778
+      },
+      "Kapurthala": {
+        "SIA": 0.7039534829953993,
+        "NOTIFICATION": 0.7944407163252148,
+        "DECLARATION": 0.9014962859663602,
+        "AWARD": 0.8978083304823811,
+        "POSSESSION": 0.8809201623815968
       },
       "Kinnaur": {
-        "SIA": 0.7246765620298867,
-        "NOTIFICATION": 0.818081238647081,
-        "DECLARATION": 0.8771458231650725,
-        "AWARD": 0.8927978946004326,
-        "POSSESSION": 0.9098394090712812
+        "SIA": 0.7111236541156982,
+        "NOTIFICATION": 0.8521177497998689,
+        "DECLARATION": 0.896714180457946,
+        "AWARD": 0.88521284579489,
+        "POSSESSION": 0.8648342044671518
       },
       "Kullu": {
-        "SIA": 0.7293659831969994,
-        "NOTIFICATION": 0.7996779650735013,
-        "DECLARATION": 0.8788031137341068,
-        "AWARD": 0.8977201717882475,
-        "POSSESSION": 0.934564091116583
+        "SIA": 0.7325789022099576,
+        "NOTIFICATION": 0.8770522368999092,
+        "DECLARATION": 0.9312317266167754,
+        "AWARD": 0.9117386922269987,
+        "POSSESSION": 0.8900027148521353
       },
       "Lahaul and Spiti": {
-        "SIA": 0.7275279669792745,
-        "NOTIFICATION": 0.8349238365114524,
-        "DECLARATION": 0.9060492639093747,
-        "AWARD": 0.899074397539741,
-        "POSSESSION": 0.9068787445003046
+        "SIA": 0.7508427759539694,
+        "NOTIFICATION": 0.9019740129935032,
+        "DECLARATION": 0.9535871802411056,
+        "AWARD": 0.9193959587805501,
+        "POSSESSION": 0.9046120643497888
+      },
+      "Ludhiana": {
+        "SIA": 0.7110504492461301,
+        "NOTIFICATION": 0.8211336088414194,
+        "DECLARATION": 0.8834785025945144,
+        "AWARD": 0.8949437647987373,
+        "POSSESSION": 0.8720903385102533
+      },
+      "Malerkotla": {
+        "SIA": 0.7092246205149432,
+        "NOTIFICATION": 0.8692366833576469,
+        "DECLARATION": 0.9277166679223485,
+        "AWARD": 0.9063147122852577,
+        "POSSESSION": 0.8791983460050689
       },
       "Mandi": {
-        "SIA": 0.7441888169229012,
-        "NOTIFICATION": 0.886495377407586,
-        "DECLARATION": 0.9430125034944555,
-        "AWARD": 0.9181210773770216,
-        "POSSESSION": 0.8933527557667977
+        "SIA": 0.7000702873711644,
+        "NOTIFICATION": 0.8501362044363729,
+        "DECLARATION": 0.8748319560632802,
+        "AWARD": 0.9005943808249427,
+        "POSSESSION": 0.8708204305832044
+      },
+      "Mansa": {
+        "SIA": 0.735048919966393,
+        "NOTIFICATION": 0.8484863882729736,
+        "DECLARATION": 0.8887997633058285,
+        "AWARD": 0.8912979664153189,
+        "POSSESSION": 0.8814099602697958
+      },
+      "Moga": {
+        "SIA": 0.728018701688117,
+        "NOTIFICATION": 0.838236439770182,
+        "DECLARATION": 0.9149276677251877,
+        "AWARD": 0.8769156483304238,
+        "POSSESSION": 0.8761882478161931
+      },
+      "Nainital": {
+        "SIA": 0.7257911160058736,
+        "NOTIFICATION": 0.8202291803851918,
+        "DECLARATION": 0.8998515140266213,
+        "AWARD": 0.9005885553596609,
+        "POSSESSION": 0.9081513390770053
+      },
+      "Pathankot": {
+        "SIA": 0.7162497590129169,
+        "NOTIFICATION": 0.8629860589637273,
+        "DECLARATION": 0.9057845368396971,
+        "AWARD": 0.8999303636812903,
+        "POSSESSION": 0.8614098745587494
+      },
+      "Patiala": {
+        "SIA": 0.6807054303328268,
+        "NOTIFICATION": 0.8153834381107108,
+        "DECLARATION": 0.8657770962197545,
+        "AWARD": 0.8618946543059786,
+        "POSSESSION": 0.8755893161862446
+      },
+      "Pauri Garhwal": {
+        "SIA": 0.7105326115105252,
+        "NOTIFICATION": 0.8178769824137236,
+        "DECLARATION": 0.8878969021142336,
+        "AWARD": 0.8927856639040734,
+        "POSSESSION": 0.9355238300029182
+      },
+      "Pithoragarh": {
+        "SIA": 0.7346468559117111,
+        "NOTIFICATION": 0.7884807090564021,
+        "DECLARATION": 0.8578108022552468,
+        "AWARD": 0.8837098132732424,
+        "POSSESSION": 0.9323768881543426
+      },
+      "Rudraprayag": {
+        "SIA": 0.7023681601337217,
+        "NOTIFICATION": 0.7891091434724868,
+        "DECLARATION": 0.8379865817631141,
+        "AWARD": 0.8965827273446546,
+        "POSSESSION": 0.9407773919753086
+      },
+      "Rupnagar": {
+        "SIA": 0.7331882202304738,
+        "NOTIFICATION": 0.8617484586419498,
+        "DECLARATION": 0.9440595531762278,
+        "AWARD": 0.8936129811841877,
+        "POSSESSION": 0.8718666329881283
+      },
+      "SAS Nagar": {
+        "SIA": 0.7291908588053142,
+        "NOTIFICATION": 0.8834499633611732,
+        "DECLARATION": 0.9263155779298424,
+        "AWARD": 0.911666780775892,
+        "POSSESSION": 0.8724808166785107
+      },
+      "SBS Nagar": {
+        "SIA": 0.7287319510882785,
+        "NOTIFICATION": 0.881621438384271,
+        "DECLARATION": 0.9385153504409521,
+        "AWARD": 0.8993631016787548,
+        "POSSESSION": 0.8853858784893269
+      },
+      "Sangrur": {
+        "SIA": 0.7004011177766264,
+        "NOTIFICATION": 0.8289732476981184,
+        "DECLARATION": 0.8947032995464645,
+        "AWARD": 0.8851004215224398,
+        "POSSESSION": 0.87687173972203
       },
       "Shimla": {
-        "SIA": 0.738271078221146,
-        "NOTIFICATION": 0.8164696954336976,
-        "DECLARATION": 0.8824135107326447,
-        "AWARD": 0.8950343384602362,
-        "POSSESSION": 0.9268533721667627
+        "SIA": 0.7378177196558124,
+        "NOTIFICATION": 0.8379345677930625,
+        "DECLARATION": 0.9209890314184793,
+        "AWARD": 0.891001804057288,
+        "POSSESSION": 0.886097087157184
       },
       "Sirmaur": {
-        "SIA": 0.7445500870772389,
-        "NOTIFICATION": 0.8018234136279966,
-        "DECLARATION": 0.860952474229884,
-        "AWARD": 0.9041199153878494,
-        "POSSESSION": 0.9377317439904049
+        "SIA": 0.7136037910309755,
+        "NOTIFICATION": 0.8976665935191281,
+        "DECLARATION": 0.9317890405940455,
+        "AWARD": 0.8952674009904225,
+        "POSSESSION": 0.8694727726291571
       },
       "Solan": {
-        "SIA": 0.7368624528556111,
-        "NOTIFICATION": 0.8618757487798406,
-        "DECLARATION": 0.9138768481896917,
-        "AWARD": 0.9074090972883979,
-        "POSSESSION": 0.8877322993546747
+        "SIA": 0.7539130484729777,
+        "NOTIFICATION": 0.8741607424960506,
+        "DECLARATION": 0.9328897561680716,
+        "AWARD": 0.9017953268263827,
+        "POSSESSION": 0.8925785893414524
+      },
+      "Sri Muktsar Sahib": {
+        "SIA": 0.6944193314359061,
+        "NOTIFICATION": 0.8027227553787035,
+        "DECLARATION": 0.8794295940794751,
+        "AWARD": 0.8705624682579989,
+        "POSSESSION": 0.8946588170958867
+      },
+      "Tarn Taran": {
+        "SIA": 0.7592269689043882,
+        "NOTIFICATION": 0.8817437097717963,
+        "DECLARATION": 0.9628103595890412,
+        "AWARD": 0.9144526188809626,
+        "POSSESSION": 0.9134706561306934
+      },
+      "Tehri Garhwal": {
+        "SIA": 0.6805042893158176,
+        "NOTIFICATION": 0.8043123246603223,
+        "DECLARATION": 0.906856558882468,
+        "AWARD": 0.9085708244450015,
+        "POSSESSION": 0.8980167342838079
+      },
+      "Udham Singh Nagar": {
+        "SIA": 0.7134375,
+        "NOTIFICATION": 0.8037062690795322,
+        "DECLARATION": 0.8734493192133131,
+        "AWARD": 0.8838403671507933,
+        "POSSESSION": 0.9120881598255494
       },
       "Una": {
-        "SIA": 0.7225685880119019,
-        "NOTIFICATION": 0.842129793329601,
-        "DECLARATION": 0.8987561126379036,
-        "AWARD": 0.8989929373318757,
-        "POSSESSION": 0.8876836201594999
+        "SIA": 0.7130969063121259,
+        "NOTIFICATION": 0.8203488103488104,
+        "DECLARATION": 0.8774664179865059,
+        "AWARD": 0.8887304571666521,
+        "POSSESSION": 0.884962564589265
+      },
+      "Uttarkashi": {
+        "SIA": 0.6977768414294027,
+        "NOTIFICATION": 0.7420607597860659,
+        "DECLARATION": 0.8544299687487317,
+        "AWARD": 0.8937721593547875,
+        "POSSESSION": 0.9255553490101309
       }
     },
+    "drop_pct": {
+      "SIA": 7.04,
+      "NOTIFICATION": 3.84,
+      "DECLARATION": 1.34,
+      "AWARD": 0.89,
+      "POSSESSION": 1.64
+    }
+  },
+  "cold_start_loso": {
     "heldout_auroc_avg": {
-      "SIA": 0.7328870990327402,
-      "NOTIFICATION": 0.8335219543550262,
-      "DECLARATION": 0.8983784752823613,
-      "AWARD": 0.9010140772695477,
-      "POSSESSION": 0.907189132204493
+      "SIA": 0.72549926333427,
+      "NOTIFICATION": 0.8404246435455445,
+      "DECLARATION": 0.9015984343272835,
+      "AWARD": 0.8956794025012064,
+      "POSSESSION": 0.895687106704704
+    },
+    "per_state": {
+      "HP": {
+        "SIA": 0.7288828105990957,
+        "NOTIFICATION": 0.8587248024465961,
+        "DECLARATION": 0.9142183160504459,
+        "AWARD": 0.8958217110055371,
+        "POSSESSION": 0.8849908249853466
+      },
+      "PB": {
+        "SIA": 0.7175035052403844,
+        "NOTIFICATION": 0.8464849690155517,
+        "DECLARATION": 0.9085962327468671,
+        "AWARD": 0.8905290850974308,
+        "POSSESSION": 0.8792604407978767
+      },
+      "UK": {
+        "SIA": 0.7301114741633297,
+        "NOTIFICATION": 0.8160641591744857,
+        "DECLARATION": 0.8819807541845375,
+        "AWARD": 0.9006874114006513,
+        "POSSESSION": 0.922810054330889
+      }
     },
     "drop_pct": {
-      "SIA": 3.92,
-      "NOTIFICATION": 2.97,
-      "DECLARATION": 1.28,
-      "AWARD": 0.59,
-      "POSSESSION": 0.71
+      "SIA": 6.02,
+      "NOTIFICATION": 3.3,
+      "DECLARATION": 1.42,
+      "AWARD": 0.68,
+      "POSSESSION": 1.2
     }
   },
   "rollup_district_risk": [
     {
-      "district": "Mandi",
-      "risk_score": 0.6371328574523994,
-      "n_parcels": 7005
-    },
-    {
-      "district": "Solan",
-      "risk_score": 0.5919494457495617,
-      "n_parcels": 7500
-    },
-    {
-      "district": "Bilaspur",
-      "risk_score": 0.5684182340529041,
-      "n_parcels": 6917
-    },
-    {
-      "district": "Kangra",
-      "risk_score": 0.5382525424360838,
-      "n_parcels": 6998
-    },
-    {
       "district": "Lahaul and Spiti",
-      "risk_score": 0.5375810593338336,
-      "n_parcels": 7011
+      "risk_score": 0.6940189339133279,
+      "n_parcels": 1809
     },
     {
-      "district": "Chamba",
-      "risk_score": 0.5334634730250561,
-      "n_parcels": 7654
-    },
-    {
-      "district": "Una",
-      "risk_score": 0.5294127613035658,
-      "n_parcels": 7332
-    },
-    {
-      "district": "Shimla",
-      "risk_score": 0.475767263402518,
-      "n_parcels": 7350
-    },
-    {
-      "district": "Hamirpur",
-      "risk_score": 0.4737444030775759,
-      "n_parcels": 7227
-    },
-    {
-      "district": "Kinnaur",
-      "risk_score": 0.44542530681366577,
-      "n_parcels": 7325
+      "district": "Tarn Taran",
+      "risk_score": 0.6823384123365228,
+      "n_parcels": 1784
     },
     {
       "district": "Kullu",
-      "risk_score": 0.44312699987534976,
-      "n_parcels": 7758
+      "risk_score": 0.6611797521058462,
+      "n_parcels": 1777
+    },
+    {
+      "district": "Gurdaspur",
+      "risk_score": 0.6561329967760703,
+      "n_parcels": 1638
+    },
+    {
+      "district": "SAS Nagar",
+      "risk_score": 0.6528160349603699,
+      "n_parcels": 2080
+    },
+    {
+      "district": "Bathinda",
+      "risk_score": 0.6516830963248896,
+      "n_parcels": 1669
+    },
+    {
+      "district": "SBS Nagar",
+      "risk_score": 0.6495280458004243,
+      "n_parcels": 2351
+    },
+    {
+      "district": "Solan",
+      "risk_score": 0.6470497768142801,
+      "n_parcels": 1820
+    },
+    {
+      "district": "Malerkotla",
+      "risk_score": 0.6462670905398832,
+      "n_parcels": 2081
+    },
+    {
+      "district": "Bilaspur",
+      "risk_score": 0.6461712694886084,
+      "n_parcels": 2248
+    },
+    {
+      "district": "Hamirpur",
+      "risk_score": 0.6395120320544752,
+      "n_parcels": 2189
+    },
+    {
+      "district": "Moga",
+      "risk_score": 0.6370651238114333,
+      "n_parcels": 1607
+    },
+    {
+      "district": "Pathankot",
+      "risk_score": 0.6369845620659877,
+      "n_parcels": 1514
+    },
+    {
+      "district": "Rupnagar",
+      "risk_score": 0.6311704030118386,
+      "n_parcels": 2171
+    },
+    {
+      "district": "Fazilka",
+      "risk_score": 0.6308358777437638,
+      "n_parcels": 1379
+    },
+    {
+      "district": "Chamba",
+      "risk_score": 0.6240058819792862,
+      "n_parcels": 1542
+    },
+    {
+      "district": "Faridkot",
+      "risk_score": 0.6214840892946478,
+      "n_parcels": 1698
     },
     {
       "district": "Sirmaur",
-      "risk_score": 0.3966688222589509,
-      "n_parcels": 7964
+      "risk_score": 0.6197369482314075,
+      "n_parcels": 1772
+    },
+    {
+      "district": "Kangra",
+      "risk_score": 0.6081301526338037,
+      "n_parcels": 1872
+    },
+    {
+      "district": "Barnala",
+      "risk_score": 0.6076312191142982,
+      "n_parcels": 1960
+    },
+    {
+      "district": "Hoshiarpur",
+      "risk_score": 0.6021947420649684,
+      "n_parcels": 2106
+    },
+    {
+      "district": "Mansa",
+      "risk_score": 0.5991154150700261,
+      "n_parcels": 1696
+    },
+    {
+      "district": "Jalandhar",
+      "risk_score": 0.5974702090305004,
+      "n_parcels": 1961
+    },
+    {
+      "district": "Una",
+      "risk_score": 0.5910946145751399,
+      "n_parcels": 1925
+    },
+    {
+      "district": "Kapurthala",
+      "risk_score": 0.5904062828755117,
+      "n_parcels": 1796
+    },
+    {
+      "district": "Kinnaur",
+      "risk_score": 0.5852045477770347,
+      "n_parcels": 1692
+    },
+    {
+      "district": "Shimla",
+      "risk_score": 0.5847846815810112,
+      "n_parcels": 2044
+    },
+    {
+      "district": "Mandi",
+      "risk_score": 0.5787934862747145,
+      "n_parcels": 1974
+    },
+    {
+      "district": "Ludhiana",
+      "risk_score": 0.5769498851751542,
+      "n_parcels": 2042
+    },
+    {
+      "district": "Sri Muktsar Sahib",
+      "risk_score": 0.576507378382772,
+      "n_parcels": 1762
+    },
+    {
+      "district": "Amritsar",
+      "risk_score": 0.5752527122015686,
+      "n_parcels": 1823
+    },
+    {
+      "district": "Sangrur",
+      "risk_score": 0.5671635828983048,
+      "n_parcels": 2005
+    },
+    {
+      "district": "Haridwar",
+      "risk_score": 0.5569114736722349,
+      "n_parcels": 1816
+    },
+    {
+      "district": "Fatehgarh Sahib",
+      "risk_score": 0.5556443880432201,
+      "n_parcels": 1777
+    },
+    {
+      "district": "Ferozepur",
+      "risk_score": 0.5531726918739512,
+      "n_parcels": 1465
+    },
+    {
+      "district": "Patiala",
+      "risk_score": 0.5511552450388492,
+      "n_parcels": 1727
+    },
+    {
+      "district": "Tehri Garhwal",
+      "risk_score": 0.518052035178649,
+      "n_parcels": 1796
+    },
+    {
+      "district": "Pauri Garhwal",
+      "risk_score": 0.5147233068485031,
+      "n_parcels": 1807
+    },
+    {
+      "district": "Nainital",
+      "risk_score": 0.5128807174680479,
+      "n_parcels": 1808
+    },
+    {
+      "district": "Dehradun",
+      "risk_score": 0.5062498793673658,
+      "n_parcels": 1623
+    },
+    {
+      "district": "Udham Singh Nagar",
+      "risk_score": 0.49861018691637765,
+      "n_parcels": 1552
+    },
+    {
+      "district": "Almora",
+      "risk_score": 0.4725451613179589,
+      "n_parcels": 2163
+    },
+    {
+      "district": "Chamoli",
+      "risk_score": 0.4686833088315686,
+      "n_parcels": 1668
+    },
+    {
+      "district": "Pithoragarh",
+      "risk_score": 0.46110099635590973,
+      "n_parcels": 1939
+    },
+    {
+      "district": "Bageshwar",
+      "risk_score": 0.4453648522788551,
+      "n_parcels": 1962
+    },
+    {
+      "district": "Champawat",
+      "risk_score": 0.43797416369356584,
+      "n_parcels": 1864
+    },
+    {
+      "district": "Rudraprayag",
+      "risk_score": 0.43131084404103376,
+      "n_parcels": 1855
+    },
+    {
+      "district": "Uttarkashi",
+      "risk_score": 0.39407897037601824,
+      "n_parcels": 1342
     }
-  ]
+  ],
+  "gates_ok": true
 }

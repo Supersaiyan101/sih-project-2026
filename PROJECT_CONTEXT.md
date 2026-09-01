@@ -104,19 +104,18 @@ Delay per stage = actual − statutory. Always expose days-overrun.
   API spec), rehearse demo script.
 
 ## 8. Current Status
-- [x] Project folder + this file created (Day 0)
-- [x] Scope analysis vs official statement + decisions locked (project rollup, Folium, alerts, FastAPI, mock RBAC, incremental training)
-- [x] schema.json (3 tables + villages + hidden admin_capacity confound, all fields tagged)
-- [x] data_generator.py + generated data (100k parcels / 5k projects / 227 villages + live subset)
-- [x] sanity_check.py (volumes, rule recovery, confound leak check, overrun-while-ongoing eyeball)
-- [x] features.py (12 geo-free features, ordinal encoding, per-stage targets, risk + rollup)
-- [x] train.py + models (10 models: 5 stages x classifier+regressor) + LODO cold-start + SHAP + metrics report
-- [x] INTERFACES.md (prediction contract + API spec)
-- [x] predict.py + actions.py (score_parcel/score_batch/--refresh-portfolio, rule-based actions)
-- [x] Streamlit UI (6 views: portfolio/detail/what-if/alerts/offline-map + role-gating)
-- [x] FastAPI endpoint (/predict, /predict/batch, /health)
-- [x] bootstrap.sh + e2e_test.py (25 checks incl. fresh-clone proof) + demo_numbers.py
-- [x] README.md + DEMO_SCRIPT.md (architecture diagram + timed 90s walkthrough)
+**Phase 1 (Day 1–4, HP single-state) — DONE and committed.**
+**Phase 2 (Architecture Expansion — multi-state) — Stages 0–5 DONE, Stage 6 final gate.**
+
+- [x] Stage 0 — schema.json v2 (semantic IDs, spatial_type, coord_path, state+district hidden confound) + states.py
+- [x] Stage 1 — generator rebuild (3 states / 48 districts, semantic IDs, point+linear adjacency routing) + calibrated single regeneration
+- [x] Stage 1.5 — LOSO calibration: K_STATE=35, ADMIN_EFFECT=30, W=(0.50,0.28,0.22)
+- [x] Stage 2 — retrain + LODO/LOSO gates (LOSO avg 2.5%, all gates pass)
+- [x] Stage 3 — dashboard: cascading filter, clickable tables, project detail, point/linear map
+- [x] Stage 4 — new-project onboarding (CSV + record pull + parquet persistence)
+- [x] Stage 5 — Area of Interest + incremental hook
+- [x] Stage 6 — docs (README/INTERFACES/DEMO_SCRIPT) + e2e refresh
+- [ ] Stage 6 — fresh-state e2e gate + final commit
 
 ### Day 1 results (verified by sanity_check.py)
 - Generated: 12 HP districts → 227 villages (40 tehsils) → 5,000 projects → 100,000
@@ -187,12 +186,63 @@ Open a new chat and say:
 - **venv:** `~/sih-land-delay/.venv` (created with `uv venv .venv`). Activate:
   `source .venv/bin/activate` (or call `.venv/bin/python` directly).
 - **Installed deps (locked versions):** pandas 3.0.5, numpy 2.5.2, scikit-learn 1.9.0,
-  shap 0.52.0, pyarrow 25.0.1, joblib 1.6.0. (Streamlit/Plotly/Folium/FastAPI not yet
-  installed — add on Day 3.)
+  shap 0.52.0, pyarrow 25.0.1, joblib 1.6.0, streamlit 1.62.0, plotly 7.0.0,
+  fastapi 0.141.1, uvicorn 0.52.4, httpx 0.28.1. (Folium dropped — map is offline plotly.)
 - **Seed:** `SEED = 42` in `data_generator.py` (fully reproducible).
 - **Run commands (from repo root):**
   - regen data: `.venv/bin/python src/data_generator.py`
   - sanity check: `.venv/bin/python src/sanity_check.py`
 - **Data outputs:** `data/generated/*.parquet` (historical = training, live = demo).
-- **Git ignore:** add `.gitignore` for `.venv/`, `__pycache__/`, `models/`, `*.pyc`
-  (generated data is committed — only ~7MB, makes demo work out-of-the-box).
+- **Git ignore:** `.venv/`, `__pycache__/`, `*.pyc`, `data/raw_sample/` (models/ and
+  data/generated are committed — ~12MB, makes demo work out-of-the-box).
+
+## 12. Post-Demo Enhancement Plan (AUTHORITATIVE — active)
+Supersedes the Day 1–4 work. Overhauls the data architecture: pan-India (3 states),
+semantic IDs, point/linear spatial realism, and leave-one-state-out (LOSO) validation.
+Execute in order (dependency-sequenced). See README/DEMO_SCRIPT after Stage 6.
+
+### Locked decisions
+1. **Confound:** hidden state + district admin capacity; stakeholder_responsiveness &
+   historical_performance_score proxy BOTH; calibrated on a small sample before the one
+   full regeneration.
+2. **IDs:** parcel `<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>`; project
+   `<STATE>-<TYPE>-<YEAR>-<SEQ>`; cross-state project's STATE = home state (first path
+   parcel). IDs derived from assigned geography (never independent).
+3. **Spatial:** point projects (1 district, 1–2 villages); linear projects via
+   centroid-adjacency routing (nearest-village walk across district/state borders).
+4. **Gates:** LODO drop ≤10% rel + district AUROC ≥0.70; LOSO drop 2–15% rel. Fail ⇒
+   return to Stage 0.
+5. **UI:** all dashboard UI in one pass (Stage 3) after regeneration.
+6. **Scale:** ~100k parcels / ~5k projects across 3 states (~33k each), modest linear
+   cross-state fraction.
+7. **Onboarding:** CSV + record pull + reject-unknown; dashboard-only (no new API
+   routes); parquet persistence (no DB).
+8. **Dropped:** corridor/route tracing, site comparator, GeoJSON, simulate-unknown IDs,
+   real GIS.
+
+### Stages
+- **Stage 0 — Lock design:** schema.json (IDs, spatial_type, coord_path, hidden
+  state_admin_capacity); states dict (HP 12 / Punjab ~22 / Uttarakhand ~13 districts);
+  state-confound formula (state_effect = (1-state_cap)*K_state; proxy blend
+  w_ind*base + w_state*state_cap + w_dist*district_cap + noise); cold-start split by
+  parcel's own district/state. No data touched.
+- **Stage 1 — Generator + calibration + single regen:** states hierarchy, semantic IDs,
+  point/linear geometry (adjacency routing); ~12k calibration sample → tune K_state +
+  blend weights until LOSO 2–15%; then ONE clean ~100k regeneration; extend sanity_check.
+- **Stage 2 — Retrain + gates:** 10 models; LODO (~47 districts) ≤10% + AUROC≥0.70;
+  LOSO (3-fold) 2–15%; metrics_report with both. Fail ⇒ stop.
+- **Stage 3 — Dashboard:** score_batch(include_stages=True); cascading filter
+  State→District→Type→Project (+risk/village); clickable tables; project detail dashboard;
+  map upgrade (point markers + linear polylines, click→project).
+- **Stage 4 — Onboarding:** user_projects/user_parcels parquet; New Project form; CSV
+  semantic-ID upload + record pull + reject-unknown; instant score; "user-created" tag.
+- **Stage 5 — Time-boxed:** Area of Interest (map-click center + radius); --incremental
+  lifecycle doc.
+- **Stage 6 — Docs/demo/e2e:** update PROJECT_CONTEXT/README/INTERFACES; repick curated
+  parcels (point dam + cross-state highway); demo_numbers += LOSO; rewrite DEMO_SCRIPT;
+  extend e2e; fresh-state gate.
+
+### Accepted consequences
+- All current baked numbers/IDs replaced (Mandi 0.64, PRCL_0000006, LODO %s).
+- Runtime: LODO ~3–5 min; fresh e2e ~8–12 min (--skip-lodo for iteration).
+- No new dependencies (Area of Interest = haversine).

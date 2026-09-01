@@ -1,201 +1,201 @@
-project_id,project_type,affected_families,compensation_status,rehab_progress_pct,stakeholder_responsiveness,historical_performance_score,state,district,tehsil
-PRJ_00000,road,30,partial,92.52,0.75,0.68,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00001,road,210,paid,78.79,0.632,0.782,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00002,industrial,24,paid,99.52,0.664,0.654,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00003,road,76,paid,100.0,0.591,0.689,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00004,road,86,paid,79.66,0.849,0.584,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00005,road,171,paid,90.17,0.713,0.622,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00006,irrigation,92,partial,92.37,0.58,0.702,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00007,irrigation,87,paid,90.19,0.504,0.668,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00008,irrigation,177,partial,86.91,0.784,0.606,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00009,road,222,pending,92.42,0.726,0.721,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00010,road,705,paid,80.31,0.873,0.833,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00011,industrial,18,paid,97.55,0.791,0.51,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00012,irrigation,215,partial,90.69,0.785,0.896,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00013,irrigation,60,paid,100.0,0.502,0.503,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00014,dam,562,paid,76.13,0.653,0.743,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00015,dam,96,paid,90.64,0.738,0.727,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00016,road,49,partial,84.25,0.637,0.653,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00017,rail,68,partial,85.64,0.778,0.635,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00018,irrigation,151,partial,84.39,0.743,0.676,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00019,rail,156,partial,88.81,0.639,0.734,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00020,industrial,111,paid,86.01,0.568,0.73,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00021,irrigation,161,partial,96.4,0.624,0.632,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00022,dam,67,pending,98.83,0.638,0.502,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00023,industrial,138,paid,89.7,0.656,0.557,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00024,irrigation,154,pending,94.21,0.809,0.754,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00025,industrial,204,pending,76.96,0.813,0.66,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00026,irrigation,85,paid,86.32,0.813,0.769,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00027,industrial,17,paid,95.6,0.506,0.717,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00028,rail,113,paid,91.27,0.716,0.768,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00029,irrigation,520,partial,84.78,0.714,0.691,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00030,irrigation,187,paid,89.05,0.649,0.588,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00031,road,75,paid,87.23,0.695,0.473,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00032,rail,53,partial,89.03,0.711,0.597,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00033,industrial,350,pending,98.33,0.593,0.767,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00034,irrigation,64,partial,100.0,0.474,0.689,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00035,road,46,partial,92.62,0.698,0.486,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00036,rail,195,paid,83.96,0.569,0.74,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00037,road,16,paid,92.77,0.559,0.77,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00038,road,283,partial,77.84,0.665,0.514,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00039,industrial,126,paid,89.37,0.652,0.692,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00040,rail,262,paid,77.05,0.612,0.471,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00041,rail,193,pending,79.24,0.577,0.434,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00042,irrigation,140,paid,80.47,0.731,0.729,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00043,road,34,partial,99.36,0.714,0.758,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00044,road,79,partial,89.23,0.562,0.628,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00045,dam,93,partial,79.47,0.907,0.813,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00046,irrigation,250,paid,85.82,0.36,0.638,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00047,industrial,148,paid,84.38,0.683,0.832,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00048,irrigation,612,paid,96.21,0.561,0.582,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00049,irrigation,226,partial,72.84,0.8,0.504,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00050,dam,517,paid,92.19,0.587,0.648,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00051,industrial,55,paid,100.0,0.718,0.315,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00052,dam,146,partial,91.64,0.495,0.587,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00053,industrial,110,paid,100.0,0.554,0.77,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00054,dam,158,paid,97.42,0.741,0.783,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00055,industrial,91,paid,68.8,0.561,0.581,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00056,road,34,paid,92.77,0.772,0.824,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00057,dam,101,paid,100.0,0.833,0.647,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00058,rail,207,paid,88.14,0.667,0.66,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00059,irrigation,359,pending,94.31,0.527,0.564,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00060,dam,92,pending,82.35,0.736,0.68,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00061,industrial,131,partial,96.07,0.568,0.622,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00062,industrial,44,partial,87.48,0.552,0.766,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00063,road,91,partial,98.45,0.67,0.696,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00064,dam,805,pending,62.77,0.875,0.775,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00065,dam,465,paid,82.25,0.757,0.531,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00066,rail,239,paid,89.25,0.63,0.673,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00067,road,501,partial,88.34,0.626,0.684,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00068,road,47,pending,94.05,0.49,0.629,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00069,dam,92,paid,95.35,0.503,0.531,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00070,irrigation,84,paid,95.64,0.859,0.653,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00071,industrial,57,paid,76.12,0.575,0.606,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00072,irrigation,19,paid,94.27,0.674,0.554,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00073,industrial,59,partial,100.0,0.782,0.742,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00074,rail,71,paid,98.76,0.622,0.752,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00075,dam,455,pending,78.94,0.597,0.621,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00076,road,123,partial,91.03,0.711,0.76,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00077,irrigation,94,paid,90.32,0.669,0.519,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00078,industrial,122,partial,79.67,0.574,0.828,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00079,industrial,138,partial,95.11,0.517,0.773,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00080,industrial,36,paid,84.65,0.641,0.521,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00081,road,57,paid,94.89,0.747,0.751,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00082,rail,15,partial,85.27,0.527,0.756,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00083,road,33,paid,92.87,0.867,0.529,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00084,road,46,paid,91.56,0.504,0.557,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00085,dam,240,paid,81.52,0.638,0.511,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00086,dam,96,paid,83.25,0.625,0.733,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00087,dam,141,partial,90.2,0.685,0.607,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00088,industrial,23,paid,93.59,0.517,0.596,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00089,dam,262,partial,75.11,0.757,0.847,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00090,industrial,105,paid,84.45,0.638,0.841,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00091,road,129,partial,92.1,0.727,0.657,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00092,road,91,paid,94.5,0.661,0.584,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00093,irrigation,40,pending,81.48,0.739,0.72,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00094,industrial,41,pending,88.75,0.715,0.649,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00095,road,62,paid,90.81,0.709,0.703,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00096,irrigation,112,partial,88.18,0.618,0.874,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00097,dam,240,paid,85.38,0.628,0.792,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00098,road,324,partial,87.86,0.758,0.607,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00099,rail,243,partial,78.43,0.864,0.588,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00100,industrial,29,paid,79.69,0.712,0.905,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00101,dam,414,paid,82.43,0.575,0.72,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00102,road,160,paid,77.72,0.7,0.795,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00103,industrial,34,partial,89.66,0.574,0.601,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00104,rail,251,partial,82.47,0.884,0.745,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00105,industrial,62,paid,81.47,0.81,0.568,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00106,road,25,paid,81.65,0.389,0.608,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00107,irrigation,244,paid,80.72,0.602,0.647,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00108,rail,142,paid,83.81,0.648,0.511,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00109,road,73,paid,73.76,0.547,0.804,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00110,industrial,69,paid,93.77,0.82,0.549,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00111,road,47,pending,90.87,0.799,0.743,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00112,road,155,paid,90.48,0.693,0.769,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00113,rail,112,partial,92.05,0.813,0.763,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00114,dam,261,paid,100.0,0.824,0.772,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00115,industrial,99,paid,78.21,0.677,0.58,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00116,industrial,25,partial,98.01,0.626,0.65,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00117,road,40,paid,88.32,0.68,0.61,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00118,rail,16,paid,100.0,0.613,0.735,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00119,road,149,pending,83.84,0.855,0.897,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00120,irrigation,54,pending,95.85,0.792,0.66,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00121,industrial,81,partial,98.44,0.401,0.715,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00122,dam,314,paid,85.93,0.628,0.563,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00123,irrigation,278,paid,93.38,0.686,0.774,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00124,rail,39,paid,94.28,0.582,0.674,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00125,industrial,67,pending,88.09,0.446,0.695,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00126,irrigation,728,partial,77.78,0.638,0.885,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00127,road,421,paid,93.18,0.849,0.661,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00128,rail,284,pending,95.66,0.63,0.721,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00129,road,121,paid,88.84,0.707,0.689,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00130,road,36,paid,85.4,0.543,0.55,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00131,road,171,paid,76.93,0.812,0.82,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00132,irrigation,140,paid,97.45,0.923,0.707,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00133,irrigation,268,pending,90.4,0.573,0.431,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00134,rail,66,pending,80.07,0.53,0.488,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00135,rail,100,paid,73.42,0.455,0.775,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00136,industrial,83,paid,97.28,0.693,0.775,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00137,dam,280,paid,93.67,0.585,0.454,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00138,irrigation,252,paid,84.94,0.68,0.667,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00139,road,53,paid,94.2,0.631,0.722,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00140,industrial,21,paid,95.91,0.57,0.519,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00141,road,388,paid,84.94,0.653,0.689,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00142,rail,1099,paid,68.81,0.683,0.825,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00143,industrial,107,paid,99.62,0.539,0.747,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00144,irrigation,49,pending,77.62,0.598,0.598,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00145,dam,112,paid,93.7,0.387,0.499,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00146,irrigation,256,paid,85.19,0.497,0.661,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00147,dam,752,paid,71.26,0.527,0.774,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00148,road,30,partial,87.16,0.798,0.712,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00149,road,80,paid,91.74,0.74,0.762,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00150,rail,139,paid,83.14,0.55,0.798,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00151,road,196,partial,89.82,0.703,0.611,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00152,industrial,52,partial,85.41,0.797,0.714,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00153,road,22,paid,91.46,0.671,0.533,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00154,irrigation,283,paid,80.85,0.698,0.803,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00155,dam,619,pending,96.2,0.755,0.838,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00156,dam,208,paid,96.44,0.494,0.562,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00157,rail,168,paid,99.93,0.758,0.502,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00158,irrigation,105,paid,89.61,0.792,0.697,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00159,industrial,33,paid,100.0,0.693,0.644,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00160,dam,566,partial,91.01,0.815,0.662,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00161,industrial,102,partial,98.04,0.647,0.944,Himachal Pradesh,Sirmaur,Sirmaur_Tehsil_1
-PRJ_00162,industrial,111,paid,77.27,0.78,0.87,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00163,dam,869,partial,90.97,0.704,0.486,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00164,road,34,paid,100.0,0.531,0.69,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00165,irrigation,98,partial,87.23,0.593,0.767,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00166,road,103,paid,75.68,0.56,0.834,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00167,dam,135,paid,89.85,0.729,0.501,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00168,industrial,145,partial,89.15,0.663,0.77,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00169,irrigation,136,paid,78.59,0.724,0.725,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00170,rail,47,paid,82.6,0.549,0.567,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00171,road,95,paid,85.84,0.718,0.513,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00172,industrial,83,partial,93.99,0.782,0.742,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00173,road,208,paid,84.69,0.412,0.733,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00174,road,128,partial,99.86,0.787,0.596,Himachal Pradesh,Chamba,Chamba_Tehsil_1
-PRJ_00175,road,136,partial,93.9,0.534,0.5,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00176,road,120,partial,77.59,0.655,0.535,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00177,irrigation,136,paid,78.5,0.553,0.786,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00178,irrigation,85,partial,85.82,0.585,0.482,Himachal Pradesh,Mandi,Mandi_Tehsil_1
-PRJ_00179,rail,151,paid,100.0,0.872,0.587,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00180,road,66,pending,99.14,0.757,0.569,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00181,road,411,partial,92.15,0.779,0.718,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00182,rail,391,paid,88.25,0.533,0.878,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00183,road,159,partial,98.73,0.719,0.886,Himachal Pradesh,Kullu,Kullu_Tehsil_1
-PRJ_00184,dam,316,paid,89.44,0.735,0.65,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00185,road,83,paid,75.2,0.63,0.56,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00186,rail,37,paid,86.5,0.529,0.334,Himachal Pradesh,Bilaspur,Bilaspur_Tehsil_1
-PRJ_00187,rail,96,partial,87.48,0.516,0.616,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00188,rail,128,partial,97.12,0.704,0.76,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00189,road,110,pending,100.0,0.628,0.75,Himachal Pradesh,Kinnaur,Kinnaur_Tehsil_1
-PRJ_00190,road,137,paid,98.73,0.476,0.631,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00191,industrial,165,partial,100.0,0.632,0.506,Himachal Pradesh,Solan,Solan_Tehsil_1
-PRJ_00192,road,48,partial,89.02,0.739,0.77,Himachal Pradesh,Lahaul and Spiti,Lahaul and Spiti_Tehsil_1
-PRJ_00193,irrigation,87,partial,86.23,0.718,0.703,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00194,irrigation,597,paid,92.95,0.821,0.679,Himachal Pradesh,Kangra,Kangra_Tehsil_1
-PRJ_00195,rail,234,paid,86.94,0.718,0.727,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00196,rail,82,partial,77.59,0.415,0.702,Himachal Pradesh,Una,Una_Tehsil_1
-PRJ_00197,dam,204,paid,72.71,0.707,0.514,Himachal Pradesh,Hamirpur,Hamirpur_Tehsil_1
-PRJ_00198,industrial,65,paid,83.32,0.701,0.824,Himachal Pradesh,Shimla,Shimla_Tehsil_1
-PRJ_00199,road,92,paid,90.66,0.797,0.649,Himachal Pradesh,Kullu,Kullu_Tehsil_1
+project_id,project_type,spatial_type,coord_path,affected_families,compensation_status,rehab_progress_pct,stakeholder_responsiveness,historical_performance_score,state,state_code,district,tehsil
+HP-DAM-2023-0001,dam,point,"[[32.3078, 77.5047]]",506,partial,99.29,0.708,0.617,Himachal Pradesh,HP,Lahaul and Spiti,Lahaul and Spiti_Tehsil_3
+PB-RDH-2023-0001,road,linear,"[[30.6077, 75.8784], [30.519, 76.4748], [30.9735, 76.5337], [30.9155, 76.03], [31.8359, 75.8614], [31.2831, 75.8017]]",50,paid,88.92,0.709,0.677,Punjab,PB,Malerkotla,Malerkotla_Tehsil_1
+HP-DAM-2021-0001,dam,point,"[[31.8708, 77.0113]]",645,paid,72.37,0.477,0.672,Himachal Pradesh,HP,Kullu,Kullu_Tehsil_3
+PB-IRR-2023-0001,irrigation,point,"[[30.8988, 75.2464]]",160,pending,94.92,0.696,0.6,Punjab,PB,Moga,Moga_Tehsil_3
+PB-IRR-2024-0001,irrigation,point,"[[31.6522, 74.9443], [31.6568, 75.042]]",155,paid,88.1,0.527,0.551,Punjab,PB,Amritsar,Amritsar_Tehsil_2
+UK-IND-2021-0001,industrial,point,"[[30.4898, 78.3748]]",38,paid,88.37,0.674,0.885,Uttarakhand,UK,Uttarkashi,Uttarkashi_Tehsil_2
+HP-DAM-2023-0002,dam,point,"[[31.2793, 76.0212], [31.3685, 76.31]]",74,partial,81.87,0.589,0.487,Himachal Pradesh,HP,Una,Una_Tehsil_2
+UK-RDH-2021-0001,road,point,"[[28.9922, 79.4195]]",20,partial,92.94,0.712,0.803,Uttarakhand,UK,Udham Singh Nagar,Udham Singh Nagar_Tehsil_1
+PB-RDH-2022-0001,road,point,"[[31.4323, 75.1106], [31.4229, 74.7668]]",45,partial,96.6,0.728,0.54,Punjab,PB,Tarn Taran,Tarn Taran_Tehsil_2
+UK-IRR-2024-0001,irrigation,point,"[[30.0952, 78.9159], [30.3266, 78.798]]",274,paid,83.25,0.622,0.689,Uttarakhand,UK,Pauri Garhwal,Pauri Garhwal_Tehsil_2
+PB-IRR-2023-0002,irrigation,point,"[[31.0798, 75.7949], [30.849, 75.8877]]",68,pending,95.4,0.498,0.786,Punjab,PB,Ludhiana,Ludhiana_Tehsil_1
+PB-RDH-2021-0001,road,point,"[[30.9286, 76.7243]]",22,partial,100.0,0.393,0.456,Punjab,PB,SAS Nagar,SAS Nagar_Tehsil_1
+PB-RLY-2023-0001,rail,point,"[[30.4499, 75.6802]]",51,partial,74.87,0.516,0.659,Punjab,PB,Barnala,Barnala_Tehsil_2
+HP-DAM-2021-0002,dam,point,"[[31.6534, 76.9851], [31.7942, 76.9466]]",159,paid,81.31,0.691,0.624,Himachal Pradesh,HP,Mandi,Mandi_Tehsil_2
+UK-IND-2023-0001,industrial,point,"[[30.4673, 79.1905], [30.3519, 79.5992]]",52,paid,74.52,0.661,0.821,Uttarakhand,UK,Chamoli,Chamoli_Tehsil_3
+PB-IRR-2024-0002,irrigation,point,"[[31.0531, 76.081]]",144,paid,81.86,0.566,0.589,Punjab,PB,SBS Nagar,SBS Nagar_Tehsil_2
+UK-RLY-2022-0001,rail,point,"[[29.9908, 78.2404], [29.9096, 78.2344]]",296,paid,82.19,0.483,0.845,Uttarakhand,UK,Haridwar,Haridwar_Tehsil_1
+PB-RDH-2023-0002,road,linear,"[[29.7203, 75.5202], [30.4879, 75.7573], [30.0789, 75.7812], [30.4397, 75.5432], [30.872, 75.1254]]",498,paid,83.06,0.544,0.74,Punjab,PB,Mansa,Mansa_Tehsil_2
+PB-IRR-2023-0003,irrigation,point,"[[30.5185, 76.0154], [30.6142, 75.7558]]",985,paid,83.61,0.686,0.631,Punjab,PB,Malerkotla,Malerkotla_Tehsil_3
+HP-RLY-2024-0001,rail,linear,"[[31.0681, 77.1559], [31.0281, 77.0602], [30.9093, 77.5417], [30.7037, 76.7534], [30.8946, 76.5674], [31.2899, 76.8599]]",48,partial,85.52,0.61,0.694,Himachal Pradesh,HP,Shimla,Shimla_Tehsil_2
+PB-IRR-2021-0001,irrigation,point,"[[31.9871, 75.4039]]",75,paid,93.83,0.728,0.573,Punjab,PB,Gurdaspur,Gurdaspur_Tehsil_4
+UK-DAM-2023-0001,dam,point,"[[29.7636, 79.4343], [29.6476, 79.7267]]",421,paid,95.19,0.628,0.71,Uttarakhand,UK,Almora,Almora_Tehsil_3
+UK-RDH-2021-0002,road,point,"[[29.4626, 80.0505], [29.21, 79.975]]",59,paid,92.19,0.848,0.799,Uttarakhand,UK,Champawat,Champawat_Tehsil_2
+UK-RDH-2021-0003,road,point,"[[30.3493, 79.0968]]",195,pending,78.11,0.82,0.816,Uttarakhand,UK,Rudraprayag,Rudraprayag_Tehsil_3
+HP-RDH-2022-0001,road,linear,"[[32.08, 76.983], [31.1708, 76.7537], [31.4706, 76.6313]]",194,paid,98.31,0.558,0.756,Himachal Pradesh,HP,Kullu,Kullu_Tehsil_2
+HP-IND-2024-0001,industrial,point,"[[31.6877, 78.2114]]",298,paid,97.35,0.721,0.55,Himachal Pradesh,HP,Kinnaur,Kinnaur_Tehsil_1
+UK-IRR-2021-0001,irrigation,point,"[[28.9922, 79.4195], [28.9579, 79.3776]]",414,pending,81.96,0.773,0.712,Uttarakhand,UK,Udham Singh Nagar,Udham Singh Nagar_Tehsil_1
+UK-RDH-2024-0001,road,linear,"[[30.0583, 79.3759], [30.5156, 78.5537], [30.3266, 78.798], [29.9908, 78.1979], [30.9093, 77.5417]]",419,partial,89.97,0.68,0.73,Uttarakhand,UK,Chamoli,Chamoli_Tehsil_2
+HP-IND-2023-0001,industrial,point,"[[31.325, 78.4365], [31.7939, 78.1524]]",49,paid,85.72,0.684,0.545,Himachal Pradesh,HP,Kinnaur,Kinnaur_Tehsil_2
+PB-IRR-2024-0003,irrigation,point,"[[31.0722, 75.4742], [31.478, 75.455]]",148,partial,80.9,0.617,0.53,Punjab,PB,Kapurthala,Kapurthala_Tehsil_1
+PB-IRR-2022-0001,irrigation,point,"[[31.3507, 75.9939], [31.8359, 75.8614]]",123,pending,85.32,0.67,0.758,Punjab,PB,Hoshiarpur,Hoshiarpur_Tehsil_2
+HP-IND-2022-0001,industrial,point,"[[31.7729, 76.9632]]",18,paid,94.91,0.543,0.744,Himachal Pradesh,HP,Mandi,Mandi_Tehsil_1
+PB-RDH-2024-0001,road,point,"[[31.0028, 76.3933], [30.8306, 76.276]]",338,partial,77.03,0.678,0.445,Punjab,PB,Rupnagar,Rupnagar_Tehsil_2
+HP-RDH-2023-0001,road,linear,"[[32.3077, 77.4498], [32.1212, 76.3055], [32.6433, 76.1822], [32.2999, 75.6553], [32.1049, 75.4916]]",316,paid,81.54,0.664,0.501,Himachal Pradesh,HP,Lahaul and Spiti,Lahaul and Spiti_Tehsil_3
+HP-IRR-2023-0001,irrigation,point,"[[30.8013, 77.5273]]",118,partial,88.84,0.534,0.495,Himachal Pradesh,HP,Sirmaur,Sirmaur_Tehsil_4
+UK-RDH-2024-0002,road,point,"[[30.6626, 78.5237]]",291,partial,87.84,0.69,0.685,Uttarakhand,UK,Uttarkashi,Uttarkashi_Tehsil_3
+UK-DAM-2024-0001,dam,point,"[[30.7868, 78.3939], [30.8523, 78.5636]]",127,pending,85.99,0.801,0.704,Uttarakhand,UK,Uttarkashi,Uttarkashi_Tehsil_2
+UK-RDH-2024-0003,road,point,"[[29.5619, 79.556]]",17,partial,92.36,0.634,0.83,Uttarakhand,UK,Almora,Almora_Tehsil_3
+PB-RDH-2021-0002,road,point,"[[30.2476, 75.603], [30.0789, 75.7812]]",222,paid,100.0,0.784,0.614,Punjab,PB,Sangrur,Sangrur_Tehsil_2
+HP-RDH-2023-0002,road,linear,"[[31.592, 78.2594], [30.5841, 77.5971], [31.0154, 77.1484]]",50,paid,83.6,0.723,0.639,Himachal Pradesh,HP,Kinnaur,Kinnaur_Tehsil_1
+PB-RLY-2023-0002,rail,linear,"[[30.4061, 73.9381], [30.5536, 74.6535], [30.6321, 74.5214], [31.1233, 74.4633]]",176,pending,83.07,0.724,0.657,Punjab,PB,Fazilka,Fazilka_Tehsil_1
+UK-RDH-2023-0001,road,point,"[[30.3419, 78.9874]]",108,paid,100.0,0.675,0.809,Uttarakhand,UK,Rudraprayag,Rudraprayag_Tehsil_1
+UK-RDH-2023-0002,road,point,"[[30.3193, 78.9619]]",127,paid,84.9,0.929,0.684,Uttarakhand,UK,Rudraprayag,Rudraprayag_Tehsil_1
+HP-IND-2024-0002,industrial,point,"[[31.3685, 76.31], [31.3359, 76.215]]",154,partial,74.72,0.464,0.664,Himachal Pradesh,HP,Una,Una_Tehsil_1
+HP-RLY-2024-0002,rail,linear,"[[31.7729, 76.9632], [31.5465, 76.6629], [31.1837, 76.6446], [31.0528, 77.2325], [30.7343, 77.3303]]",354,paid,96.19,0.661,0.708,Himachal Pradesh,HP,Mandi,Mandi_Tehsil_1
+PB-RLY-2022-0001,rail,point,"[[30.5269, 76.713], [30.9104, 76.7088]]",191,paid,89.06,0.522,0.531,Punjab,PB,SAS Nagar,SAS Nagar_Tehsil_4
+HP-RDH-2021-0001,road,point,"[[31.1236, 77.2685], [31.0528, 77.2325]]",44,paid,91.1,0.419,0.827,Himachal Pradesh,HP,Shimla,Shimla_Tehsil_1
+UK-RLY-2021-0001,rail,linear,"[[29.4709, 79.5698], [29.8772, 79.8407], [29.4462, 80.1825], [29.4539, 79.207], [28.89, 79.3817]]",273,paid,74.53,0.81,0.693,Uttarakhand,UK,Almora,Almora_Tehsil_1
+PB-RDH-2022-0002,road,point,"[[30.0019, 75.5117], [29.8675, 75.1768]]",23,partial,80.85,0.702,0.688,Punjab,PB,Mansa,Mansa_Tehsil_3
+UK-IRR-2024-0002,irrigation,point,"[[29.7185, 79.7989], [29.7724, 79.7235]]",660,paid,91.75,0.836,0.72,Uttarakhand,UK,Almora,Almora_Tehsil_2
+PB-RDH-2023-0003,road,linear,"[[30.959, 74.397], [31.4229, 74.7668], [31.6308, 75.1817], [32.0965, 75.336]]",45,paid,86.9,0.774,0.655,Punjab,PB,Ferozepur,Ferozepur_Tehsil_4
+HP-IND-2022-0002,industrial,point,"[[31.3685, 76.31], [31.4669, 76.3077]]",52,partial,71.16,0.773,0.612,Himachal Pradesh,HP,Una,Una_Tehsil_1
+UK-IND-2024-0001,industrial,point,"[[30.2846, 78.6364]]",21,paid,94.83,0.771,0.712,Uttarakhand,UK,Tehri Garhwal,Tehri Garhwal_Tehsil_2
+HP-RDH-2024-0001,road,point,"[[31.1341, 77.3492]]",46,partial,89.72,0.705,0.699,Himachal Pradesh,HP,Solan,Solan_Tehsil_2
+HP-RDH-2023-0003,road,linear,"[[31.3359, 76.215], [31.5552, 76.6476], [31.1236, 77.2685], [30.8589, 76.9228], [30.8464, 77.7565]]",163,paid,84.59,0.556,0.7,Himachal Pradesh,HP,Una,Una_Tehsil_2
+PB-RDH-2023-0004,road,point,"[[31.5812, 74.8359], [31.5893, 74.9977]]",55,paid,94.44,0.604,0.666,Punjab,PB,Amritsar,Amritsar_Tehsil_2
+UK-IRR-2022-0001,irrigation,point,"[[29.3363, 79.1984], [29.4043, 79.4]]",453,paid,72.27,0.638,0.825,Uttarakhand,UK,Nainital,Nainital_Tehsil_1
+PB-RDH-2023-0005,road,linear,"[[31.2831, 75.8017], [30.6298, 75.7508], [31.2694, 76.0782], [30.6493, 76.5775], [30.6097, 76.6127]]",198,partial,92.2,0.793,0.731,Punjab,PB,Jalandhar,Jalandhar_Tehsil_2
+PB-IND-2023-0001,industrial,point,"[[32.1049, 75.4916], [31.9663, 75.5741]]",47,pending,100.0,0.681,0.512,Punjab,PB,Gurdaspur,Gurdaspur_Tehsil_2
+PB-DAM-2021-0001,dam,point,"[[31.5893, 74.9977], [31.6308, 75.1817]]",199,paid,92.61,0.759,0.619,Punjab,PB,Amritsar,Amritsar_Tehsil_2
+UK-IND-2024-0002,industrial,point,"[[30.4083, 78.0749]]",215,paid,83.06,0.865,0.885,Uttarakhand,UK,Dehradun,Dehradun_Tehsil_1
+PB-IRR-2023-0004,irrigation,point,"[[31.3507, 75.9939], [31.2405, 76.1033]]",367,paid,93.45,0.578,0.787,Punjab,PB,Hoshiarpur,Hoshiarpur_Tehsil_2
+HP-IND-2022-0003,industrial,point,"[[31.5405, 76.6528]]",25,paid,87.38,0.565,0.63,Himachal Pradesh,HP,Mandi,Mandi_Tehsil_1
+HP-RDH-2024-0002,road,point,"[[32.3078, 77.5047]]",48,paid,85.12,0.601,0.571,Himachal Pradesh,HP,Lahaul and Spiti,Lahaul and Spiti_Tehsil_3
+HP-RLY-2023-0001,rail,point,"[[31.3031, 76.7791], [31.1708, 76.7537]]",179,pending,98.24,0.689,0.562,Himachal Pradesh,HP,Bilaspur,Bilaspur_Tehsil_3
+HP-RLY-2022-0001,rail,point,"[[31.6449, 76.5076], [31.4706, 76.6313]]",160,partial,93.23,0.612,0.538,Himachal Pradesh,HP,Hamirpur,Hamirpur_Tehsil_4
+PB-IND-2022-0001,industrial,point,"[[30.3217, 74.0958], [30.3383, 73.9233]]",27,paid,86.99,0.617,0.541,Punjab,PB,Fazilka,Fazilka_Tehsil_2
+PB-IRR-2021-0002,irrigation,point,"[[30.4823, 75.3302]]",317,paid,81.84,0.611,0.651,Punjab,PB,Barnala,Barnala_Tehsil_2
+PB-IND-2023-0002,industrial,point,"[[30.4033, 74.3664], [30.4772, 74.3637]]",32,paid,94.05,0.64,0.728,Punjab,PB,Sri Muktsar Sahib,Sri Muktsar Sahib_Tehsil_1
+PB-RDH-2023-0006,road,point,"[[30.6408, 74.4712]]",291,paid,86.46,0.694,0.725,Punjab,PB,Ferozepur,Ferozepur_Tehsil_1
+PB-IND-2021-0001,industrial,point,"[[31.5145, 74.9117], [31.6522, 74.9443]]",115,paid,91.35,0.764,0.639,Punjab,PB,Amritsar,Amritsar_Tehsil_1
+UK-IRR-2024-0003,irrigation,point,"[[29.7185, 79.7989]]",58,pending,83.71,0.866,0.619,Uttarakhand,UK,Almora,Almora_Tehsil_2
+UK-IRR-2024-0004,irrigation,point,"[[30.4434, 78.6147]]",100,paid,85.04,0.82,0.866,Uttarakhand,UK,Pauri Garhwal,Pauri Garhwal_Tehsil_1
+UK-IND-2023-0002,industrial,point,"[[29.2409, 80.2109], [29.3568, 80.174]]",44,paid,92.64,0.754,0.773,Uttarakhand,UK,Champawat,Champawat_Tehsil_1
+PB-RLY-2024-0001,rail,point,"[[30.751, 76.4876]]",135,paid,85.09,0.437,0.612,Punjab,PB,SAS Nagar,SAS Nagar_Tehsil_4
+PB-RLY-2023-0003,rail,linear,"[[30.2386, 76.26], [31.0815, 76.8222], [30.5161, 76.2407], [30.3841, 75.6924]]",174,paid,91.91,0.772,0.705,Punjab,PB,Patiala,Patiala_Tehsil_1
+HP-IRR-2022-0001,irrigation,point,"[[31.6987, 76.5622], [31.68, 76.4334]]",57,pending,85.89,0.676,0.643,Himachal Pradesh,HP,Hamirpur,Hamirpur_Tehsil_1
+PB-RDH-2023-0007,road,point,"[[30.8061, 75.5716], [30.7763, 75.8432]]",25,partial,86.03,0.79,0.704,Punjab,PB,Ludhiana,Ludhiana_Tehsil_2
+PB-RLY-2022-0002,rail,linear,"[[32.1257, 75.429], [32.2519, 75.5605], [31.5072, 75.7764], [31.4265, 75.36], [31.2831, 75.8017], [31.1471, 76.2437]]",343,partial,68.29,0.512,0.573,Punjab,PB,Gurdaspur,Gurdaspur_Tehsil_3
+PB-RDH-2023-0008,road,point,"[[30.0868, 75.2056]]",116,partial,91.76,0.752,0.742,Punjab,PB,Mansa,Mansa_Tehsil_2
+PB-RDH-2024-0002,road,point,"[[30.9599, 74.8286], [30.8791, 74.4118]]",98,paid,90.35,0.752,0.709,Punjab,PB,Ferozepur,Ferozepur_Tehsil_3
+PB-IND-2023-0003,industrial,point,"[[30.9155, 76.03]]",91,partial,94.45,0.583,0.577,Punjab,PB,SBS Nagar,SBS Nagar_Tehsil_2
+UK-IRR-2022-0002,irrigation,point,"[[30.291, 79.0754]]",92,partial,97.53,0.675,0.672,Uttarakhand,UK,Rudraprayag,Rudraprayag_Tehsil_3
+PB-RLY-2021-0001,rail,point,"[[30.6077, 75.8784]]",138,paid,92.55,0.692,0.668,Punjab,PB,Malerkotla,Malerkotla_Tehsil_1
+UK-RLY-2024-0001,rail,point,"[[29.3568, 80.174], [29.2409, 80.2109]]",1149,paid,75.49,0.777,0.621,Uttarakhand,UK,Champawat,Champawat_Tehsil_2
+HP-RLY-2021-0001,rail,point,"[[31.5467, 76.4634], [31.6498, 76.5383]]",336,partial,81.41,0.62,0.543,Himachal Pradesh,HP,Hamirpur,Hamirpur_Tehsil_4
+HP-IRR-2024-0001,irrigation,point,"[[31.7729, 76.9632]]",124,pending,86.64,0.701,0.696,Himachal Pradesh,HP,Mandi,Mandi_Tehsil_1
+UK-IND-2021-0002,industrial,point,"[[30.0727, 78.7728], [30.3266, 78.798]]",44,paid,92.01,0.581,0.566,Uttarakhand,UK,Pauri Garhwal,Pauri Garhwal_Tehsil_2
+PB-IND-2024-0001,industrial,point,"[[31.4323, 75.1106]]",5,pending,93.91,0.473,0.674,Punjab,PB,Tarn Taran,Tarn Taran_Tehsil_2
+PB-RLY-2022-0003,rail,linear,"[[31.1471, 76.2437], [30.8374, 75.7978], [30.3841, 75.6924], [30.414, 75.5157], [29.9675, 75.4334]]",550,pending,92.93,0.558,0.48,Punjab,PB,SBS Nagar,SBS Nagar_Tehsil_1
+PB-RLY-2022-0004,rail,linear,"[[30.3855, 76.5445], [30.519, 76.4748], [30.6097, 76.6127], [31.1574, 76.3947]]",426,pending,91.05,0.705,0.611,Punjab,PB,Patiala,Patiala_Tehsil_2
+UK-IRR-2022-0003,irrigation,point,"[[29.3568, 80.174]]",99,paid,99.57,0.757,0.905,Uttarakhand,UK,Champawat,Champawat_Tehsil_2
+PB-IRR-2021-0003,irrigation,point,"[[32.0938, 75.1977], [31.9647, 75.3236]]",44,paid,78.79,0.587,0.627,Punjab,PB,Gurdaspur,Gurdaspur_Tehsil_2
+PB-IRR-2021-0004,irrigation,point,"[[30.6097, 76.6127], [30.6608, 76.8913]]",57,partial,74.85,0.637,0.693,Punjab,PB,SAS Nagar,SAS Nagar_Tehsil_1
+PB-DAM-2022-0001,dam,point,"[[31.5145, 74.9117]]",335,paid,100.0,0.573,0.683,Punjab,PB,Amritsar,Amritsar_Tehsil_1
+PB-IRR-2023-0005,irrigation,point,"[[32.0965, 75.336]]",149,paid,86.49,0.501,0.609,Punjab,PB,Gurdaspur,Gurdaspur_Tehsil_4
+PB-RLY-2023-0004,rail,point,"[[30.2135, 75.8176]]",218,partial,86.07,0.692,0.463,Punjab,PB,Sangrur,Sangrur_Tehsil_3
+PB-RLY-2022-0005,rail,linear,"[[31.1976, 75.6505], [31.0531, 76.081], [30.8061, 75.5716], [30.7068, 76.4256]]",226,paid,86.52,0.711,0.68,Punjab,PB,Jalandhar,Jalandhar_Tehsil_2
+PB-RLY-2024-0002,rail,linear,"[[30.597, 75.8534], [30.4245, 75.513], [30.9463, 75.0595]]",502,paid,90.73,0.723,0.475,Punjab,PB,Malerkotla,Malerkotla_Tehsil_1
+UK-RDH-2024-0004,road,point,"[[30.3116, 78.9013], [30.3193, 78.9619]]",125,pending,80.82,0.916,0.927,Uttarakhand,UK,Rudraprayag,Rudraprayag_Tehsil_3
+PB-RDH-2024-0003,road,point,"[[31.5072, 75.7764], [31.2405, 76.1033]]",189,paid,85.2,0.74,0.708,Punjab,PB,Hoshiarpur,Hoshiarpur_Tehsil_2
+PB-DAM-2023-0001,dam,point,"[[32.2457, 75.5201]]",34,pending,81.46,0.736,0.605,Punjab,PB,Pathankot,Pathankot_Tehsil_1
+PB-RLY-2023-0005,rail,point,"[[31.2831, 75.8017], [31.4755, 75.5411]]",38,paid,95.6,0.494,0.563,Punjab,PB,Jalandhar,Jalandhar_Tehsil_2
+PB-RDH-2024-0004,road,point,"[[30.6493, 76.5775], [30.8306, 76.276]]",64,paid,100.0,0.699,0.59,Punjab,PB,Rupnagar,Rupnagar_Tehsil_3
+HP-IRR-2024-0002,irrigation,point,"[[31.7116, 76.5263]]",428,paid,83.1,0.604,0.445,Himachal Pradesh,HP,Hamirpur,Hamirpur_Tehsil_4
+PB-DAM-2024-0001,dam,point,"[[30.4129, 75.7707]]",1222,paid,87.93,0.761,0.655,Punjab,PB,Malerkotla,Malerkotla_Tehsil_1
+PB-RDH-2023-0009,road,point,"[[30.2476, 75.603]]",77,paid,80.95,0.496,0.619,Punjab,PB,Sangrur,Sangrur_Tehsil_2
+HP-IND-2023-0002,industrial,point,"[[32.5129, 77.7571], [32.6925, 77.5451]]",41,partial,100.0,0.657,0.392,Himachal Pradesh,HP,Lahaul and Spiti,Lahaul and Spiti_Tehsil_2
+PB-IND-2024-0002,industrial,point,"[[30.1698, 75.8244], [30.005, 75.8285]]",12,pending,93.65,0.582,0.685,Punjab,PB,Sangrur,Sangrur_Tehsil_1
+UK-IRR-2023-0001,irrigation,point,"[[30.4083, 78.0749], [30.3357, 78.1289]]",352,paid,92.11,0.819,0.805,Uttarakhand,UK,Dehradun,Dehradun_Tehsil_1
+PB-DAM-2022-0002,dam,point,"[[30.519, 76.4748]]",137,paid,91.56,0.706,0.658,Punjab,PB,Fatehgarh Sahib,Fatehgarh Sahib_Tehsil_1
+PB-RDH-2024-0005,road,linear,"[[32.3773, 75.6514], [31.9647, 75.3236], [31.6308, 75.1817], [31.0722, 75.4742], [31.5075, 74.7357], [31.127, 75.5779]]",2322,partial,69.34,0.781,0.437,Punjab,PB,Pathankot,Pathankot_Tehsil_1
+UK-IND-2024-0003,industrial,point,"[[30.3958, 77.8615]]",37,paid,86.53,0.822,0.852,Uttarakhand,UK,Dehradun,Dehradun_Tehsil_1
+PB-RLY-2021-0002,rail,point,"[[30.4772, 74.3637], [30.256, 74.53]]",778,paid,78.66,0.725,0.581,Punjab,PB,Sri Muktsar Sahib,Sri Muktsar Sahib_Tehsil_3
+HP-IND-2021-0001,industrial,point,"[[31.3359, 76.215], [31.4669, 76.3077]]",141,paid,82.83,0.665,0.578,Himachal Pradesh,HP,Una,Una_Tehsil_2
+UK-IRR-2024-0005,irrigation,point,"[[29.3342, 80.0661], [29.21, 79.975]]",64,paid,90.86,0.848,0.831,Uttarakhand,UK,Champawat,Champawat_Tehsil_1
+PB-RDH-2022-0003,road,point,"[[30.7068, 76.4256]]",110,paid,72.25,0.504,0.648,Punjab,PB,Fatehgarh Sahib,Fatehgarh Sahib_Tehsil_2
+PB-RDH-2024-0006,road,point,"[[30.9559, 76.6757], [30.9458, 76.4607]]",180,paid,77.46,0.675,0.686,Punjab,PB,Rupnagar,Rupnagar_Tehsil_3
+UK-DAM-2021-0001,dam,point,"[[29.6476, 79.7267], [29.7636, 79.4343]]",183,partial,91.03,0.809,0.62,Uttarakhand,UK,Almora,Almora_Tehsil_1
+HP-IRR-2022-0002,irrigation,point,"[[31.4102, 78.5771]]",344,paid,88.34,0.728,0.56,Himachal Pradesh,HP,Kinnaur,Kinnaur_Tehsil_3
+PB-RDH-2024-0007,road,point,"[[30.6997, 74.7385]]",187,paid,91.17,0.693,0.469,Punjab,PB,Faridkot,Faridkot_Tehsil_4
+HP-DAM-2024-0001,dam,point,"[[31.7729, 76.9632], [31.5405, 76.6528]]",384,paid,84.02,0.616,0.581,Himachal Pradesh,HP,Mandi,Mandi_Tehsil_1
+HP-IND-2023-0003,industrial,point,"[[32.6925, 77.5451]]",70,paid,97.22,0.615,0.47,Himachal Pradesh,HP,Lahaul and Spiti,Lahaul and Spiti_Tehsil_2
+PB-IRR-2021-0005,irrigation,point,"[[32.12, 75.7113]]",56,pending,95.87,0.593,0.558,Punjab,PB,Pathankot,Pathankot_Tehsil_2
+UK-IRR-2022-0004,irrigation,point,"[[30.1993, 78.7942], [30.0952, 78.9159]]",151,partial,100.0,0.718,0.578,Uttarakhand,UK,Pauri Garhwal,Pauri Garhwal_Tehsil_1
+UK-RDH-2022-0001,road,point,"[[29.3889, 80.1005], [29.5707, 80.1864]]",105,pending,92.35,0.866,0.694,Uttarakhand,UK,Pithoragarh,Pithoragarh_Tehsil_2
+HP-DAM-2024-0002,dam,point,"[[31.1275, 77.2336]]",41,paid,81.15,0.729,0.493,Himachal Pradesh,HP,Shimla,Shimla_Tehsil_1
+PB-RLY-2023-0006,rail,linear,"[[31.2694, 76.0782], [31.3685, 76.31], [31.1708, 76.7537], [31.6449, 76.5076], [32.2405, 76.3601], [32.3773, 75.6514]]",244,paid,89.26,0.589,0.73,Punjab,PB,SBS Nagar,SBS Nagar_Tehsil_1
+HP-IND-2024-0003,industrial,point,"[[31.0281, 77.0602], [31.1341, 77.3492]]",66,paid,90.24,0.66,0.652,Himachal Pradesh,HP,Solan,Solan_Tehsil_1
+PB-RLY-2024-0003,rail,point,"[[30.9205, 76.6797], [30.6097, 76.6127]]",36,paid,87.49,0.513,0.542,Punjab,PB,SAS Nagar,SAS Nagar_Tehsil_1
+PB-IRR-2023-0006,irrigation,point,"[[30.4943, 74.3888]]",120,paid,97.06,0.77,0.684,Punjab,PB,Sri Muktsar Sahib,Sri Muktsar Sahib_Tehsil_2
+UK-RDH-2021-0004,road,linear,"[[30.9363, 78.1616], [30.4372, 79.1695], [30.0727, 78.7728]]",120,paid,88.84,0.864,0.838,Uttarakhand,UK,Uttarkashi,Uttarkashi_Tehsil_1
+PB-RDH-2024-0008,road,point,"[[30.8947, 74.4813], [31.1233, 74.4633]]",511,paid,78.79,0.748,0.622,Punjab,PB,Ferozepur,Ferozepur_Tehsil_1
+UK-DAM-2021-0002,dam,point,"[[29.2653, 79.5125], [29.4638, 79.4722]]",274,paid,85.36,0.76,0.786,Uttarakhand,UK,Nainital,Nainital_Tehsil_4
+UK-IRR-2024-0006,irrigation,point,"[[29.9563, 78.1271], [29.9096, 78.2344]]",411,paid,78.89,0.648,0.769,Uttarakhand,UK,Haridwar,Haridwar_Tehsil_3
+PB-IRR-2023-0007,irrigation,point,"[[30.292, 74.0528], [30.4061, 73.9381]]",145,paid,78.73,0.415,0.569,Punjab,PB,Fazilka,Fazilka_Tehsil_3
+UK-IND-2022-0001,industrial,point,"[[29.5619, 79.556], [29.4709, 79.5698]]",13,paid,84.6,0.775,0.765,Uttarakhand,UK,Almora,Almora_Tehsil_3
+PB-IND-2023-0004,industrial,point,"[[31.5145, 74.9117]]",131,pending,94.66,0.739,0.448,Punjab,PB,Amritsar,Amritsar_Tehsil_1
+PB-IND-2023-0005,industrial,point,"[[30.9104, 76.7088]]",39,paid,92.44,0.432,0.671,Punjab,PB,SAS Nagar,SAS Nagar_Tehsil_2
+PB-RDH-2024-0009,road,linear,"[[30.6331, 74.5506], [30.9599, 74.8286], [30.7741, 75.0482], [30.3496, 75.4565], [30.005, 75.8285], [30.2386, 76.26]]",118,paid,73.6,0.458,0.577,Punjab,PB,Sri Muktsar Sahib,Sri Muktsar Sahib_Tehsil_1
+UK-IRR-2023-0002,irrigation,point,"[[30.4778, 78.0168], [30.3597, 77.9937]]",62,paid,86.99,0.658,0.782,Uttarakhand,UK,Dehradun,Dehradun_Tehsil_2
+PB-IND-2022-0002,industrial,point,"[[30.2563, 75.7004], [30.5285, 75.8547]]",76,paid,87.94,0.711,0.602,Punjab,PB,Malerkotla,Malerkotla_Tehsil_3
+PB-RLY-2023-0007,rail,linear,"[[32.1046, 75.2759], [31.5145, 74.9117], [31.3753, 75.1672], [31.0722, 75.4742], [31.2405, 76.1033], [31.2694, 76.0782]]",549,partial,92.49,0.648,0.585,Punjab,PB,Gurdaspur,Gurdaspur_Tehsil_2
+UK-RDH-2023-0003,road,point,"[[29.4638, 79.4722]]",208,paid,89.07,0.59,0.571,Uttarakhand,UK,Nainital,Nainital_Tehsil_3
+PB-IND-2024-0003,industrial,point,"[[30.751, 76.4876]]",300,pending,81.87,0.552,0.641,Punjab,PB,SAS Nagar,SAS Nagar_Tehsil_4
+UK-IRR-2024-0007,irrigation,point,"[[29.9908, 78.1979], [29.9563, 78.1271]]",767,pending,83.75,0.447,0.629,Uttarakhand,UK,Haridwar,Haridwar_Tehsil_3
+PB-IRR-2023-0008,irrigation,point,"[[31.3753, 75.1672], [31.3689, 74.8165]]",25,paid,93.96,0.654,0.626,Punjab,PB,Tarn Taran,Tarn Taran_Tehsil_2
+HP-IND-2024-0004,industrial,point,"[[32.3077, 77.4498], [32.6595, 77.7028]]",24,pending,92.11,0.681,0.596,Himachal Pradesh,HP,Lahaul and Spiti,Lahaul and Spiti_Tehsil_3
+PB-IRR-2023-0009,irrigation,point,"[[32.1049, 75.4916], [32.1257, 75.429]]",31,partial,80.22,0.676,0.722,Punjab,PB,Gurdaspur,Gurdaspur_Tehsil_2
+PB-RLY-2021-0003,rail,point,"[[31.3753, 75.1672]]",206,pending,83.01,0.624,0.552,Punjab,PB,Tarn Taran,Tarn Taran_Tehsil_2
+PB-RLY-2021-0004,rail,point,"[[30.4639, 74.5104]]",62,paid,85.23,0.739,0.791,Punjab,PB,Sri Muktsar Sahib,Sri Muktsar Sahib_Tehsil_3
+PB-RLY-2024-0004,rail,linear,"[[31.4968, 74.9323], [31.5812, 74.8359], [31.3506, 75.5395]]",135,pending,85.39,0.601,0.73,Punjab,PB,Tarn Taran,Tarn Taran_Tehsil_2
+PB-RDH-2023-0010,road,point,"[[30.6209, 76.4144]]",74,paid,98.87,0.711,0.584,Punjab,PB,Fatehgarh Sahib,Fatehgarh Sahib_Tehsil_1
+PB-DAM-2024-0002,dam,point,"[[32.2519, 75.5605]]",317,paid,85.29,0.622,0.549,Punjab,PB,Pathankot,Pathankot_Tehsil_2
+HP-IND-2023-0004,industrial,point,"[[32.4316, 76.1006], [32.4625, 76.0515]]",18,pending,81.31,0.67,0.509,Himachal Pradesh,HP,Chamba,Chamba_Tehsil_3
+PB-RDH-2021-0003,road,linear,"[[31.1697, 74.4688], [30.9463, 75.0595], [30.4216, 75.4478], [30.6142, 75.7558], [30.005, 75.8285], [30.0019, 75.5117]]",50,paid,91.69,0.618,0.606,Punjab,PB,Ferozepur,Ferozepur_Tehsil_2
+UK-RLY-2023-0001,rail,linear,"[[30.4434, 78.6147], [29.9955, 78.0118], [30.3357, 78.1289], [30.9068, 78.1459], [30.2846, 78.6364], [30.2196, 79.1522]]",210,paid,80.5,0.592,0.815,Uttarakhand,UK,Pauri Garhwal,Pauri Garhwal_Tehsil_1
+PB-IND-2023-0006,industrial,point,"[[31.5072, 75.7764]]",211,paid,83.95,0.542,0.663,Punjab,PB,Hoshiarpur,Hoshiarpur_Tehsil_2
+UK-RDH-2023-0004,road,point,"[[30.291, 79.0754]]",87,paid,82.68,0.642,0.845,Uttarakhand,UK,Rudraprayag,Rudraprayag_Tehsil_3
+PB-IRR-2024-0004,irrigation,point,"[[30.4631, 76.3947]]",79,paid,88.96,0.727,0.621,Punjab,PB,Patiala,Patiala_Tehsil_1
+PB-IRR-2023-0010,irrigation,point,"[[29.8557, 75.4537]]",23,paid,82.72,0.724,0.667,Punjab,PB,Mansa,Mansa_Tehsil_1
+UK-DAM-2023-0002,dam,point,"[[30.7374, 78.4445]]",530,paid,97.48,0.925,0.722,Uttarakhand,UK,Uttarkashi,Uttarkashi_Tehsil_1
+PB-RDH-2024-0010,road,linear,"[[32.2457, 75.5201], [32.0606, 76.2626], [31.6449, 76.5076], [31.4927, 75.8757], [31.478, 75.455]]",82,partial,89.08,0.789,0.697,Punjab,PB,Pathankot,Pathankot_Tehsil_1
+HP-DAM-2022-0001,dam,point,"[[31.8564, 77.0923], [31.8708, 77.0113]]",80,paid,83.66,0.709,0.725,Himachal Pradesh,HP,Kullu,Kullu_Tehsil_2
+HP-RLY-2024-0003,rail,point,"[[31.7729, 76.9632]]",24,partial,87.44,0.581,0.7,Himachal Pradesh,HP,Mandi,Mandi_Tehsil_1
+UK-IRR-2022-0005,irrigation,point,"[[30.4808, 78.6585], [30.3474, 78.3417]]",44,paid,80.88,0.858,0.827,Uttarakhand,UK,Tehri Garhwal,Tehri Garhwal_Tehsil_2
+PB-RDH-2024-0011,road,linear,"[[32.2457, 75.5201], [31.4927, 75.8757], [31.0531, 76.081], [30.8946, 76.5674], [30.9104, 76.7088]]",66,partial,90.73,0.481,0.481,Punjab,PB,Pathankot,Pathankot_Tehsil_1
+PB-IRR-2023-0011,irrigation,point,"[[30.2135, 75.8176]]",130,partial,93.34,0.638,0.772,Punjab,PB,Sangrur,Sangrur_Tehsil_3
+UK-IRR-2021-0002,irrigation,point,"[[30.291, 79.0754], [30.241, 78.8122]]",54,pending,100.0,0.851,0.674,Uttarakhand,UK,Rudraprayag,Rudraprayag_Tehsil_3
+UK-RDH-2023-0005,road,linear,"[[29.0222, 79.2914], [29.8491, 79.7707], [29.4709, 79.5698]]",190,paid,90.66,0.682,0.774,Uttarakhand,UK,Udham Singh Nagar,Udham Singh Nagar_Tehsil_2
+PB-RDH-2023-0011,road,point,"[[31.4127, 75.2943]]",72,paid,85.29,0.738,0.657,Punjab,PB,Kapurthala,Kapurthala_Tehsil_1
+HP-RDH-2023-0004,road,linear,"[[32.256, 76.3399], [31.2793, 76.0212], [31.9312, 76.7088]]",1197,pending,74.34,0.322,0.66,Himachal Pradesh,HP,Kangra,Kangra_Tehsil_2
+HP-RLY-2023-0002,rail,point,"[[32.6925, 77.5451], [32.6013, 77.6014]]",25,partial,100.0,0.552,0.631,Himachal Pradesh,HP,Lahaul and Spiti,Lahaul and Spiti_Tehsil_2
+PB-RDH-2021-0004,road,point,"[[30.519, 76.4748]]",104,paid,79.77,0.716,0.569,Punjab,PB,Fatehgarh Sahib,Fatehgarh Sahib_Tehsil_1
+HP-IND-2022-0004,industrial,point,"[[32.591, 76.3374]]",84,partial,97.12,0.514,0.419,Himachal Pradesh,HP,Chamba,Chamba_Tehsil_3
+HP-RLY-2024-0004,rail,linear,"[[30.9221, 76.89], [30.7101, 76.6368], [30.9123, 76.7025], [31.0531, 76.081], [31.3507, 75.9939]]",82,partial,90.31,0.513,0.794,Himachal Pradesh,HP,Shimla,Shimla_Tehsil_3
+PB-IND-2023-0007,industrial,point,"[[31.4927, 75.8757]]",78,paid,93.93,0.569,0.556,Punjab,PB,Hoshiarpur,Hoshiarpur_Tehsil_2
+UK-IND-2023-0003,industrial,point,"[[28.9484, 79.3277]]",143,partial,85.52,0.537,0.826,Uttarakhand,UK,Udham Singh Nagar,Udham Singh Nagar_Tehsil_3
+UK-RDH-2021-0005,road,point,"[[30.3995, 79.4428]]",98,partial,88.46,0.842,0.721,Uttarakhand,UK,Chamoli,Chamoli_Tehsil_1
+HP-DAM-2022-0002,dam,point,"[[31.0281, 77.0602]]",782,paid,78.32,0.716,0.747,Himachal Pradesh,HP,Solan,Solan_Tehsil_1
+PB-IND-2024-0004,industrial,point,"[[31.222, 75.4803]]",10,paid,75.17,0.647,0.561,Punjab,PB,Kapurthala,Kapurthala_Tehsil_2
+PB-IRR-2024-0005,irrigation,point,"[[30.8425, 75.9449]]",75,paid,86.22,0.67,0.654,Punjab,PB,Ludhiana,Ludhiana_Tehsil_1
+PB-RLY-2023-0008,rail,linear,"[[29.8675, 75.1768], [30.2514, 75.0202], [30.8578, 74.7166], [30.8947, 74.4813]]",793,paid,88.27,0.613,0.583,Punjab,PB,Mansa,Mansa_Tehsil_3
+HP-RLY-2023-0003,rail,point,"[[31.7366, 76.6415]]",265,paid,84.19,0.669,0.556,Himachal Pradesh,HP,Hamirpur,Hamirpur_Tehsil_1
+PB-RDH-2023-0012,road,linear,"[[32.12, 75.7113], [31.9663, 75.5741], [31.6522, 74.9443]]",262,partial,72.34,0.578,0.688,Punjab,PB,Pathankot,Pathankot_Tehsil_2
+PB-IRR-2024-0006,irrigation,point,"[[32.2519, 75.5605], [32.317, 75.4356]]",491,paid,80.82,0.633,0.565,Punjab,PB,Pathankot,Pathankot_Tehsil_2
+HP-IND-2024-0005,industrial,point,"[[30.5841, 77.5971]]",12,pending,82.34,0.649,0.696,Himachal Pradesh,HP,Sirmaur,Sirmaur_Tehsil_2
+PB-IND-2022-0003,industrial,point,"[[30.2386, 76.26], [30.472, 76.3741]]",147,partial,100.0,0.72,0.708,Punjab,PB,Patiala,Patiala_Tehsil_1
+PB-RDH-2024-0012,road,point,"[[31.5072, 75.7764]]",234,partial,85.03,0.616,0.598,Punjab,PB,Hoshiarpur,Hoshiarpur_Tehsil_2
+HP-DAM-2022-0003,dam,point,"[[32.4225, 76.0665], [32.5049, 76.1139]]",124,paid,91.15,0.703,0.658,Himachal Pradesh,HP,Chamba,Chamba_Tehsil_2
+PB-RLY-2021-0005,rail,point,"[[31.1976, 75.6505]]",1247,paid,85.46,0.67,0.672,Punjab,PB,Jalandhar,Jalandhar_Tehsil_2
+HP-IND-2021-0002,industrial,point,"[[32.2413, 76.3227], [31.9737, 76.2299]]",85,partial,89.5,0.727,0.555,Himachal Pradesh,HP,Kangra,Kangra_Tehsil_3
+HP-RDH-2021-0002,road,point,"[[31.0658, 77.1937]]",12,paid,89.03,0.783,0.668,Himachal Pradesh,HP,Shimla,Shimla_Tehsil_4
+HP-IND-2022-0005,industrial,point,"[[31.2899, 76.8599], [31.1837, 76.6446]]",101,paid,94.19,0.607,0.547,Himachal Pradesh,HP,Bilaspur,Bilaspur_Tehsil_1
+UK-IND-2021-0003,industrial,point,"[[29.7636, 79.4343], [29.5619, 79.556]]",37,paid,88.2,0.583,0.674,Uttarakhand,UK,Almora,Almora_Tehsil_3
+UK-RDH-2021-0006,road,point,"[[29.9563, 78.1271], [29.9908, 78.2404]]",256,paid,89.34,0.813,0.556,Uttarakhand,UK,Haridwar,Haridwar_Tehsil_3
+PB-RDH-2021-0005,road,point,"[[30.4631, 76.3947]]",147,partial,83.2,0.625,0.581,Punjab,PB,Patiala,Patiala_Tehsil_1
+PB-IND-2021-0002,industrial,point,"[[30.1997, 75.0349]]",42,paid,87.84,0.603,0.766,Punjab,PB,Bathinda,Bathinda_Tehsil_2
+UK-RDH-2022-0002,road,point,"[[30.0659, 79.7496]]",348,paid,84.21,0.667,0.803,Uttarakhand,UK,Bageshwar,Bageshwar_Tehsil_1
+PB-IRR-2024-0007,irrigation,point,"[[30.0143, 75.4848], [30.1311, 75.3706]]",377,paid,79.15,0.646,0.542,Punjab,PB,Barnala,Barnala_Tehsil_3

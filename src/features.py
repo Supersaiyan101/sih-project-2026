@@ -53,7 +53,8 @@ PROJECT_FEATURE_COLS = [
 ]
 
 # parcel geo/id columns used ONLY for rollup/validation (never in X)
-META_COLUMNS = ["parcel_id", "project_id", "village", "tehsil", "district", "state", "area_sqm"]
+META_COLUMNS = ["parcel_id", "project_id", "village", "tehsil", "district", "district_code",
+                "state", "state_code", "area_sqm"]
 
 
 def load_training_frames() -> tuple[pd.DataFrame, pd.DataFrame]:

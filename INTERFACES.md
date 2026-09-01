@@ -70,8 +70,35 @@ different sources (models vs live timeline).
 `historical_performance_score`, `owner_count`, `area_sqm`, `pending_mutations`,
 `court_stay`, `encumbrances` (numeric).
 
-Geo/identifier fields (district, village, khasra, parcel_id, project_id) are **never**
-model features — they exist only for rollup/validation/map display.
+Geo/identifier fields (state, state_code, district, district_code, village, village_code,
+khasra, parcel_id, project_id) are **never** model features — they exist only for
+rollup/validation/map display.
+
+## 2a. Semantic IDs (multi-state)
+
+- **Parcel ID:** `<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>` — e.g. `HP-KNG-0001-0123`.
+- **Project ID:** `<STATE>-<TYPE>-<YEAR>-<SEQ>` — e.g. `HP-DAM-2024-0001`.
+- **Home-state rule:** a cross-state linear project's `<STATE>` is the state of its first
+  path parcel.
+- IDs are **derived from** the parcel's assigned geography (state/district/village codes
+  always match the geo columns).
+- State codes: `HP` (Himachal Pradesh), `PB` (Punjab), `UK` (Uttarakhand).
+- Project type codes: `RDH` road, `RLY` rail, `IRR` irrigation, `DAM` dam, `IND` industrial.
+
+## 2b. Spatial types
+
+- `point` — localized project (1 district, 1–2 villages). `coord_path` is `[]`.
+- `linear` — corridor project (road/rail) routed through contiguous villages, may cross
+  district/state borders. `coord_path` is a JSON list of ordered `[lat, lon]` village
+  coordinates used to render the polyline on the offline map.
+
+## 2c. Cold-start validation (Stage 2)
+
+Two leave-one-group-out levels, split by each **parcel's own** district/state:
+- **LODO** (leave-one-district-out, 48 folds) — drop ≤10% relative.
+- **LOSO** (leave-one-state-out, 3 folds) — drop 2–15% relative (avg), the strong
+  pan-India cold-start proof.
+Both recorded in `models/metrics_report.json` with a `gates_ok` flag.
 
 ## 3. FastAPI endpoints (`app/api.py`)
 
@@ -89,6 +116,11 @@ identical to training.
 
 `src/predict.py --refresh-portfolio` scores every live parcel and writes
 `data/generated/portfolio_scores.parquet` with `risk_score`, `risk_level`,
-`expected_overrun_days`, `max_delay_prob`, the 12 raw features, geo (village/tehsil/
-district/state + village lat/lon), and `overrun_while_ongoing_days`. The dashboard reads
-this cache (≈0.4s to regenerate live, so it can be refreshed on demand).
+`expected_overrun_days`, `max_delay_prob`, per-stage `{STAGE}_prob` / `{STAGE}_overrun`,
+the 12 raw features, geo (village/village_code/tehsil/district/district_code/state/
+state_code + village lat/lon), `spatial_type`, `current_stage`, and
+`overrun_while_ongoing_days`. The dashboard reads this cache (~0.4s to regenerate live).
+
+User-created projects (onboarding) persist to `data/generated/user/user_projects.parquet`
++ `user_parcels.parquet` (schema-matched to the portfolio cache) and are merged at load,
+tagged `is_user=1`.

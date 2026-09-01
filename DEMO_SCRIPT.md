@@ -1,89 +1,59 @@
-# SIH26017 — 90-Second Demo Script
+# SIH26017 — 90-Second Demo Script (v2 multi-state)
 
-> Numbers below are **auto-sourced** from `metrics_report.json` + `portfolio_scores.parquet`.
-> Re-run `python src/demo_numbers.py` before the demo to refresh them (they will never be
-> silently stale — if you regenerate data, re-run that command).
+> Numbers are **auto-sourced** — run `python src/demo_numbers.py` before the demo. Nothing
+> here is hardcoded; if you regenerate data, re-run that command and the IDs/numbers update.
 
-**Setup before the demo**
+**Setup**
 
 ```bash
 source .venv/bin/activate
-streamlit run app/streamlit_app.py       # terminal 1 (dashboard)
-# optional: uvicorn app.api:app --port 8000  # terminal 2 (API, bonus)
+streamlit run app/streamlit_app.py       # terminal 1
 python src/demo_numbers.py               # print + memorize the facts below
 ```
 
----
-
 ## The 90-second arc
 
-### 0–15s — Hook + portfolio (risk table)
+### 0–15s — Hook + Portfolio (cascading filter)
 > "Land acquisition is the #1 cause of infrastructure delay. We built an early-warning
-> system that flags projects **before** they slip."
+> system that flags projects **before** they slip — across 3 states."
 
-**Click:** sidebar **Portfolio** (default). Group by **district**.
+**Click:** Portfolio → use the cascading filter (State → District → Project type).
+**Say:** "Every parcel is scored RED/YELLOW/GREEN. Here are **12,013 live parcels** —
+4,201 RED, 5,354 YELLOW. ~29% of in-progress stages are *already* past their legal limit."
 
-**Say:** "Every live parcel is scored. RED = act now, YELLOW = watch, GREEN = on track."
-- 11,959 live parcels · RED 3,084 / YELLOW 5,388 / GREEN 3,487.
-- Worst district **Mandi 0.64**, best **Sirmaur 0.40**.
+### 15–35s — Drill into a project (project dashboard)
+**Click** a project row → Project detail.
+**Point at:** summary strip, per-stage bottleneck bars, segment (village) profile.
+**Say:** "This is the project's weak point — which stage, which village cluster."
 
-### 15–35s — Drill into a parcel (per-stage bars + SHAP "why")
-**Click:** a RED district → a RED parcel, or use **Detail** and pick `PRCL_0000006` (Shimla).
+### 35–55s — The money-shot (parcel + what-if)
+**Click** a parcel → Detail. Then **What-if** → toggle court stay → off.
+**Say:** "Clearing the court stay drops it from **RED → GREEN** live (e.g. 0.88 → 0.36)."
 
-**Say:** "This parcel has an active **court stay**, and it's **already 124 days past** its
-Award statutory limit — while still marked 'ongoing'." (the overrun-while-ongoing flag)
+### 55–75s — Area of Interest + onboarding
+**Click:** Area of Interest → pick a village + radius → catchment risk.
+**Then** New Project → upload a CSV of parcel IDs → instant scoring.
+**Say:** "Officials define a new site two ways: a radius around a village, or a precise
+CSV of khasra IDs — scored instantly, persisted, tagged 'user-created'."
 
-**Point at:** the per-stage delay-probability bars (blue) vs the statutory clock (dotted),
-and the SHAP bars on the right.
+### 75–90s — Map + cold-start close
+**Click:** Map → point markers + linear corridors colored by risk.
+**Say:** "The model never sees geography. **Leave-one-state-out: held-out states predicted
+within ~2.5% of in-sample accuracy** — cold-start by design. Plug in Bhoomi/Bhulekh data
+and this scales to any state."
 
-**Say:** "The model explains *why*: the court stay is the dominant driver."
+**Close:** "Reactive monitoring becomes predictive governance."
 
-### 35–50s — Recommended actions + what-if (the money shot)
-**Say:** "It also tells us what to do." (point at the actions panel).
-
-**Click:** sidebar **What-if** (parcel `PRCL_0000006` already selected).
-
-**Toggle:** court stay → off.
-
-**Say:** "Clear the court stay and the risk **drops from 0.85 RED to 0.23 GREEN** live —
-overrun forecast falls from ~477 to ~64 days." *(numbers auto-sourced)*
-
-### 50–70s — Offline map + alerts
-**Click:** sidebar **Map**.
-
-**Say:** "Hotspots roll up to a district map — fully offline, no tile server." (point at
-Mandi / Solan / Bilaspur as the warm spots.)
-
-**Click:** sidebar **Alerts**.
-
-**Say:** "Every high-risk parcel auto-raises alerts — ~25% of in-progress stages are
-already past their legal limit." (3,013 of 11,959)
-
-### 70–90s — Cold-start + API (the pitch close)
-**Say:** "The model never sees district names. Trained without a district, it still
-predicts it within ~1–4% of in-sample accuracy — cold-start by design." (AUROC drop
-SIA −3.9% … POSSESSION −0.7%.)
-
-**Optional (bonus):** show `localhost:8000/docs` → POST `/predict` with a JSON parcel →
-same contract. Then flip the role-switcher to **Viewer** to show read-only gating.
-
-**Close:** "Reactive monitoring becomes predictive governance. Architecture is
-production-ready — plug in Bhoomi/Bhulekh data to extend to any state."
-
----
+## Demo facts (auto-sourced, paste from `demo_numbers.py`)
+- Live: 12,013 parcels / 3 states · RED 4,201 · YELLOW 5,354 · ~28.6% overrun-while-ongoing.
+- AUROC: SIA 0.772 · NOTIF 0.869 · DECL 0.915 · AWARD 0.902 · POSS 0.907.
+- LOSO drop: SIA −6.0% … POSS −1.2% (avg 2.5%).
+- Point dam + cross-state road/highway project IDs (auto-picked).
 
 ## Fallbacks
-
 | Risk | Fallback |
 |---|---|
-| API won't start | The dashboard uses `predict.py` directly (no API needed). Demo the API only if time. |
-| No internet | Everything is offline: dashboard, map (lat/lon scatter), models, data. |
-| What-if looks stuck | Ensure the parcel has `court_stay=1` (toggle is only meaningful then). Use `PRCL_0000006`. |
-| Numbers look off vs live dashboard | Re-run `python src/demo_numbers.py`; never quote hardcoded figures. |
-
-## Curated parcels (re-check after regeneration)
-
-| parcel_id | story |
-|---|---|
-| `PRCL_0000006` (Shimla) | court stay + overrun-while-ongoing (124d past Award limit), RED 0.85 → clear stay → GREEN 0.23 |
-| `PRCL_0094902` (Mandi) | court stay + pending compensation + 8 owners, RED 0.98 (severity example) |
+| API won't start | Dashboard uses predict.py directly (no API needed). |
+| No internet | Everything offline (map is lat/lon scatter, no tiles). |
+| Numbers look stale | Re-run `python src/demo_numbers.py` — never quote hand-typed figures. |
+| Click doesn't navigate | Use the parcel/project dropdown pickers, or the sidebar nav. |

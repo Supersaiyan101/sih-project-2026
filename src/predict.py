@@ -101,8 +101,12 @@ def risk_level(score: float) -> str:
     return "GREEN"
 
 
-def score_batch(df: pd.DataFrame, artifacts: dict | None = None) -> pd.DataFrame:
-    """Score many parcels (fast path: no SHAP). df must carry the raw feature columns."""
+def score_batch(df: pd.DataFrame, artifacts: dict | None = None,
+                include_stages: bool = False) -> pd.DataFrame:
+    """Score many parcels (fast path: no SHAP). df must carry the raw feature columns.
+
+    include_stages=True adds per-stage {STAGE}_prob and {STAGE}_overrun columns.
+    """
     if artifacts is None:
         artifacts = load_artifacts()
     X = _encode(df, artifacts)
@@ -120,6 +124,10 @@ def score_batch(df: pd.DataFrame, artifacts: dict | None = None) -> pd.DataFrame
         "expected_overrun_days": np.round(sev, 1),
         "max_delay_prob": np.round(max_prob, 4),
     })
+    if include_stages:
+        for s in STAGES:
+            out[f"{s}_prob"] = np.round(probs[s], 4)
+            out[f"{s}_overrun"] = np.round(overruns[s], 1)
     return out
 
 
@@ -194,21 +202,22 @@ def score_parcel(features: dict, artifacts: dict | None = None,
 # --------------------------------------------------------------------------- #
 
 def refresh_portfolio(output_path: Path | None = None) -> pd.DataFrame:
-    """Score all live parcels and persist the portfolio cache (with geo + raw features)."""
+    """Score all live parcels and persist the portfolio cache (geo + features + stages)."""
     artifacts = load_artifacts()
     parcels = pd.read_parquet(DATA / "parcels.parquet")
     live = parcels[parcels["is_live"] == 1].copy()
-    projects = pd.read_parquet(DATA / "projects.parquet")[PROJECT_FEATURE_COLS]
+    projects = pd.read_parquet(DATA / "projects.parquet")[PROJECT_FEATURE_COLS + ["spatial_type"]]
     villages = pd.read_parquet(DATA / "villages.parquet")[["village", "lat", "lon"]]
     timelines = pd.read_parquet(DATA / "stage_timelines_live.parquet")
 
     live = live.merge(projects, on="project_id", how="left")
-    scores = score_batch(live, artifacts)
+    scores = score_batch(live, artifacts, include_stages=True)
 
-    # keep raw features alongside scores for per-parcel SHAP/actions in the UI
+    # keep raw features + geo (incl. codes for cascading filter) alongside scores
     feat_cols = artifacts["feature_columns"]
-    geo = live[["parcel_id", "project_id", "village", "tehsil", "district", "state"]
-               + feat_cols].copy()
+    geo_cols = ["parcel_id", "project_id", "village", "village_code", "tehsil",
+                "district", "district_code", "state", "state_code", "spatial_type"]
+    geo = live[geo_cols + feat_cols].copy()
     out = scores.merge(geo, on="parcel_id", how="left")
     out = out.merge(villages, on="village", how="left")
 

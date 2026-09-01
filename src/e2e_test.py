@@ -42,6 +42,7 @@ def ok(name: str, cond: bool, detail: str = "") -> None:
 def check_artifacts() -> None:
     print("== 1. Artifacts ==")
     ok("data generated", (ROOT / "data/generated/parcels.parquet").exists())
+    ok("states generated", (ROOT / "data/generated/states.parquet").exists())
     ok("10 models", all((ROOT / "models" / f"{s}_{m}.joblib").exists()
                         for s in ["SIA", "NOTIFICATION", "DECLARATION", "AWARD", "POSSESSION"]
                         for m in ["classifier", "regressor"]))
@@ -50,9 +51,42 @@ def check_artifacts() -> None:
     ok("portfolio cache", (ROOT / "data/generated/portfolio_scores.parquet").exists())
 
 
-def check_contract() -> None:
-    print("== 2. Prediction contract ==")
+def check_data_invariants() -> None:
+    print("== 2. Data invariants (multi-state, IDs, spatial) ==")
+    import re
     import pandas as pd
+    pr = pd.read_parquet(ROOT / "data/generated/projects.parquet")
+    pa = pd.read_parquet(ROOT / "data/generated/parcels.parquet")
+    st = pd.read_parquet(ROOT / "data/generated/states.parquet")
+
+    ok("3 states", len(st) == 3)
+    parcel_re = re.compile(r"^(HP|PB|UK)-[A-Z]{3}-\d{4}-\d{4}$")
+    project_re = re.compile(r"^(HP|PB|UK)-(RDH|RLY|IRR|DAM|IND)-\d{4}-\d{4}$")
+    ok("parcel ID format", bool(pa["parcel_id"].str.match(parcel_re).all()))
+    ok("project ID format", bool(pr["project_id"].str.match(project_re).all()))
+    ok("ID<->geo consistent",
+       bool((pa["state_code"] == pa["parcel_id"].str[:2]).all()))
+
+    lin = pr[pr["spatial_type"] == "linear"]
+    pt = pr[pr["spatial_type"] == "point"]
+    lin_multi = sum((pa[pa["project_id"] == p["project_id"]]["district_code"].nunique() > 1)
+                    for _, p in lin.iterrows())
+    lin_state = sum((pa[pa["project_id"] == p["project_id"]]["state_code"].nunique() > 1)
+                    for _, p in lin.iterrows())
+    pt_bad = sum((pa[pa["project_id"] == p["project_id"]]["district_code"].nunique() > 1)
+                 for _, p in pt.iterrows())
+    ok("linear spans >1 district", lin_multi == len(lin))
+    ok("some linear cross state", lin_state > 0)
+    ok("point stays in 1 district", pt_bad == 0)
+
+    import json
+    report = json.loads((ROOT / "models/metrics_report.json").read_text())
+    ok("LOSO present", "cold_start_loso" in report)
+    ok("gates passed", report.get("gates_ok") is True)
+
+
+def check_contract() -> None:
+    print("== 3. Prediction contract ==")
     from predict import load_artifacts, score_parcel, DEFAULTS
     artifacts = load_artifacts()
     c = score_parcel({**DEFAULTS, "court_stay": 1}, artifacts=artifacts, parcel_id="E2E")
@@ -67,7 +101,7 @@ def check_contract() -> None:
 
 
 def check_api() -> None:
-    print("== 3. FastAPI ==")
+    print("== 4. FastAPI ==")
     sys.path.insert(0, str(ROOT))
     from fastapi.testclient import TestClient
     from app.api import app
@@ -83,21 +117,22 @@ def check_api() -> None:
 
 
 def check_dashboard() -> None:
-    print("== 4. Dashboard (all views) ==")
+    print("== 5. Dashboard (all views) ==")
     from streamlit.testing.v1 import AppTest
     at = AppTest.from_file(str(ROOT / "app" / "streamlit_app.py"), default_timeout=240)
     at.run()
     ok("no exceptions", len(at.exception) == 0,
        "; ".join(repr(e.value) for e in at.exception))
-    for page in ["Detail", "What-if", "Alerts", "Map"]:
+    for page in ["Project", "New Project", "Detail", "What-if", "Alerts",
+                 "Area of Interest", "Map"]:
         at.radio[0].set_value(page)
         at.run()
         ok(f"view {page}", len(at.exception) == 0)
     # viewer gating
     at.sidebar.selectbox[0].set_value("Viewer")
     at.run()
-    ok("viewer hides what-if/alerts", [o for o in at.radio[0].options]
-       == ["Portfolio", "Detail", "Map"])
+    ok("viewer hides active views", [o for o in at.radio[0].options]
+       == ["Portfolio", "Project", "Detail", "Map"])
 
 
 # --------------------------------------------------------------------------- #
@@ -151,6 +186,7 @@ def main() -> None:
 
     print("SIH26017 end-to-end test")
     check_artifacts()
+    check_data_invariants()
     check_contract()
     check_api()
     check_dashboard()

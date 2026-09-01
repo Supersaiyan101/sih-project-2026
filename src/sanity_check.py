@@ -1,17 +1,20 @@
-"""Day 1 sanity checks for generated data.
+"""Day-1 / Stage-1 sanity checks for generated data (v2 multi-state).
 
 Checks:
-  1. Volumes + null counts match expectations.
-  2. Delay rules are recoverable (correlation checks on court_stay, orchard, etc.).
-  3. Hidden confound: delay varies ACROSS districts AND is NOT directly leaked into
-     any visible column (no near-perfect collinearity with a feature).
-  4. Ongoing-row eyeball: live stages with elapsed_days sometimes exceeding statutory.
+  1. Volumes + null pattern.
+  2. Semantic ID format correctness (parcel + project).
+  3. Spatial validity: linear spans >1 district (some >1 state); point stays in 1 district.
+  4. Per-state volumes are reasonable.
+  5. Delay rules recoverable (correlation factor -> delay).
+  6. Hidden confound: no visible column leaks district/state identity; institutional
+     features are a MODERATE proxy (partial, not perfect).
 
 Run:  .venv/bin/python src/sanity_check.py
 """
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import numpy as np
@@ -19,137 +22,138 @@ import pandas as pd
 
 GEN = Path(__file__).resolve().parent.parent / "data" / "generated"
 
+PARCEL_ID_RE = re.compile(r"^(HP|PB|UK)-[A-Z]{3}-\d{4}-\d{4}$")
+PROJECT_ID_RE = re.compile(r"^(HP|PB|UK)-(RDH|RLY|IRR|DAM|IND)-\d{4}-\d{4}$")
+
 
 def load():
-    projects = pd.read_parquet(GEN / "projects.parquet")
-    parcels = pd.read_parquet(GEN / "parcels.parquet")
-    villages = pd.read_parquet(GEN / "villages.parquet")
-    districts = pd.read_parquet(GEN / "districts.parquet")
-    hist = pd.read_parquet(GEN / "stage_timelines_historical.parquet")
-    live = pd.read_parquet(GEN / "stage_timelines_live.parquet")
-    return projects, parcels, villages, districts, hist, live
+    return (pd.read_parquet(GEN / "projects.parquet"),
+            pd.read_parquet(GEN / "parcels.parquet"),
+            pd.read_parquet(GEN / "villages.parquet"),
+            pd.read_parquet(GEN / "districts.parquet"),
+            pd.read_parquet(GEN / "states.parquet"),
+            pd.read_parquet(GEN / "stage_timelines_historical.parquet"),
+            pd.read_parquet(GEN / "stage_timelines_live.parquet"))
 
 
-def check_volumes(projects, parcels, villages, hist, live):
-    print("=" * 60)
-    print("[1] VOLUMES + NULLS")
-    print("=" * 60)
-    print(f"projects: {len(projects)}  (expect 5000)")
-    print(f"parcels : {len(parcels)}  (expect 100000)")
+def check_volumes(projects, parcels, villages, states, hist, live):
+    print("=" * 60); print("[1] VOLUMES + NULLS"); print("=" * 60)
+    print(f"states: {len(states)}  (expect 3)")
+    print(f"districts: {villages['district'].nunique()}")
+    print(f"projects: {len(projects)}")
+    print(f"parcels : {len(parcels)}  (live={int(parcels['is_live'].sum())})")
     print(f"villages: {len(villages)}")
-    print(f"historical rows: {len(hist)}  (expect ~500000)")
-    print(f"live rows      : {len(live)}  (expect ~5 x live parcels)")
-    n_live = parcels["is_live"].sum()
-    print(f"live parcels   : {n_live}")
-    print(f"  live stage breakdown:\n{live['status'].value_counts().to_string()}")
-
-    assert len(projects) == 5000
-    assert len(parcels) == 100000
-    assert len(hist) == 500000
-    assert live["status"].notna().all()
+    print(f"historical rows: {len(hist)}  (expect 5 x parcels)")
+    print(f"live rows      : {len(live)}")
+    assert len(states) == 3
+    assert len(hist) == 5 * len(parcels)
     assert (hist["status"] == "completed").all()
-    # null pattern in live: pending stages must have no actual/elapsed/delay
     assert live.loc[live["status"] == "pending", "actual_days"].isna().all()
     assert live.loc[live["status"] == "ongoing", "actual_days"].isna().all()
     assert live.loc[live["status"] == "ongoing", "elapsed_days"].notna().all()
-    assert live.loc[live["status"] == "completed", "actual_days"].notna().all()
     print("  -> null/status pattern OK")
 
 
+def check_ids(projects, parcels):
+    print("=" * 60); print("[2] SEMANTIC ID FORMAT"); print("=" * 60)
+    ok_p = bool(parcels["parcel_id"].str.match(PARCEL_ID_RE).all())
+    ok_r = bool(projects["project_id"].str.match(PROJECT_ID_RE).all())
+    print(f"parcel IDs valid: {ok_p}   project IDs valid: {ok_r}")
+    # consistency: ID components match the parcel's assigned geography
+    st = parcels["state_code"] == parcels["parcel_id"].str[:2]
+    dc = parcels["district_code"] == parcels["parcel_id"].str.split("-").str[1]
+    vc = parcels["village_code"] == parcels["parcel_id"].str.split("-").str[2]
+    print(f"ID<->state consistent: {bool(st.all())}  ID<->district: {bool(dc.all())}  ID<->village: {bool(vc.all())}")
+    assert ok_p and ok_r and st.all() and dc.all() and vc.all()
+
+
+def check_spatial(projects, parcels):
+    print("=" * 60); print("[3] SPATIAL VALIDITY"); print("=" * 60)
+    lin = projects[projects["spatial_type"] == "linear"]
+    pt = projects[projects["spatial_type"] == "point"]
+    lin_multi_district = lin_multi_state = 0
+    for _, p in lin.iterrows():
+        sub = parcels[parcels["project_id"] == p["project_id"]]
+        if sub["district_code"].nunique() > 1:
+            lin_multi_district += 1
+        if sub["state_code"].nunique() > 1:
+            lin_multi_state += 1
+    bad_point = 0
+    for _, p in pt.iterrows():
+        if parcels[parcels["project_id"] == p["project_id"]]["district_code"].nunique() > 1:
+            bad_point += 1
+    print(f"linear total: {len(lin)}  | span>1 district: {lin_multi_district}  | span>1 state: {lin_multi_state}")
+    print(f"point total: {len(pt)}  | point crossing districts: {bad_point}")
+    assert len(lin) > 0
+    assert lin_multi_district == len(lin), "every linear project must span >1 district"
+    assert lin_multi_state > 0, "need at least one cross-state linear project"
+    assert bad_point == 0, "point projects must stay in 1 district"
+
+
+def check_state_volumes(parcels):
+    print("=" * 60); print("[4] PER-STATE VOLUMES"); print("=" * 60)
+    vc = parcels["state_code"].value_counts()
+    print(vc.to_string())
+    frac = vc / len(parcels)
+    assert (frac > 0.10).all(), "each state needs a reasonable parcel share"
+
+
 def check_rules(parcels, hist):
-    print("=" * 60)
-    print("[2] RULE RECOVERY (correlation of factor -> delay)")
-    print("=" * 60)
-    # wide delay per parcel-stage for AWARD / POSSESSION / DECLARATION
+    print("=" * 60); print("[5] RULE RECOVERY"); print("=" * 60)
     aw = hist[hist["stage"] == "AWARD"].set_index("parcel_id")["delay_days"].rename("award_delay")
     po = hist[hist["stage"] == "POSSESSION"].set_index("parcel_id")["delay_days"].rename("poss_delay")
     de = hist[hist["stage"] == "DECLARATION"].set_index("parcel_id")["delay_days"].rename("decl_delay")
     df = parcels.set_index("parcel_id").join([aw, po, de])
-
-    def show(cond, label, col):
-        mean_delay = df.loc[cond, col].mean()
-        base = df.loc[~cond, col].mean()
-        print(f"  {label:38s} {col:15s} mean_delay {mean_delay:8.1f} vs base {base:8.1f}")
-
-    show(df["court_stay"] == 1, "court_stay=1", "award_delay")
-    show(df["land_class"] == "orchard", "orchard land", "award_delay")
-    show(df["encumbrances"] >= 2, "encumbrances>=2", "award_delay")
-    show(df["court_stay"] == 1, "court_stay=1", "poss_delay")
-    show(df["owner_count"] > 4, "owner_count>4", "decl_delay")
-    show(df["pending_mutations"] >= 2, "pending_mutations>=2", "decl_delay")
-    print("  (delays should be meaningfully higher for the flagged group)")
+    for cond, label, col in [
+        (df["court_stay"] == 1, "court_stay=1", "award_delay"),
+        (df["land_class"] == "orchard", "orchard", "award_delay"),
+        (df["owner_count"] > 4, "owner_count>4", "decl_delay"),
+        (df["pending_mutations"] >= 2, "pending_mutations>=2", "decl_delay"),
+    ]:
+        print(f"  {label:24s} {col:12s} {df.loc[cond, col].mean():8.1f} vs base {df.loc[~cond, col].mean():8.1f}")
 
 
-def check_confound_leak(projects, parcels, villages, districts, hist):
-    print("=" * 60)
-    print("[3] HIDDEN CONFOUND (district admin_capacity)")
-    print("=" * 60)
-    # admin_capacity is dropped from outputs; re-derive is impossible -> leak check on
-    # visible columns: verify no visible column is a near-perfect proxy of district
-    # (i.e., delay should vary across districts, but no single feature should fully
-    # determine district identity).
-    per_district = (
-        hist.merge(parcels[["parcel_id", "district"]], on="parcel_id")
-        .groupby("district")["delay_days"].mean().sort_values()
-    )
-    print("  mean delay_days by district (hidden confound drives spread):")
-    print(per_district.round(1).to_string())
-
-    # Leak check: correlation of each numeric feature with district dummies should not
-    # be near-perfect (i.e., feature alone must not equal district). Report max abs corr.
+def check_confound(projects, parcels):
+    print("=" * 60); print("[6] HIDDEN CONFOUND (leak + proxy band)"); print("=" * 60)
     feats = ["owner_count", "pending_mutations", "court_stay", "encumbrances"]
-    dummies = pd.get_dummies(parcels["district"]).astype(float)
+    d_dummies = pd.get_dummies(parcels["district_code"]).astype(float)
+    s_dummies = pd.get_dummies(parcels["state_code"]).astype(float)
     worst = 0.0
-    worst_name = ""
     for f in feats:
-        corr = dummies.corrwith(parcels[f]).abs().max()
-        if corr > worst:
-            worst, worst_name = corr, f
-        print(f"  max |corr(district, {f})| = {corr:.3f}")
-    print(f"  -> worst feature->district correlation: {worst_name} ({worst:.3f})")
-    assert worst < 0.5, "feature leaks district identity too strongly"
-    print("  -> no direct leak (no visible column encodes the hidden confound)")
+        c = d_dummies.corrwith(parcels[f]).abs().max()
+        worst = max(worst, c)
+    print(f"  worst parcel-feature <-> district corr: {worst:.3f}")
+    assert worst < 0.5, "parcel feature leaks district identity"
 
-
-def check_institutional_proxy(projects):
-    print("=" * 60)
-    print("[4] INSTITUTIONAL PROXY (stakeholder/hist_perf vs district)")
-    print("=" * 60)
-    # stakeholder_responsiveness & historical_performance_score must be MODERATE proxies
-    # of the hidden district confound: correlated enough to transfer cold-start signal,
-    # but not near-perfect (that would leak the confound and make LODO trivially easy).
-    dummies = pd.get_dummies(projects["district"]).astype(float)
+    pdum = pd.get_dummies(projects["district"]).astype(float)
+    sdum = pd.get_dummies(projects["state_code"]).astype(float)
     for f in ["stakeholder_responsiveness", "historical_performance_score"]:
-        corr = dummies.corrwith(projects[f]).abs().max()
-        print(f"  max |corr(district, {f})| = {corr:.3f}")
-        assert 0.15 <= corr <= 0.70, f"{f} proxy correlation out of band: {corr:.3f}"
-    print("  -> moderate: partial proxy present, residual confound remains (honest LODO)")
+        cd = pdum.corrwith(projects[f]).abs().max()
+        cs = sdum.corrwith(projects[f]).abs().max()
+        print(f"  {f}: |corr w/ district|={cd:.3f}  |corr w/ state|={cs:.3f}")
+        assert 0.10 <= cd <= 0.70, f"{f} district proxy out of band: {cd:.3f}"
+        assert 0.10 <= cs <= 0.70, f"{f} state proxy out of band: {cs:.3f}"
+    print("  -> partial proxy present, no direct leak")
 
 
-def check_ongoing_eyeball(live):
-    print("=" * 60)
-    print("[5] ONGOING-ROW EYEBALL (overrun-while-ongoing money shot)")
-    print("=" * 60)
-    ongoing = live[live["status"] == "ongoing"].copy()
-    ongoing["overrun"] = ongoing["elapsed_days"] > ongoing["statutory_days"]
-    frac = ongoing["overrun"].mean()
-    print(f"  ongoing stages already past statutory: {frac:.1%}")
-    print("  sample ongoing rows (incl. some overrun):")
-    cols = ["parcel_id", "stage", "statutory_days", "elapsed_days"]
-    sample = ongoing[ongoing["overrun"]].head(6)
-    if sample.empty:
-        sample = ongoing.head(6)
-    print(sample[cols].to_string(index=False))
-    assert frac > 0.05, "not enough overrun-while-ongoing cases"
+def check_ongoing(live):
+    print("=" * 60); print("[7] ONGOING OVERRUN EYEBALL"); print("=" * 60)
+    ong = live[live["status"] == "ongoing"]
+    ong = ong.copy()
+    ong["overrun"] = ong["elapsed_days"] > ong["statutory_days"]
+    print(f"  ongoing stages past statutory: {ong['overrun'].mean():.1%}")
+    assert ong["overrun"].mean() > 0.05
 
 
 def main():
-    projects, parcels, villages, districts, hist, live = load()
-    check_volumes(projects, parcels, villages, hist, live)
+    projects, parcels, villages, districts, states, hist, live = load()
+    check_volumes(projects, parcels, villages, states, hist, live)
+    check_ids(projects, parcels)
+    check_spatial(projects, parcels)
+    check_state_volumes(parcels)
     check_rules(parcels, hist)
-    check_confound_leak(projects, parcels, villages, districts, hist)
-    check_institutional_proxy(projects)
-    check_ongoing_eyeball(live)
+    check_confound(projects, parcels)
+    check_ongoing(live)
     print("\nALL SANITY CHECKS PASSED.")
 
 

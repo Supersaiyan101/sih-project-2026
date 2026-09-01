@@ -86,16 +86,16 @@ def evaluate(X_test, y_test, models) -> dict:
 
 
 # --------------------------------------------------------------------------- #
-# Cold-start: leave-one-district-out
+# Cold-start: leave-one-group-out (district OR state)
 # --------------------------------------------------------------------------- #
 
-def lodo_cold_start(X, y, meta) -> dict:
-    districts = sorted(meta["district"].unique())
-    per_district = {}
+def _leave_one_group_out(X, y, meta, group_col: str) -> dict:
+    groups = sorted(meta[group_col].unique())
+    per_group = {}
     per_stage = {s: [] for s in STAGES}
 
-    for d in districts:
-        test_mask = (meta["district"] == d).to_numpy()
+    for g in groups:
+        test_mask = (meta[group_col] == g).to_numpy()
         X_tr, X_te = X[~test_mask], X[test_mask]
         y_tr, y_te = y[~test_mask], y[test_mask]
         row = {}
@@ -105,10 +105,22 @@ def lodo_cold_start(X, y, meta) -> dict:
             auroc = float(roc_auc_score(y_te[f"{stage}_delay_flag"], p))
             row[stage] = auroc
             per_stage[stage].append(auroc)
-        per_district[d] = row
+        per_group[g] = row
 
     heldout_avg = {s: float(np.mean(per_stage[s])) for s in STAGES}
-    return {"per_district": per_district, "heldout_auroc_avg": heldout_avg}
+    return {"per_group": per_group, "heldout_auroc_avg": heldout_avg}
+
+
+def lodo_cold_start(X, y, meta) -> dict:
+    r = _leave_one_group_out(X, y, meta, "district")
+    r["per_district"] = r.pop("per_group")
+    return r
+
+
+def loso_cold_start(X, y, meta) -> dict:
+    r = _leave_one_group_out(X, y, meta, "state_code")
+    r["per_state"] = r.pop("per_group")
+    return r
 
 
 # --------------------------------------------------------------------------- #
@@ -216,11 +228,14 @@ def main() -> None:
     split_models = fit_stage_models(X_tr, y_tr)
     metrics = evaluate(X_te, y_te, split_models)
 
-    # --- cold-start LODO ---
+    # --- cold-start LODO + LOSO ---
     cold_start = None
+    cold_start_state = None
     if not args.skip_lodo:
-        print("Running leave-one-district-out cold-start validation ...")
+        print("Running leave-one-district-out (LODO) cold-start validation ...")
         cold_start = lodo_cold_start(X, y, meta)
+        print("Running leave-one-state-out (LOSO) cold-start validation ...")
+        cold_start_state = loso_cold_start(X, y, meta)
 
     # --- SHAP ---
     print("Exporting SHAP explanations ...")
@@ -252,11 +267,18 @@ def main() -> None:
         "stages": metrics,
         "shap_importance": shap_importance,
         "cold_start_lodo": cold_start,
+        "cold_start_loso": cold_start_state,
         "rollup_district_risk": district_risk.to_dict(orient="records"),
     }
     if cold_start:
         report["cold_start_lodo"]["drop_pct"] = {
             s: round((metrics[s]["classifier"]["auroc"] - cold_start["heldout_auroc_avg"][s])
+                     / metrics[s]["classifier"]["auroc"] * 100, 2)
+            for s in STAGES
+        }
+    if cold_start_state:
+        report["cold_start_loso"]["drop_pct"] = {
+            s: round((metrics[s]["classifier"]["auroc"] - cold_start_state["heldout_auroc_avg"][s])
                      / metrics[s]["classifier"]["auroc"] * 100, 2)
             for s in STAGES
         }
@@ -271,11 +293,39 @@ def main() -> None:
               f"MAE={m['regressor']['mae']:.1f}  RMSE={m['regressor']['rmse']:.1f}  "
               f"delay_rate={m['delay_rate']:.2f}  top3={[t[0] for t in top]}")
     if cold_start:
-        print("\nCold-start (LODO) held-out AUROC vs in-sample:")
+        print("\nCold-start LODO (district) held-out AUROC vs in-sample:")
         for s in STAGES:
             print(f"  {s:14s} in-sample={metrics[s]['classifier']['auroc']:.3f}  "
                   f"held-out={cold_start['heldout_auroc_avg'][s]:.3f}  "
                   f"drop={report['cold_start_lodo']['drop_pct'][s]:.1f}%")
+    if cold_start_state:
+        print("\nCold-start LOSO (state) held-out AUROC vs in-sample:")
+        for s in STAGES:
+            print(f"  {s:14s} in-sample={metrics[s]['classifier']['auroc']:.3f}  "
+                  f"held-out={cold_start_state['heldout_auroc_avg'][s]:.3f}  "
+                  f"drop={report['cold_start_loso']['drop_pct'][s]:.1f}%")
+
+    # --- Stage 2 hard gates ---
+    gates_ok = True
+    if cold_start and cold_start_state:
+        lodo_drop = max(report["cold_start_lodo"]["drop_pct"].values())
+        loso_drop_avg = float(np.mean(list(report["cold_start_loso"]["drop_pct"].values())))
+        loso_drop_max = max(report["cold_start_loso"]["drop_pct"].values())
+        min_auroc = min(metrics[s]["classifier"]["auroc"] for s in STAGES)
+        print("\n================= GATES =================")
+        print(f"LODO max drop: {lodo_drop:.2f}%  (gate: <=10%)")
+        print(f"LOSO avg drop: {loso_drop_avg:.2f}%  (gate: 2-15%)")
+        print(f"min in-sample AUROC: {min_auroc:.3f}  (gate: >=0.70)")
+        if not (lodo_drop <= 10.0):
+            print("GATE FAIL: LODO drop > 10%"); gates_ok = False
+        if not (2.0 <= loso_drop_avg <= 15.0):
+            print("GATE FAIL: LOSO drop outside 2-15%"); gates_ok = False
+        if not (min_auroc >= 0.70):
+            print("GATE FAIL: AUROC floor < 0.70"); gates_ok = False
+        print("ALL GATES PASSED." if gates_ok else "GATES FAILED -> return to Stage 0.")
+    report["gates_ok"] = gates_ok
+    (MODELS / "metrics_report.json").write_text(json.dumps(report, indent=2))
+
     print(f"\nDistrict risk ranking (area-weighted):")
     print(district_risk[["district", "risk_score", "n_parcels"]].to_string(index=False))
     print(f"\nDone in {time.time() - t0:.1f}s. Models + report in {MODELS}/")

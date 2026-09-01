@@ -1,11 +1,21 @@
 {
   "name": "SIH26017 land acquisition schema",
-  "version": "1.0",
-  "description": "Column definitions for the SIH26017 early-warning system. Mirrors HimBhoomi-style land records + RFCTLARR lifecycle timelines.",
+  "version": "2.0",
+  "description": "Pan-India (multi-state) schema. Mirrors HimBhoomi-style land records + RFCTLARR lifecycle timelines. Semantic IDs encode geography; models never see geo/identifier columns.",
+  "id_formats": {
+    "parcel_id": "<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>",
+    "project_id": "<STATE>-<TYPE>-<YEAR>-<SEQ>",
+    "home_state_rule": "For cross-state linear projects, the STATE in the project_id is the state of the first parcel on the path.",
+    "consistency": "Parcel IDs are DERIVED from the parcel's assigned state/district/village (never independent)."
+  },
   "granularity": {
     "atomic_unit": "parcel",
     "rollup_path": ["parcel", "project", "village", "tehsil", "district", "state"],
     "note": "Parcel is atomic; project/village/district/state risk is a weighted rollup."
+  },
+  "spatial_types": {
+    "point": "Localized project: constrained to 1 district, 1-2 adjacent villages.",
+    "linear": "Linear project (road/rail/highway): ordered path over contiguous villages, may cross district/state borders; carries coord_path."
   },
   "stages": ["SIA", "NOTIFICATION", "DECLARATION", "AWARD", "POSSESSION"],
   "statutory_days": {
@@ -28,72 +38,98 @@
     "hidden": "present in data but NEVER a feature and NEVER exposed (confound for cold-start stress test)",
     "support": "auxiliary column needed to compute/derive target (not a feature)"
   },
-  "hidden_fields": ["district_admin_capacity"],
+  "hidden_fields": ["state_admin_capacity", "district_admin_capacity"],
+  "hidden_confound": {
+    "state_admin_capacity": "per-state hidden institutional pace; partially proxied by stakeholder_responsiveness + historical_performance_score (state x district x individual blend).",
+    "district_admin_capacity": "per-district hidden administrative capacity (existing).",
+    "cold_start_split_unit": "LODO/LOSO split by each PARCEL's own district/state, never by project."
+  },
   "tables": {
-    "districts": {
-      "description": "District-level metadata. district_admin_capacity is the HIDDEN confound.",
+    "states": {
+      "description": "State-level metadata. state_admin_capacity is the HIDDEN state confound.",
       "fields": [
-        {"name": "state", "dtype": "string", "role": "geo_only", "domain": "Himachal Pradesh (demo pilot)", "description": "State name"},
-        {"name": "district", "dtype": "string", "role": "geo_only", "domain": "12 HP districts", "description": "District name"},
-        {"name": "admin_capacity", "dtype": "float", "role": "hidden", "domain": "0.0-1.0", "description": "Hidden administrative capacity; drives between-district delay variance; NOT exposed to models or UI"}
+        {"name": "state", "dtype": "string", "role": "geo_only", "domain": ["Himachal Pradesh", "Punjab", "Uttarakhand"], "description": "State name"},
+        {"name": "state_code", "dtype": "string", "role": "geo_only", "domain": ["HP", "PB", "UK"], "description": "2-letter state code"},
+        {"name": "admin_capacity", "dtype": "float", "role": "hidden", "domain": "0.0-1.0", "description": "Hidden state-level institutional pace; NOT exposed to models or UI"}
+      ]
+    },
+    "districts": {
+      "description": "District-level metadata. district_admin_capacity is the HIDDEN district confound.",
+      "fields": [
+        {"name": "state", "dtype": "string", "role": "geo_only", "description": "State name"},
+        {"name": "state_code", "dtype": "string", "role": "geo_only", "description": "2-letter state code"},
+        {"name": "district", "dtype": "string", "role": "geo_only", "description": "District name"},
+        {"name": "district_code", "dtype": "string", "role": "geo_only", "domain": "3 uppercase letters, unique per state", "description": "District code used in parcel IDs"},
+        {"name": "lat", "dtype": "float", "role": "geo_only", "description": "District centroid latitude"},
+        {"name": "lon", "dtype": "float", "role": "geo_only", "description": "District centroid longitude"},
+        {"name": "admin_capacity", "dtype": "float", "role": "hidden", "domain": "0.0-1.0", "description": "Hidden district-level admin capacity; NOT exposed"}
       ]
     },
     "projects": {
-      "description": "Project-level record. One land acquisition project aggregates many parcels.",
+      "description": "Project-level record. One acquisition project aggregates many parcels. point or linear spatial type.",
       "fields": [
-        {"name": "project_id", "dtype": "string", "role": "identifier", "description": "Unique project key (e.g. PRJ_00001)"},
-        {"name": "project_type", "dtype": "category", "role": "feature", "domain": ["road", "rail", "irrigation", "dam", "industrial"], "description": "Type of infrastructure project; drives base pace"},
+        {"name": "project_id", "dtype": "string", "role": "identifier", "domain": "<STATE>-<TYPE>-<YEAR>-<SEQ>", "description": "Semantic project key (e.g. HP-DAM-2024-0001)"},
+        {"name": "project_type", "dtype": "category", "role": "feature", "domain": ["road", "rail", "irrigation", "dam", "industrial"], "description": "Infrastructure type; drives base pace"},
+        {"name": "spatial_type", "dtype": "category", "role": "support", "domain": ["point", "linear"], "description": "Spatial geometry of the project"},
+        {"name": "coord_path", "dtype": "list[float,float]", "role": "geo_only", "domain": "ordered [lat,lon] village coords (linear only)", "description": "Ordered village coordinate path for linear projects"},
         {"name": "affected_families", "dtype": "int", "role": "feature", "domain": "0-5000", "description": "Number of families affected (R&R dimension)"},
         {"name": "compensation_status", "dtype": "category", "role": "feature", "domain": ["pending", "partial", "paid"], "description": "Compensation disbursement status"},
         {"name": "rehab_progress_pct", "dtype": "float", "role": "feature", "domain": "0-100", "description": "Rehabilitation & resettlement progress percentage"},
-        {"name": "stakeholder_responsiveness", "dtype": "float", "role": "feature", "domain": "0.0-1.0", "description": "Responsiveness score of stakeholders/authorities"},
-        {"name": "historical_performance_score", "dtype": "float", "role": "feature", "domain": "0.0-1.0", "description": "Dept/region historical track-record score"},
-        {"name": "state", "dtype": "string", "role": "geo_only", "description": "State"},
-        {"name": "district", "dtype": "string", "role": "geo_only", "description": "District"},
+        {"name": "stakeholder_responsiveness", "dtype": "float", "role": "feature", "domain": "0.0-1.0", "description": "Responsiveness score (partially proxies hidden state/district pace)"},
+        {"name": "historical_performance_score", "dtype": "float", "role": "feature", "domain": "0.0-1.0", "description": "Dept/region track-record score (partially proxies hidden pace)"},
+        {"name": "state", "dtype": "string", "role": "geo_only", "description": "Home state"},
+        {"name": "state_code", "dtype": "string", "role": "geo_only", "description": "Home state code"},
+        {"name": "district", "dtype": "string", "role": "geo_only", "description": "Lead/start district"},
         {"name": "tehsil", "dtype": "string", "role": "geo_only", "description": "Tehsil"}
       ]
     },
     "parcels": {
       "description": "Parcel-level land record (HimBhoomi-style).",
       "fields": [
-        {"name": "parcel_id", "dtype": "string", "role": "identifier", "description": "Unique parcel key (e.g. PRCL_0000001)"},
+        {"name": "parcel_id", "dtype": "string", "role": "identifier", "domain": "<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>", "description": "Semantic parcel key (e.g. HP-KNG-0001-0123)"},
         {"name": "project_id", "dtype": "string", "role": "identifier", "description": "FK to projects"},
-        {"name": "khasra_number", "dtype": "string", "role": "identifier", "description": "Khasra/revenue record number (not a model feature)"},
+        {"name": "khasra_number", "dtype": "string", "role": "identifier", "description": "Khasra/revenue record number (component of parcel_id)"},
         {"name": "owner_count", "dtype": "int", "role": "feature", "domain": "1-30", "description": "Number of joint owners (consent complexity)"},
         {"name": "land_class", "dtype": "category", "role": "feature", "domain": ["agri", "orchard", "barren", "residential"], "description": "Land use classification"},
         {"name": "area_sqm", "dtype": "float", "role": "feature", "domain": ">0", "description": "Parcel area in square meters"},
-        {"name": "pending_mutations", "dtype": "int", "role": "feature", "domain": "0-10", "description": "Pending mutation (ownership-transfer) count"},
+        {"name": "pending_mutations", "dtype": "int", "role": "feature", "domain": "0-10", "description": "Pending mutation count"},
         {"name": "court_stay", "dtype": "int", "role": "feature", "domain": "0/1", "description": "Active court stay flag"},
         {"name": "encumbrances", "dtype": "int", "role": "feature", "domain": "0-5", "description": "Number of encumbrances/liens"},
         {"name": "village", "dtype": "string", "role": "geo_only", "description": "Village name"},
+        {"name": "village_code", "dtype": "string", "role": "geo_only", "description": "Village code (component of parcel_id)"},
         {"name": "tehsil", "dtype": "string", "role": "geo_only", "description": "Tehsil"},
         {"name": "district", "dtype": "string", "role": "geo_only", "description": "District"},
+        {"name": "district_code", "dtype": "string", "role": "geo_only", "description": "District code (component of parcel_id)"},
         {"name": "state", "dtype": "string", "role": "geo_only", "description": "State"},
-        {"name": "is_live", "dtype": "int", "role": "support", "domain": "0/1", "description": "1 = in-progress parcel (live/early-warning set), 0 = historical completed (training)"}
+        {"name": "state_code", "dtype": "string", "role": "geo_only", "description": "State code (component of parcel_id)"},
+        {"name": "is_live", "dtype": "int", "role": "support", "domain": "0/1", "description": "1 = in-progress (live), 0 = historical (training)"}
       ]
     },
     "villages": {
-      "description": "Village geo table for the Folium map (seeded fake coordinates).",
+      "description": "Village geo table (seeded fake coordinates per district).",
       "fields": [
         {"name": "village", "dtype": "string", "role": "geo_only", "description": "Village name"},
+        {"name": "village_code", "dtype": "string", "role": "geo_only", "description": "Village code within district"},
         {"name": "tehsil", "dtype": "string", "role": "geo_only", "description": "Tehsil"},
         {"name": "district", "dtype": "string", "role": "geo_only", "description": "District"},
+        {"name": "district_code", "dtype": "string", "role": "geo_only", "description": "District code"},
         {"name": "state", "dtype": "string", "role": "geo_only", "description": "State"},
-        {"name": "lat", "dtype": "float", "role": "geo_only", "description": "Latitude (seeded fake, within HP bounding box)"},
-        {"name": "lon", "dtype": "float", "role": "geo_only", "description": "Longitude (seeded fake, within HP bounding box)"}
+        {"name": "state_code", "dtype": "string", "role": "geo_only", "description": "State code"},
+        {"name": "lat", "dtype": "float", "role": "geo_only", "description": "Latitude (seeded fake)"},
+        {"name": "lon", "dtype": "float", "role": "geo_only", "description": "Longitude (seeded fake)"}
       ]
     },
     "stage_timelines": {
       "description": "Long format: one row per parcel per stage (parcel x 5 stages).",
       "fields": [
-        {"name": "parcel_id", "dtype": "string", "role": "identifier", "description": "FK to parcels"},
+        {"name": "parcel_id", "dtype": "string", "role": "identifier", "description": "FK to parcels (semantic ID)"},
         {"name": "stage", "dtype": "category", "role": "support", "domain": ["SIA", "NOTIFICATION", "DECLARATION", "AWARD", "POSSESSION"], "description": "RFCTLARR stage"},
         {"name": "statutory_days", "dtype": "int", "role": "support", "description": "Statutory limit for this stage"},
         {"name": "actual_days", "dtype": "int", "role": "support", "domain": "nullable", "description": "Actual days taken (NULL for ongoing/pending stages)"},
-        {"name": "elapsed_days", "dtype": "int", "role": "support", "domain": "nullable", "description": "Days elapsed so far (for ongoing stages; may exceed statutory)"},
+        {"name": "elapsed_days", "dtype": "int", "role": "support", "domain": "nullable", "description": "Days elapsed so far (for ongoing stages)"},
         {"name": "status", "dtype": "category", "role": "support", "domain": ["completed", "ongoing", "pending"], "description": "completed iff actual_days set; ongoing iff started but unfinished; pending otherwise"},
         {"name": "delay_days", "dtype": "int", "role": "target", "domain": "nullable", "description": "actual_days - statutory_days; NULL for non-completed stages"},
-        {"name": "delay_flag", "dtype": "int", "role": "target", "domain": "0/1", "description": "1 if delay_days > 0 (binary classification target)"}
+        {"name": "delay_flag", "dtype": "int", "role": "target", "domain": "0/1", "description": "1 if delay_days > 0"}
       ]
     }
   }

@@ -1,8 +1,10 @@
-"""SIH26017 Streamlit dashboard (main demo path).
+"""SIH26017 Streamlit dashboard (v2 — multi-state, interactive).
 
-Offline-capable: reads the precomputed portfolio cache and calls predict.py directly
-(no network, no tiles). Six views: Portfolio, Detail, What-if, Alerts, Map, plus a
-mock role-switcher with functional gating.
+Offline-capable. Reads the portfolio cache + projects geometry, calls predict.py
+directly. Views: Portfolio (cascading filter + clickable project/parcel tables),
+Project detail (summary + per-stage bottleneck + segment profile + parcels),
+Parcel detail (per-stage bars + SHAP + actions), What-if, Alerts, Map
+(point markers + linear polylines).
 
 Run:
   .venv/bin/streamlit run app/streamlit_app.py
@@ -10,6 +12,8 @@ Run:
 
 from __future__ import annotations
 
+import json
+import re
 import sys
 from pathlib import Path
 
@@ -22,9 +26,12 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 import predict  # noqa: E402
+import user_projects  # noqa: E402
+from features import STAGES  # noqa: E402
 from predict import load_artifacts, score_parcel, risk_level  # noqa: E402
 
 PORTFOLIO_PATH = ROOT / "data" / "generated" / "portfolio_scores.parquet"
+PROJECTS_PATH = ROOT / "data" / "generated" / "projects.parquet"
 
 COLORS = {"RED": "#e74c3c", "YELLOW": "#f1c40f", "GREEN": "#2ecc71"}
 EMOJI = {"RED": "🔴", "YELLOW": "🟡", "GREEN": "🟢"}
@@ -40,17 +47,29 @@ st.set_page_config(page_title="SIH26017 — Land Delay Early Warning", layout="w
 def load_portfolio() -> pd.DataFrame:
     if not PORTFOLIO_PATH.exists():
         predict.refresh_portfolio()
-    return pd.read_parquet(PORTFOLIO_PATH)
+    main = pd.read_parquet(PORTFOLIO_PATH)
+    main["is_user"] = 0
+    user = user_projects.load_user_parcels()
+    if len(user):
+        user = user.copy()
+        user["is_user"] = 1
+        main = pd.concat([main, user], ignore_index=True)
+    return main
 
 
-@st.cache_resource
-def load_artifacts_cached() -> dict:
-    return load_artifacts()
+@st.cache_data
+def load_projects() -> pd.DataFrame:
+    return pd.read_parquet(PROJECTS_PATH)
 
 
 @st.cache_data
 def load_districts() -> pd.DataFrame:
     return pd.read_parquet(ROOT / "data" / "generated" / "districts.parquet")
+
+
+@st.cache_resource
+def load_artifacts_cached() -> dict:
+    return load_artifacts()
 
 
 def load_live_timeline(parcel_id: str) -> dict:
@@ -72,82 +91,181 @@ def refresh() -> None:
     st.rerun()
 
 
+def nav_to(page: str) -> None:
+    st.session_state["nav"] = page
+    st.rerun()
+
+
+def risk_color(score: float) -> str:
+    return COLORS[risk_level(score)]
+
+
+def haversine(lat1, lon1, lat2, lon2):
+    r = 6371.0
+    p1, p2 = np.radians(lat1), np.radians(lat2)
+    dp, dl = np.radians(lat2 - lat1), np.radians(lon2 - lon1)
+    a = np.sin(dp / 2) ** 2 + np.cos(p1) * np.cos(p2) * np.sin(dl / 2) ** 2
+    return 2 * r * np.arcsin(np.sqrt(a))
+
+
 # --------------------------------------------------------------------------- #
-# View: Portfolio
+# Portfolio view
 # --------------------------------------------------------------------------- #
 
-def view_portfolio(df: pd.DataFrame, artifacts: dict) -> None:
-    st.subheader("Portfolio risk table")
-    k1, k2, k3, k4, k5 = st.columns(5)
-    k1.metric("Live parcels", f"{len(df):,}")
-    k2.metric("High risk (RED)", f"{(df['risk_level'] == 'RED').sum():,}")
-    k3.metric("Medium (YELLOW)", f"{(df['risk_level'] == 'YELLOW').sum():,}")
-    k4.metric("Low (GREEN)", f"{(df['risk_level'] == 'GREEN').sum():,}")
-    k5.metric("Avg risk", f"{df['risk_score'].mean():.2f}")
+def filter_bar(df: pd.DataFrame) -> pd.DataFrame:
+    c = st.columns(4)
+    states = ["All"] + sorted(df["state"].unique())
+    state = c[0].selectbox("State", states)
+    d = df if state == "All" else df[df["state"] == state]
 
-    level = st.selectbox("Group by", ["district", "village", "project_id"], index=0)
-    g = df.groupby(level).agg(
-        n_parcels=("parcel_id", "size"),
-        avg_risk=("risk_score", "mean"),
-        wavg_risk=("risk_score", lambda s: np.average(s, weights=df.loc[s.index, "area_sqm"])),
-        avg_overrun=("expected_overrun_days", "mean"),
-        red_count=("risk_level", lambda s: (s == "RED").sum()),
-    ).reset_index().sort_values("wavg_risk", ascending=False)
+    districts = ["All"] + sorted(d["district"].unique())
+    district = c[1].selectbox("District", districts)
+    d = d if district == "All" else d[d["district"] == district]
 
-    g["level"] = g["wavg_risk"].map(risk_level)
-    g["emoji"] = g["level"].map(EMOJI)
-    disp = g[["emoji", level, "n_parcels", "wavg_risk", "avg_overrun", "red_count", "level"]]
-    disp.columns = ["", level, "n_parcels", "area-wtd risk", "avg overrun (d)", "RED count", "level"]
-    st.dataframe(disp, width='stretch', hide_index=True)
+    ptypes = ["All"] + sorted(d["project_type"].unique())
+    ptype = c[2].selectbox("Project type", ptypes)
+    d = d if ptype == "All" else d[d["project_type"] == ptype]
 
-    sel = st.selectbox("Drill into group", g[level].tolist())
-    subset = df[df[level] == sel].sort_values("risk_score", ascending=False)
-    st.markdown(f"**{len(subset)} parcels in {level} `{sel}`** (top 50 by risk)")
+    levels = c[3].multiselect("Risk level", ["RED", "YELLOW", "GREEN"],
+                              default=["RED", "YELLOW", "GREEN"])
+    d = d[d["risk_level"].isin(levels)] if levels else d
+    return d
+
+
+def project_table(df: pd.DataFrame) -> None:
+    agg = (df.groupby("project_id")
+             .agg(project_type=("project_type", "first"),
+                  spatial=("spatial_type", "first"),
+                  state=("state_code", "first"),
+                  district=("district", "first"),
+                  n_parcels=("parcel_id", "size"),
+                  avg_risk=("risk_score", "mean"),
+                  red=("risk_level", lambda s: (s == "RED").sum()),
+                  avg_overrun=("expected_overrun_days", "mean"))
+             .reset_index()
+             .sort_values("avg_risk", ascending=False))
+    agg["level"] = agg["avg_risk"].map(risk_level)
+    disp = agg[["project_id", "project_type", "spatial", "state", "district",
+                "n_parcels", "avg_risk", "red", "avg_overrun", "level"]]
+    disp.columns = ["project_id", "type", "spatial", "state", "district",
+                    "parcels", "avg risk", "RED", "avg overrun", "level"]
+    disp = disp.reset_index(drop=True)
+    event = st.dataframe(disp, width="stretch", hide_index=True, key="proj_table",
+                         on_select="rerun", selection_mode="single-row")
+    if event.selection and event.selection.rows:
+        sel = disp.iloc[event.selection.rows[0]]["project_id"]
+        st.session_state["selected_project"] = sel
+        nav_to("Project")
+
+
+def parcel_table(df: pd.DataFrame, key: str, limit: int = 100) -> None:
+    sub = df.sort_values("risk_score", ascending=False).head(limit).reset_index(drop=True)
     cols = ["parcel_id", "risk_level", "risk_score", "expected_overrun_days",
             "current_stage", "overrun_while_ongoing_days", "court_stay", "compensation_status"]
-    st.dataframe(subset[cols].head(50), width='stretch', hide_index=True)
+    event = st.dataframe(sub[cols], width="stretch", hide_index=True, key=key,
+                         on_select="rerun", selection_mode="single-row")
+    if event.selection and event.selection.rows:
+        sel = sub.iloc[event.selection.rows[0]]["parcel_id"]
+        st.session_state["selected_parcel"] = sel
+        nav_to("Detail")
 
-    if not subset.empty:
-        if st.button("Open top-risk parcel in Detail / What-if", key="open_top"):
-            st.session_state["parcel_id"] = subset.iloc[0]["parcel_id"]
-            st.rerun()
+
+def view_portfolio(df: pd.DataFrame) -> None:
+    st.subheader("Portfolio risk table")
+    d = filter_bar(df)
+
+    k1, k2, k3, k4, k5 = st.columns(5)
+    k1.metric("Projects", f"{d['project_id'].nunique():,}")
+    k2.metric("Live parcels", f"{len(d):,}")
+    k3.metric("RED", f"{(d['risk_level'] == 'RED').sum():,}")
+    k4.metric("YELLOW", f"{(d['risk_level'] == 'YELLOW').sum():,}")
+    k5.metric("Avg risk", f"{d['risk_score'].mean():.2f}")
+
+    st.markdown("**Projects** (click a row to open)")
+    project_table(d)
 
 
 # --------------------------------------------------------------------------- #
-# View: Detail
+# Project detail view
+# --------------------------------------------------------------------------- #
+
+def view_project(df: pd.DataFrame) -> None:
+    st.subheader("Project detail")
+    pid = st.session_state.get("selected_project")
+    if not pid:
+        st.info("Select a project from the Portfolio view first.")
+        return
+    sub = df[df["project_id"] == pid]
+    if sub.empty:
+        st.warning("Project not found in the live portfolio.")
+        return
+    projects = load_projects()
+    proj = projects[projects["project_id"] == pid]
+    ptype = sub["project_type"].iloc[0]
+    spatial = sub["spatial_type"].iloc[0]
+    state = sub["state"].iloc[0]
+    district = sub["district"].iloc[0]
+
+    c1, c2, c3, c4, c5 = st.columns(5)
+    c1.metric("Project", pid)
+    c2.metric("Type", f"{ptype} · {spatial}")
+    c3.metric("State / District", f"{state} / {district}")
+    c4.metric("Parcels", f"{len(sub):,}")
+    c5.metric("Aggregate risk", f"{sub['risk_score'].mean():.3f}")
+
+    red = (sub["risk_level"] == "RED").sum()
+    yel = (sub["risk_level"] == "YELLOW").sum()
+    st.markdown(f"Risk mix: 🔴 {red} · 🟡 {yel} · 🟢 {len(sub) - red - yel}   |   "
+                f"avg expected overrun **{sub['expected_overrun_days'].mean():.0f} days**")
+
+    left, right = st.columns(2)
+    with left:
+        st.markdown("**Per-stage bottleneck** (mean delay probability)")
+        sp = {s: sub[f"{s}_prob"].mean() for s in STAGES}
+        fig = go.Figure(go.Bar(x=list(sp.keys()), y=list(sp.values()), marker_color="#3498db",
+                               text=[f"{v:.0%}" for v in sp.values()], textposition="outside"))
+        fig.update_layout(template="plotly_white", height=300, yaxis=dict(range=[0, 1], title="P(delay)"))
+        st.plotly_chart(fig, width="stretch")
+    with right:
+        st.markdown("**Segment profile** (risk by village)")
+        seg = sub.groupby("village")["risk_score"].agg(["mean", "count"]).sort_values("mean", ascending=False)
+        fig = go.Figure(go.Bar(x=seg["mean"], y=seg.index, orientation="h", marker_color="#e67e22"))
+        fig.update_layout(template="plotly_white", height=300, xaxis_title="avg risk")
+        st.plotly_chart(fig, width="stretch")
+
+    st.markdown("**Parcels** (click a row to open)")
+    parcel_table(sub, key="proj_parcels")
+
+
+# --------------------------------------------------------------------------- #
+# Parcel detail view
 # --------------------------------------------------------------------------- #
 
 def _pick_parcel(df: pd.DataFrame) -> str:
-    if "parcel_id" in st.session_state:
-        default_idx = df.index[df["parcel_id"] == st.session_state["parcel_id"]]
+    if "selected_parcel" in st.session_state and st.session_state["selected_parcel"] in df["parcel_id"].values:
+        default = st.session_state["selected_parcel"]
     else:
-        default_idx = df.index[df["risk_score"] == df["risk_score"].max()]
-    idx = int(default_idx[0]) if len(default_idx) else 0
-    options = df["parcel_id"].tolist()
-    return st.selectbox("Parcel", options, index=idx, key="parcel_selector")
+        default = df["parcel_id"].iloc[df["risk_score"].argmax()]
+    idx = df["parcel_id"].tolist().index(default)
+    return st.selectbox("Parcel", df["parcel_id"].tolist(), index=idx, key="parcel_selector")
 
 
 def _stage_bars(contract: dict) -> go.Figure:
-    stages = contract["stages"]
-    names = list(stages.keys())
-    probs = [stages[s]["delay_prob"] for s in names]
-    overruns = [stages[s]["expected_overrun"] for s in names]
-    statutory = [stages[s]["statutory_days"] for s in names]
-
+    names = list(contract["stages"].keys())
+    probs = [contract["stages"][s]["delay_prob"] for s in names]
+    overruns = [contract["stages"][s]["expected_overrun"] for s in names]
+    statutory = [contract["stages"][s]["statutory_days"] for s in names]
     fig = go.Figure()
     fig.add_trace(go.Bar(name="delay probability", x=names, y=probs, marker_color="#3498db",
                          yaxis="y", text=[f"{p:.0%}" for p in probs], textposition="outside"))
     fig.add_trace(go.Bar(name="expected overrun (days)", x=names, y=overruns, marker_color="#e67e22",
                          yaxis="y2", opacity=0.85))
     fig.add_trace(go.Scatter(name="statutory days", x=names, y=statutory, yaxis="y2",
-                             mode="lines+markers", line=dict(dash="dot", color="#555"),
-                             marker=dict(size=6)))
-    fig.update_layout(
-        barmode="group", template="plotly_white", height=380,
-        yaxis=dict(title="P(delay)", range=[0, 1]),
-        yaxis2=dict(title="days", overlaying="y", side="right"),
-        legend=dict(orientation="h", y=1.12),
-    )
+                             mode="lines+markers", line=dict(dash="dot", color="#555"), marker=dict(size=6)))
+    fig.update_layout(barmode="group", template="plotly_white", height=380,
+                      yaxis=dict(title="P(delay)", range=[0, 1]),
+                      yaxis2=dict(title="days", overlaying="y", side="right"),
+                      legend=dict(orientation="h", y=1.12))
     return fig
 
 
@@ -157,8 +275,7 @@ def _shap_bars(contract: dict) -> go.Figure:
     vals = [t[1] for t in tf][::-1]
     colors = [COLORS["RED"] if v >= 0 else "#3498db" for v in vals]
     fig = go.Figure(go.Bar(x=vals, y=names, orientation="h", marker_color=colors))
-    fig.update_layout(template="plotly_white", height=340,
-                      xaxis_title="|SHAP| impact (higher = bigger driver)")
+    fig.update_layout(template="plotly_white", height=340, xaxis_title="|SHAP| impact")
     return fig
 
 
@@ -181,10 +298,10 @@ def view_detail(df: pd.DataFrame, artifacts: dict) -> None:
     left, right = st.columns([3, 2])
     with left:
         st.markdown("**Per-stage delay probability vs statutory clock**")
-        st.plotly_chart(_stage_bars(contract), width='stretch')
+        st.plotly_chart(_stage_bars(contract), width="stretch")
     with right:
         st.markdown("**Why is this parcel at risk? (SHAP)**")
-        st.plotly_chart(_shap_bars(contract), width='stretch')
+        st.plotly_chart(_shap_bars(contract), width="stretch")
         st.markdown("**Recommended actions**")
         for a in contract["recommended_actions"]:
             badge = {"high": "🔴", "medium": "🟡", "low": "🟢"}[a["priority_label"]]
@@ -192,7 +309,7 @@ def view_detail(df: pd.DataFrame, artifacts: dict) -> None:
 
 
 # --------------------------------------------------------------------------- #
-# View: What-if
+# What-if view
 # --------------------------------------------------------------------------- #
 
 def view_whatif(df: pd.DataFrame, artifacts: dict) -> None:
@@ -202,34 +319,29 @@ def view_whatif(df: pd.DataFrame, artifacts: dict) -> None:
     features = {c: row[c] for c in predict.DEFAULTS}
 
     c1, c2 = st.columns(2)
-    new_court_stay = c1.selectbox("Court stay", [0, 1], index=int(features["court_stay"]),
-                                  help="Toggle to simulate clearing an active court stay.")
+    new_stay = c1.selectbox("Court stay", [0, 1], index=int(features["court_stay"]))
     new_comp = c2.selectbox("Compensation status", ["paid", "partial", "pending"],
-                            index=["paid", "partial", "pending"].index(features["compensation_status"]),
-                            help="Simulate disbursing compensation.")
-
-    changed = (new_court_stay != int(features["court_stay"])) or (new_comp != features["compensation_status"])
+                            index=["paid", "partial", "pending"].index(features["compensation_status"]))
+    changed = (new_stay != int(features["court_stay"])) or (new_comp != features["compensation_status"])
 
     before = score_parcel(features, artifacts=artifacts, parcel_id=pid)
-    mutated = {**features, "court_stay": new_court_stay, "compensation_status": new_comp}
-    after = score_parcel(mutated, artifacts=artifacts, parcel_id=pid)
+    after = score_parcel({**features, "court_stay": new_stay, "compensation_status": new_comp},
+                         artifacts=artifacts, parcel_id=pid)
 
     b1, b2, b3 = st.columns(3)
-    b1.metric("Risk score (before)", f"{before['risk_score']:.3f}",
-              delta=None)
-    b2.metric("Risk score (after)", f"{after['risk_score']:.3f}",
+    b1.metric("Risk (before)", f"{before['risk_score']:.3f}")
+    b2.metric("Risk (after)", f"{after['risk_score']:.3f}",
               delta=f"{after['risk_score'] - before['risk_score']:+.3f}")
     b3.metric("Expected overrun (after)", f"{after['expected_overrun_days']:.0f} d",
               delta=f"{after['expected_overrun_days'] - before['expected_overrun_days']:+.0f} d")
-
     if not changed:
-        st.info("Change the court-stay or compensation toggles to see the risk move live.")
+        st.info("Change the toggles to see the risk move live.")
     else:
         st.success(f"Level {before['risk_level']} → {after['risk_level']}")
 
 
 # --------------------------------------------------------------------------- #
-# View: Alerts
+# Alerts view
 # --------------------------------------------------------------------------- #
 
 def view_alerts(df: pd.DataFrame) -> None:
@@ -248,44 +360,210 @@ def view_alerts(df: pd.DataFrame) -> None:
         if r["expected_overrun_days"] > 365:
             alerts.append((r["parcel_id"], "severe-overrun",
                            f"{r['expected_overrun_days']:.0f} days expected overrun"))
-
     a = pd.DataFrame(alerts, columns=["parcel_id", "alert_type", "detail"])
     st.markdown(f"**{len(a)} active alerts** across {a['parcel_id'].nunique()} parcels")
     if not a.empty:
-        st.dataframe(a.head(200), width='stretch', hide_index=True)
-        st.markdown(f"Alert types: {a['alert_type'].value_counts().to_dict()}")
+        st.dataframe(a.head(200), width="stretch", hide_index=True)
 
 
 # --------------------------------------------------------------------------- #
-# View: Map (offline plotly scatter)
+# Map view
 # --------------------------------------------------------------------------- #
 
 def view_map(df: pd.DataFrame) -> None:
-    st.subheader("District risk hotspot map (offline)")
+    st.subheader("Project risk map (offline)")
+    projects = load_projects()
     districts = load_districts()
-    agg = df.groupby("district").agg(
-        n=("parcel_id", "size"),
-        wavg_risk=("risk_score", lambda s: np.average(s, weights=df.loc[s.index, "area_sqm"])),
-    ).reset_index()
-    agg["level"] = agg["wavg_risk"].map(risk_level)
-    m = districts.merge(agg, on="district", how="left")
+    dcentroid = dict(zip(districts["district"], zip(districts["lat"], districts["lon"])))
+    proj_risk = df.groupby("project_id")["risk_score"].mean()
 
     fig = go.Figure()
-    for lvl, color in COLORS.items():
-        sub = m[m["level"] == lvl]
+
+    # point projects -> markers at district centroid
+    pt = projects[projects["spatial_type"] == "point"]
+    pt_lat, pt_lon, pt_risk, pt_ids, pt_names = [], [], [], [], []
+    for _, p in pt.iterrows():
+        lat, lon = dcentroid.get(p["district"], (None, None))
+        if lat is None:
+            continue
+        pt_lat.append(lat); pt_lon.append(lon)
+        pt_risk.append(float(proj_risk.get(p["project_id"], 0.0)))
+        pt_ids.append(p["project_id"]); pt_names.append(f"{p['project_id']} ({p['project_type']})")
+    fig.add_trace(go.Scatter(
+        x=pt_lon, y=pt_lat, mode="markers", name="point",
+        marker=dict(size=10, color=[risk_color(r) for r in pt_risk],
+                    line=dict(width=1, color="#333")),
+        customdata=pt_ids, text=pt_names, hovertemplate="%{text}<br>risk: %{marker.color}",
+        visible="legendonly" if False else True))
+
+    # linear projects -> polylines through coord_path
+    lin = projects[projects["spatial_type"] == "linear"]
+    for _, p in lin.iterrows():
+        try:
+            path = json.loads(p["coord_path"])
+        except (ValueError, TypeError):
+            continue
+        if not path:
+            continue
+        lats = [pt_[0] for pt_ in path]
+        lons = [pt_[1] for pt_ in path]
+        r = float(proj_risk.get(p["project_id"], 0.0))
         fig.add_trace(go.Scatter(
-            x=sub["lon"], y=sub["lat"], mode="markers+text",
-            marker=dict(size=sub["n"].clip(8, 30), color=color, line=dict(width=1, color="#333")),
-            text=sub["district"], textposition="top center", name=lvl,
-            customdata=sub[["wavg_risk", "n"]].round(2).values,
-            hovertemplate="%{text}<br>area-wtd risk: %{customdata[0]}<br>parcels: %{customdata[1]}",
-        ))
-    fig.update_layout(template="plotly_white", height=520,
+            x=lons, y=lats, mode="lines", name=p["project_id"],
+            line=dict(color=risk_color(r), width=3),
+            customdata=[p["project_id"]] * len(lats), text=[p["project_id"]] * len(lats),
+            hovertemplate=f"{p['project_id']} ({p['project_type']})<extra></extra>"))
+
+    fig.update_layout(template="plotly_white", height=560, showlegend=False,
                       xaxis_title="longitude", yaxis_title="latitude",
-                      showlegend=True,
-                      title="Himachal Pradesh — district risk (area-weighted)")
-    st.plotly_chart(fig, width='stretch')
-    st.caption("Offline lat/lon scatter (no tile server) — chosen over Folium to keep the demo fully offline.")
+                      title="Point projects (markers) + linear corridors (lines), colored by risk")
+
+    sel = st.plotly_chart(fig, width="stretch", on_select="rerun", selection_mode="points",
+                          key="map_select")
+    if sel.selection and sel.selection.points:
+        cd = sel.selection.points[0].get("customdata")
+        if cd:
+            st.session_state["selected_project"] = cd
+            nav_to("Project")
+
+    # fallback picker
+    options = sorted(projects["project_id"].tolist())
+    pick = st.selectbox("Or pick a project", ["—"] + options)
+    if pick != "—":
+        st.session_state["selected_project"] = pick
+        nav_to("Project")
+
+    st.caption("Offline lat/lon visualization (no tile server). Linear corridors are straight "
+               "village-path approximations, not real road geometry.")
+
+
+# --------------------------------------------------------------------------- #
+# New project view
+# --------------------------------------------------------------------------- #
+
+def view_new_project(artifacts: dict) -> None:
+    st.subheader("New project onboarding")
+    c = st.columns(3)
+    project_type = c[0].selectbox("Project type", ["road", "rail", "irrigation", "dam", "industrial"])
+    spatial_type = c[1].selectbox("Spatial type", ["point", "linear"])
+    affected = c[2].number_input("Affected families", 0, 5000, 100)
+
+    c2 = st.columns(3)
+    compensation = c2[0].selectbox("Compensation status", ["paid", "partial", "pending"])
+    rehab = c2[1].slider("Rehab progress %", 0, 100, 60)
+    responsiveness = c2[2].slider("Stakeholder responsiveness", 0.0, 1.0, 0.6, 0.01)
+    hist_perf = st.slider("Historical performance score", 0.0, 1.0, 0.6, 0.01)
+
+    uploaded = st.file_uploader("Upload CSV of parcel IDs (one per line, or comma-separated)",
+                                type=["csv", "txt"])
+    ids: list[str] = []
+    if uploaded is not None:
+        raw = uploaded.getvalue().decode("utf-8")
+        ids = list(dict.fromkeys(t for t in re.split(r"[,\s\n;]+", raw.strip()) if t))
+        found, missing = user_projects.pull_records(ids)
+        st.info(f"{len(ids)} IDs parsed → {len(found)} found, {len(missing)} unknown")
+        if missing:
+            st.warning("Unknown parcel IDs (ignored): " + ", ".join(missing[:20])
+                       + ("…" if len(missing) > 20 else ""))
+
+    if st.button("Create & score project", disabled=(not ids)):
+        found, _missing = user_projects.pull_records(ids)
+        if found.empty:
+            st.error("No valid parcels found — nothing to create.")
+            return
+
+        feat = found[["parcel_id", "owner_count", "land_class", "area_sqm",
+                      "pending_mutations", "court_stay", "encumbrances"]].copy()
+        feat["project_type"] = project_type
+        feat["affected_families"] = affected
+        feat["compensation_status"] = compensation
+        feat["rehab_progress_pct"] = rehab
+        feat["stakeholder_responsiveness"] = responsiveness
+        feat["historical_performance_score"] = hist_perf
+
+        scores = predict.score_batch(feat, artifacts, include_stages=True)
+        geo = found[["parcel_id", "village", "village_code", "tehsil", "district",
+                     "district_code", "state", "state_code"]]
+        villages = pd.read_parquet(ROOT / "data" / "generated" / "villages.parquet")[["village", "lat", "lon"]]
+        rows = scores.merge(feat, on="parcel_id", how="left").merge(geo, on="parcel_id", how="left")
+        rows = rows.merge(villages, on="village", how="left")
+
+        home_state = found["state"].mode()[0]
+        home_state_code = found["state_code"].mode()[0]
+        home_district = found["district"].mode()[0]
+        pid = user_projects.generate_user_project_id(home_state_code, project_type)
+
+        rows["spatial_type"] = spatial_type
+        rows["project_id"] = pid
+        rows["current_stage"] = None
+        rows["overrun_while_ongoing_days"] = None
+
+        if spatial_type == "linear":
+            coords = [[float(v["lat"]), float(v["lon"])]
+                      for _, v in rows[["village", "lat", "lon"]].drop_duplicates("village").iterrows()]
+        else:
+            coords = []
+
+        project_row = {
+            "project_id": pid, "project_type": project_type, "spatial_type": spatial_type,
+            "coord_path": json.dumps(coords), "affected_families": affected,
+            "compensation_status": compensation, "rehab_progress_pct": rehab,
+            "stakeholder_responsiveness": responsiveness,
+            "historical_performance_score": hist_perf, "state": home_state,
+            "state_code": home_state_code, "district": home_district,
+            "tehsil": found["tehsil"].mode()[0],
+        }
+        user_projects.persist_user(project_row, rows)
+        load_portfolio.clear()
+        st.session_state["selected_project"] = pid
+        st.success(f"Project {pid} created with {len(rows)} parcels.")
+        nav_to("Project")
+
+
+# --------------------------------------------------------------------------- #
+# Area of Interest view
+# --------------------------------------------------------------------------- #
+
+def view_area(df: pd.DataFrame) -> None:
+    st.subheader("Area of Interest (site catchment analysis)")
+    villages = pd.read_parquet(ROOT / "data" / "generated" / "villages.parquet")
+
+    c = st.columns(3)
+    state = c[0].selectbox("State", sorted(villages["state"].unique()))
+    vd = villages[villages["state"] == state]
+    district = c[1].selectbox("District", sorted(vd["district"].unique()))
+    vdd = vd[vd["district"] == district]
+    village = c[2].selectbox("Center village", sorted(vdd["village"].unique()))
+    radius = st.slider("Radius (km)", 1, 50, 15)
+
+    center = vdd[vdd["village"] == village].iloc[0]
+    d = haversine(center["lat"], center["lon"], df["lat"], df["lon"])
+    subset = df[d <= radius]
+
+    k1, k2, k3, k4 = st.columns(4)
+    k1.metric("Parcels in area", f"{len(subset):,}")
+    k2.metric("RED", f"{(subset['risk_level'] == 'RED').sum():,}")
+    k3.metric("Avg risk", f"{subset['risk_score'].mean():.2f}" if len(subset) else "—")
+    k4.metric("Avg expected overrun", f"{subset['expected_overrun_days'].mean():.0f} d" if len(subset) else "—")
+
+    if len(subset):
+        factors = {
+            "court stay": int(subset["court_stay"].sum()),
+            "compensation pending": int((subset["compensation_status"] != "paid").sum()),
+            "orchard land": int((subset["land_class"] == "orchard").sum()),
+            "owners > 4": int((subset["owner_count"] > 4).sum()),
+            "mutations >= 2": int((subset["pending_mutations"] >= 2).sum()),
+        }
+        fig = go.Figure(go.Bar(x=list(factors.values()), y=list(factors.keys()),
+                               orientation="h", marker_color="#8e44ad"))
+        fig.update_layout(template="plotly_white", height=260, xaxis_title="parcels affected")
+        st.markdown("**Risk-factor prevalence in the area**")
+        st.plotly_chart(fig, width="stretch")
+
+        st.markdown("**Riskiest parcels in the area** (click to open)")
+        parcel_table(subset, key="area_parcels")
+    else:
+        st.info("No parcels within this radius — widen the radius or pick a different center.")
 
 
 # --------------------------------------------------------------------------- #
@@ -294,7 +572,7 @@ def view_map(df: pd.DataFrame) -> None:
 
 def main() -> None:
     st.title("SIH26017 — Predictive Analytics for Land Acquisition Delays")
-    st.caption("Early-warning system · RFCTLARR 2013 · Himachal Pradesh pilot")
+    st.caption("Early-warning system · RFCTLARR 2013 · HP · Punjab · Uttarakhand")
 
     df = load_portfolio()
     artifacts = load_artifacts_cached()
@@ -306,24 +584,37 @@ def main() -> None:
         is_viewer = role == "Viewer"
 
         st.markdown("## Navigation")
-        nav = ["Portfolio", "Detail", "Map"]
+        nav = ["Portfolio", "Project", "Detail", "Map"]
         if not is_viewer:
-            nav = ["Portfolio", "Detail", "What-if", "Alerts", "Map"]
-        page = st.radio("Go to", nav)
+            nav = ["Portfolio", "Project", "New Project", "Detail", "What-if", "Alerts",
+                   "Area of Interest", "Map"]
+        if "nav" not in st.session_state or st.session_state["nav"] not in nav:
+            st.session_state["nav"] = nav[0]
+        st.radio("Go to", nav, key="nav")
 
-        if is_admin:
-            if st.button("Refresh portfolio cache"):
-                refresh()
+        if is_admin and st.button("Refresh portfolio cache"):
+            refresh()
+        if is_admin and st.button("Reset user-created projects"):
+            user_projects.reset_user_data()
+            load_portfolio.clear()
+            st.rerun()
         st.caption(f"Logged in as **{role}**")
 
+    page = st.session_state["nav"]
     if page == "Portfolio":
-        view_portfolio(df, artifacts)
+        view_portfolio(df)
+    elif page == "Project":
+        view_project(df)
+    elif page == "New Project":
+        view_new_project(artifacts)
     elif page == "Detail":
         view_detail(df, artifacts)
     elif page == "What-if":
         view_whatif(df, artifacts)
     elif page == "Alerts":
         view_alerts(df)
+    elif page == "Area of Interest":
+        view_area(df)
     elif page == "Map":
         view_map(df)
 
