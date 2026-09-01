@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 data/raw_sample/
 .DS_Store
+test_data/

@@ -142,7 +142,11 @@ The API contract is documented in [`INTERFACES.md`](INTERFACES.md).
   tracked via the Project detail "Update project state" action, and responsiveness/track
   record are derived from the district, so risk-relevant inputs can't be gamed.
 - **What-if** — toggle court stay / compensation → risk updates live.
-- **Alerts** — auto-flagged parcels (overrun-while-ongoing, RED, court stay, compensation).
+- **Alerts** — auto-flagged parcels (overrun-while-ongoing, RED, court stay, compensation)
+  + a simulated notification log (SMS/Email/Push).
+- **Trends** — delay trends by state/district/project-type, per-stage delay probability,
+  a district × stage heat map, and historical per-stage overrun.
+- **Compare** — side-by-side comparative analytics for any two districts or projects.
 - **Area of Interest** — pick a center village + radius → catchment risk profile.
 - **Map** — point projects as markers, linear corridors as polylines, colored by risk.
 - **Role switcher** (mock) — Admin / Officer / Viewer with functional gating.

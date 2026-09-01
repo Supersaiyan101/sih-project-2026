@@ -28,7 +28,7 @@ sys.path.insert(0, str(ROOT / "src"))
 import predict  # noqa: E402
 import user_projects  # noqa: E402
 from features import STAGES  # noqa: E402
-from predict import load_artifacts, score_parcel, risk_level  # noqa: E402
+from predict import load_artifacts, score_parcel, risk_level, STATUTORY  # noqa: E402
 
 PORTFOLIO_PATH = ROOT / "data" / "generated" / "portfolio_scores.parquet"
 PROJECTS_PATH = ROOT / "data" / "generated" / "projects.parquet"
@@ -270,6 +270,19 @@ def view_project(df: pd.DataFrame) -> None:
         fig.update_layout(template="plotly_white", height=300, xaxis_title="avg risk")
         st.plotly_chart(fig, width="stretch")
 
+    st.markdown("**Timeline analysis — statutory vs expected duration per stage**")
+    stat = {s: STATUTORY[s] for s in STAGES}
+    expected = {s: max(0.0, float(sub[f"{s}_overrun"].mean())) for s in STAGES}
+    act = {s: stat[s] + expected[s] for s in STAGES}
+    fig = go.Figure()
+    fig.add_trace(go.Bar(name="statutory", x=[stat[s] for s in STAGES], y=STAGES,
+                         orientation="h", marker_color="#95a5a6"))
+    fig.add_trace(go.Bar(name="expected (statutory + overrun)", x=[act[s] for s in STAGES],
+                         y=STAGES, orientation="h", marker_color="#2E75B6"))
+    fig.update_layout(barmode="group", template="plotly_white", height=260,
+                      xaxis_title="days", legend=dict(orientation="h", y=1.15))
+    st.plotly_chart(fig, width="stretch")
+
     st.markdown("**Parcels** (click a row to open)")
     parcel_table(sub, key="proj_parcels")
 
@@ -401,6 +414,20 @@ def view_alerts(df: pd.DataFrame) -> None:
     st.markdown(f"**{len(a)} active alerts** across {a['parcel_id'].nunique()} parcels")
     if not a.empty:
         st.dataframe(a.head(200), width="stretch", hide_index=True)
+
+        st.markdown("**Notification log (simulated SMS / Email / Push)**")
+        channels = ["SMS", "Email", "Push"]
+        recipients = ["District Collector", "Project Manager", "Acquiring Officer", "Admin"]
+        rows = []
+        for i, (_, r) in enumerate(a.head(60).iterrows()):
+            rows.append({
+                "channel": channels[i % 3],
+                "recipient": recipients[i % 4],
+                "parcel_id": r["parcel_id"],
+                "alert": r["alert_type"],
+                "message": f"{r['parcel_id']} — {r['detail']}",
+            })
+        st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
 
 
 # --------------------------------------------------------------------------- #
@@ -616,6 +643,119 @@ def view_area(df: pd.DataFrame) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# Trends view
+# --------------------------------------------------------------------------- #
+
+def view_trends(df: pd.DataFrame) -> None:
+    st.subheader("Delay trends")
+    c1, c2 = st.columns(2)
+    with c1:
+        st.markdown("**Average risk by state**")
+        s = df.groupby("state")["risk_score"].mean().sort_values(ascending=False)
+        fig = go.Figure(go.Bar(x=s.values, y=s.index, orientation="h", marker_color="#2E75B6",
+                               text=[f"{v:.2f}" for v in s.values], textposition="outside"))
+        fig.update_layout(template="plotly_white", height=220, margin=dict(l=0, r=0, t=10, b=0))
+        st.plotly_chart(fig, width="stretch")
+    with c2:
+        st.markdown("**Mean delay probability per stage**")
+        sp = {stg: float(df[f"{stg}_prob"].mean()) for stg in STAGES}
+        fig = go.Figure(go.Bar(x=list(sp.keys()), y=list(sp.values()), marker_color="#3498db",
+                               text=[f"{v:.0%}" for v in sp.values()], textposition="outside"))
+        fig.update_layout(template="plotly_white", height=220, yaxis=dict(range=[0, 1]),
+                          margin=dict(l=0, r=0, t=10, b=0))
+        st.plotly_chart(fig, width="stretch")
+
+    c3, c4 = st.columns(2)
+    with c3:
+        st.markdown("**Average risk by project type**")
+        pt = df.groupby("project_type")["risk_score"].mean().sort_values(ascending=False)
+        fig = go.Figure(go.Bar(x=pt.index, y=pt.values, marker_color="#e67e22",
+                               text=[f"{v:.2f}" for v in pt.values], textposition="outside"))
+        fig.update_layout(template="plotly_white", height=220, margin=dict(l=0, r=0, t=10, b=0))
+        st.plotly_chart(fig, width="stretch")
+    with c4:
+        st.markdown("**Top districts by average risk**")
+        d = df.groupby("district")["risk_score"].mean().nlargest(12).sort_values()
+        fig = go.Figure(go.Bar(x=d.values, y=d.index, orientation="h", marker_color="#8e44ad",
+                               text=[f"{v:.2f}" for v in d.values], textposition="outside"))
+        fig.update_layout(template="plotly_white", height=320, margin=dict(l=0, r=0, t=10, b=0))
+        st.plotly_chart(fig, width="stretch")
+
+    st.markdown("**Heat map — delay probability by district × stage**")
+    heat = df.groupby("district")[[f"{s}_prob" for s in STAGES]].mean()
+    heat["_m"] = heat.mean(axis=1)
+    heat = heat.sort_values("_m", ascending=False).drop(columns="_m")
+    fig = go.Figure(go.Heatmap(z=heat.values, x=STAGES, y=heat.index, colorscale="YlOrRd",
+                               colorbar=dict(title="P(delay)"),
+                               text=np.round(heat.values, 2), texttemplate="%{text}"))
+    fig.update_layout(template="plotly_white", height=max(320, 14 * len(heat)),
+                      margin=dict(l=0, r=0, t=10, b=0))
+    st.plotly_chart(fig, width="stretch")
+
+    st.markdown("**Historical mean overrun per stage** (completed projects)")
+    hist = pd.read_parquet(ROOT / "data" / "generated" / "stage_timelines_historical.parquet")
+    hm = hist.groupby("stage")["delay_days"].mean().reindex(STAGES)
+    fig = go.Figure(go.Bar(x=hm.index, y=hm.values, marker_color="#c0392b",
+                           text=[f"{v:.0f}d" for v in hm.values], textposition="outside"))
+    fig.update_layout(template="plotly_white", height=240, margin=dict(l=0, r=0, t=10, b=0))
+    st.plotly_chart(fig, width="stretch")
+
+
+# --------------------------------------------------------------------------- #
+# Compare view
+# --------------------------------------------------------------------------- #
+
+def view_compare(df: pd.DataFrame) -> None:
+    st.subheader("Comparative analytics")
+    mode = st.radio("Compare", ["Districts", "Projects"], horizontal=True)
+    col = "district" if mode == "Districts" else "project_id"
+    entities = sorted(df[col].unique())
+    if len(entities) < 2:
+        st.info("Need at least two entities to compare.")
+        return
+    a = st.selectbox("Entity A", entities, index=0)
+    others = [e for e in entities if e != a]
+    b = st.selectbox("Entity B", others, index=0)
+
+    def summary(e):
+        sub = df[df[col] == e]
+        return {
+            "n": len(sub),
+            "risk": sub["risk_score"].mean(),
+            "red": int((sub["risk_level"] == "RED").sum()),
+            "yel": int((sub["risk_level"] == "YELLOW").sum()),
+            "grn": int((sub["risk_level"] == "GREEN").sum()),
+            "overrun": sub["expected_overrun_days"].mean(),
+            "maxprob": sub["max_delay_prob"].mean(),
+            "stages": [float(sub[f"{s}_prob"].mean()) for s in STAGES],
+        }
+
+    sa, sb = summary(a), summary(b)
+
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric(f"{a} avg risk", f"{sa['risk']:.3f}")
+    m2.metric(f"{b} avg risk", f"{sb['risk']:.3f}")
+    m3.metric("Parcels (A/B)", f"{sa['n']:,} / {sb['n']:,}")
+    m4.metric("Avg overrun (A/B)", f"{sa['overrun']:.0f} / {sb['overrun']:.0f} d")
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(name=a, x=STAGES, y=sa["stages"], marker_color="#2E75B6"))
+    fig.add_trace(go.Bar(name=b, x=STAGES, y=sb["stages"], marker_color="#E81123"))
+    fig.update_layout(barmode="group", template="plotly_white", height=300,
+                      yaxis=dict(range=[0, 1], title="P(delay)"), legend=dict(orientation="h", y=1.15))
+    st.plotly_chart(fig, width="stretch")
+
+    fig = go.Figure()
+    for e, s in ((a, sa), (b, sb)):
+        fig.add_trace(go.Bar(name=e, x=["RED", "YELLOW", "GREEN"],
+                             y=[s["red"], s["yel"], s["grn"]],
+                             marker_color=[COLORS["RED"], COLORS["YELLOW"], COLORS["GREEN"]]))
+    fig.update_layout(barmode="group", template="plotly_white", height=280,
+                      yaxis_title="parcels", legend=dict(orientation="h", y=1.15))
+    st.plotly_chart(fig, width="stretch")
+
+
+# --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
 
@@ -637,7 +777,7 @@ def main() -> None:
         nav = ["Portfolio", "Project", "Detail", "Map"]
         if not is_viewer:
             nav = ["Portfolio", "Project", "New Project", "Detail", "What-if", "Alerts",
-                   "Area of Interest", "Map"]
+                   "Area of Interest", "Trends", "Compare", "Map"]
         # initialize nav once; nav is NOT widget-bound, so nav_to() can update it safely
         if "nav" not in st.session_state:
             st.session_state["nav"] = nav[0]
@@ -675,6 +815,10 @@ def main() -> None:
         view_alerts(df)
     elif page == "Area of Interest":
         view_area(df)
+    elif page == "Trends":
+        view_trends(df)
+    elif page == "Compare":
+        view_compare(df)
     elif page == "Map":
         view_map(df)
 

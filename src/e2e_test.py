@@ -123,7 +123,7 @@ def check_dashboard() -> None:
     ok("no exceptions", len(at.exception) == 0,
        "; ".join(repr(e.value) for e in at.exception))
     for page in ["Project", "New Project", "Detail", "What-if", "Alerts",
-                 "Area of Interest", "Map"]:
+                 "Area of Interest", "Trends", "Compare", "Map"]:
         at.radio[0].set_value(page)
         at.run()
         ok(f"view {page}", len(at.exception) == 0)
