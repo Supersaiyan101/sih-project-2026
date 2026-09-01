@@ -462,6 +462,10 @@ def view_map(df: pd.DataFrame) -> None:
     dcentroid = dict(zip(districts["district"], zip(districts["lat"], districts["lon"])))
     proj_risk = df.groupby("project_id")["risk_score"].mean()
 
+    # monitor only LIVE (in-progress) projects — completed projects have no future
+    # delay risk to warn about, so they are excluded from the map + picker
+    projects = projects[projects["project_id"].isin(proj_risk.index)]
+
     fig = go.Figure()
 
     # point projects -> markers at district centroid
