@@ -54,7 +54,27 @@ def load_portfolio() -> pd.DataFrame:
         user = user.copy()
         user["is_user"] = 1
         main = pd.concat([main, user], ignore_index=True)
+    ovr = user_projects.load_overrides()
+    if len(ovr):
+        main = _apply_overrides(main, ovr)
     return main
+
+
+def _apply_overrides(df: pd.DataFrame, ovr: pd.DataFrame) -> pd.DataFrame:
+    """Apply lifecycle state overrides (compensation/rehab) and re-score those projects."""
+    artifacts = predict.load_artifacts()
+    for _, o in ovr.iterrows():
+        mask = df["project_id"] == o["project_id"]
+        if not mask.any():
+            continue
+        df.loc[mask, "compensation_status"] = o["compensation_status"]
+        df.loc[mask, "rehab_progress_pct"] = float(o["rehab_progress_pct"])
+        scores = predict.score_batch(df[mask], artifacts, include_stages=True)
+        cols = (["risk_score", "risk_level", "expected_overrun_days", "max_delay_prob"]
+                + [f"{s}_prob" for s in STAGES] + [f"{s}_overrun" for s in STAGES])
+        for col in cols:
+            df.loc[mask, col] = scores[col].values
+    return df
 
 
 @st.cache_data
@@ -221,6 +241,19 @@ def view_project(df: pd.DataFrame) -> None:
     yel = (sub["risk_level"] == "YELLOW").sum()
     st.markdown(f"Risk mix: 🔴 {red} · 🟡 {yel} · 🟢 {len(sub) - red - yel}   |   "
                 f"avg expected overrun **{sub['expected_overrun_days'].mean():.0f} days**")
+
+    if st.session_state.get("role", "Officer") != "Viewer":
+        with st.expander("Update project state (compensation / rehab) → re-score"):
+            comp_opts = ["pending", "partial", "paid"]
+            cur_comp = p0["compensation_status"]
+            comp = st.selectbox("Compensation status", comp_opts,
+                                index=comp_opts.index(cur_comp) if cur_comp in comp_opts else 0)
+            rehab = st.slider("Rehab progress %", 0, 100,
+                              int(round(min(max(float(p0["rehab_progress_pct"]), 0), 100))))
+            if st.button("Apply update"):
+                user_projects.save_override(pid, comp, rehab)
+                load_portfolio.clear()
+                st.rerun()
 
     left, right = st.columns(2)
     with left:
@@ -447,16 +480,14 @@ def view_map(df: pd.DataFrame) -> None:
 
 def view_new_project(artifacts: dict) -> None:
     st.subheader("New project onboarding")
+    st.caption("Enter only what is known at project sanctioning. Compensation & rehab progress "
+               "are lifecycle states — tracked later, not typed here. Responsiveness & track "
+               "record are derived from the district's observed performance.")
+
     c = st.columns(3)
     project_type = c[0].selectbox("Project type", ["road", "rail", "irrigation", "dam", "industrial"])
     spatial_type = c[1].selectbox("Spatial type", ["point", "linear"])
-    affected = c[2].number_input("Affected families", 0, 5000, 100)
-
-    c2 = st.columns(3)
-    compensation = c2[0].selectbox("Compensation status", ["paid", "partial", "pending"])
-    rehab = c2[1].slider("Rehab progress %", 0, 100, 60)
-    responsiveness = c2[2].slider("Stakeholder responsiveness", 0.0, 1.0, 0.6, 0.01)
-    hist_perf = st.slider("Historical performance score", 0.0, 1.0, 0.6, 0.01)
+    affected = c[2].number_input("Affected families (from SIA/DPR)", 1, 50_000, 100)
 
     uploaded = st.file_uploader("Upload CSV of parcel IDs (one per line, or comma-separated)",
                                 type=["csv", "txt"])
@@ -476,6 +507,23 @@ def view_new_project(artifacts: dict) -> None:
             st.error("No valid parcels found — nothing to create.")
             return
 
+        home_state = found["state"].mode()[0]
+        home_state_code = found["state_code"].mode()[0]
+        home_district = found["district"].mode()[0]
+
+        # validation: affected_families should be roughly consistent with parcel count
+        ratio = affected / max(len(found), 1)
+        if ratio > 20 or ratio < 0.1:
+            st.warning(f"affected_families ({affected:,}) vs {len(found)} parcels (ratio "
+                       f"{ratio:.1f}) looks inconsistent — creating anyway.")
+
+        # lifecycle fields start at their honest defaults; soft scores are DERIVED
+        compensation = "pending"
+        rehab = 0.0
+        profile = user_projects.derive_institutional_profile(home_district)
+        responsiveness = profile["stakeholder_responsiveness"]
+        hist_perf = profile["historical_performance_score"]
+
         feat = found[["parcel_id", "owner_count", "land_class", "area_sqm",
                       "pending_mutations", "court_stay", "encumbrances"]].copy()
         feat["project_type"] = project_type
@@ -492,9 +540,6 @@ def view_new_project(artifacts: dict) -> None:
         rows = scores.merge(feat, on="parcel_id", how="left").merge(geo, on="parcel_id", how="left")
         rows = rows.merge(villages, on="village", how="left")
 
-        home_state = found["state"].mode()[0]
-        home_state_code = found["state_code"].mode()[0]
-        home_district = found["district"].mode()[0]
         pid = user_projects.generate_user_project_id(home_state_code, project_type)
 
         rows["spatial_type"] = spatial_type
@@ -586,6 +631,7 @@ def main() -> None:
         role = st.selectbox("Select role", ["Admin", "Officer", "Viewer"])
         is_admin = role == "Admin"
         is_viewer = role == "Viewer"
+        st.session_state["role"] = role
 
         st.markdown("## Navigation")
         nav = ["Portfolio", "Project", "Detail", "Map"]

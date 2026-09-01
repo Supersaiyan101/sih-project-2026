@@ -4,9 +4,10 @@ Officials create new projects and tag land parcels (via CSV of semantic parcel I
 This module persists those projects + parcels so they survive dashboard refresh and
 appear in the Portfolio tagged "user-created".
 
-Stores two files under data/generated/user/:
-  - user_projects.parquet  (project-level record)
-  - user_parcels.parquet   (scored parcels, schema-matched to portfolio_scores.parquet)
+Stores files under data/generated/user/:
+  - user_projects.parquet        (project-level record)
+  - user_parcels.parquet         (scored parcels, schema-matched to portfolio_scores.parquet)
+  - project_state_overrides.parquet  (lifecycle state updates: compensation/rehab)
 """
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ DATA = Path(__file__).resolve().parent.parent / "data" / "generated"
 USER_DIR = DATA / "user"
 USER_PROJECTS_PATH = USER_DIR / "user_projects.parquet"
 USER_PARCELS_PATH = USER_DIR / "user_parcels.parquet"
+OVERRIDES_PATH = USER_DIR / "project_state_overrides.parquet"
 
 # column order must match portfolio_scores.parquet so concat works
 PORTFOLIO_COLS = [
@@ -55,9 +57,45 @@ def load_user_parcels() -> pd.DataFrame:
 
 
 def reset_user_data() -> None:
-    for p in (USER_PROJECTS_PATH, USER_PARCELS_PATH):
+    for p in (USER_PROJECTS_PATH, USER_PARCELS_PATH, OVERRIDES_PATH):
         if p.exists():
             p.unlink()
+
+
+def load_overrides() -> pd.DataFrame:
+    """Lifecycle state overrides per project (compensation/rehab), applied on portfolio load."""
+    if OVERRIDES_PATH.exists():
+        return pd.read_parquet(OVERRIDES_PATH)
+    return pd.DataFrame(columns=["project_id", "compensation_status", "rehab_progress_pct"])
+
+
+def save_override(project_id: str, compensation_status: str, rehab_progress_pct: float) -> None:
+    USER_DIR.mkdir(parents=True, exist_ok=True)
+    ov = load_overrides()
+    ov = ov[ov["project_id"] != project_id]
+    ov = pd.concat([ov, pd.DataFrame([{"project_id": project_id,
+                                       "compensation_status": compensation_status,
+                                       "rehab_progress_pct": float(rehab_progress_pct)}])],
+                   ignore_index=True)
+    ov.to_parquet(OVERRIDES_PATH, index=False)
+
+
+def derive_institutional_profile(district: str) -> dict:
+    """Institutional prior for a NEW project in `district`: median responsiveness + track
+    record of existing projects there (falls back to state, then all). Not user-editable —
+    these are derived from the district's observed performance."""
+    projects = pd.read_parquet(DATA / "projects.parquet")
+    sub = projects[projects["district"] == district]
+    if len(sub) < 3:
+        if len(sub):
+            state = sub["state"].mode()[0]
+            sub = projects[projects["state"] == state]
+        else:
+            sub = projects
+    return {
+        "stakeholder_responsiveness": round(float(sub["stakeholder_responsiveness"].median()), 3),
+        "historical_performance_score": round(float(sub["historical_performance_score"].median()), 3),
+    }
 
 
 def pull_records(ids: list[str]) -> tuple[pd.DataFrame, list[str]]:

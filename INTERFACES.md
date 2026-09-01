@@ -124,3 +124,17 @@ state_code + village lat/lon), `spatial_type`, `current_stage`, and
 User-created projects (onboarding) persist to `data/generated/user/user_projects.parquet`
 + `user_parcels.parquet` (schema-matched to the portfolio cache) and are merged at load,
 tagged `is_user=1`.
+
+### Project attribute provenance (onboarding + lifecycle)
+
+Not all model features are known at project creation:
+- **Entered at creation:** `project_type`, `spatial_type`, `affected_families` (from the
+  SIA/DPR; validated against parcel count).
+- **Derived, not editable:** `stakeholder_responsiveness` + `historical_performance_score`
+  come from the home district's observed performance (median of existing projects there).
+- **Lifecycle state (NOT entered at creation):** `compensation_status` defaults to
+  `pending` and `rehab_progress_pct` to `0` — both evolve as the acquisition progresses.
+  Officials update them via the Project detail "Update project state" action; the update is
+  persisted to `project_state_overrides.parquet` and re-scores that project on portfolio load.
+- This prevents gaming: risk-relevant states start at honest defaults and change only
+  through tracked updates, never free-typed.

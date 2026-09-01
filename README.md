@@ -137,7 +137,10 @@ The API contract is documented in [`INTERFACES.md`](INTERFACES.md).
 - **Parcel detail** — per-stage probability bars vs statutory clocks, SHAP "why", actions.
 - **New Project onboarding** — officials create a project and tag land parcels by uploading
   a CSV of semantic parcel IDs (records pulled automatically; unknown IDs rejected); instant
-  scoring, persisted across refresh, tagged "user-created".
+  scoring, persisted across refresh, tagged "user-created". Only sanctioning-time fields are
+  entered (type, spatial type, affected families); compensation/rehab are lifecycle states
+  tracked via the Project detail "Update project state" action, and responsiveness/track
+  record are derived from the district, so risk-relevant inputs can't be gamed.
 - **What-if** — toggle court stay / compensation → risk updates live.
 - **Alerts** — auto-flagged parcels (overrun-while-ongoing, RED, court stay, compensation).
 - **Area of Interest** — pick a center village + radius → catchment risk profile.
