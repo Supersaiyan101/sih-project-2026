@@ -26,17 +26,17 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 import predict  # noqa: E402
+import ui  # noqa: E402
 import user_projects  # noqa: E402
 from features import STAGES  # noqa: E402
 from predict import load_artifacts, score_parcel, risk_level, STATUTORY  # noqa: E402
+from ui import (COLORS, EMOJI, inject_css, setup_plotly, brand_sidebar,  # noqa: E402
+                hero, kpi_row, section, footer)
 
 PORTFOLIO_PATH = ROOT / "data" / "generated" / "portfolio_scores.parquet"
 PROJECTS_PATH = ROOT / "data" / "generated" / "projects.parquet"
 
-COLORS = {"RED": "#e74c3c", "YELLOW": "#f1c40f", "GREEN": "#2ecc71"}
-EMOJI = {"RED": "🔴", "YELLOW": "🟡", "GREEN": "🟢"}
-
-st.set_page_config(page_title="SIH26017 — Land Delay Early Warning", layout="wide")
+st.set_page_config(page_title="BhoomiSetu — Land Delay Early Warning", layout="wide")
 
 
 # --------------------------------------------------------------------------- #
@@ -120,6 +120,22 @@ def risk_color(score: float) -> str:
     return COLORS[risk_level(score)]
 
 
+@st.cache_data
+def metrics_summary_footer() -> str:
+    """Auto-sourced cold-start footnote (never stale — reads metrics_report.json)."""
+    import json as _json
+    try:
+        r = _json.loads((ROOT / "models" / "metrics_report.json").read_text())
+        loso = r["cold_start_loso"]["drop_pct"]
+        loso_avg = float(np.mean(list(loso.values())))
+        auroc = r["stages"]["POSSESSION"]["classifier"]["auroc"]
+        return (f"BhoomiSetu · Cold-start validated: leave-one-state-out avg drop "
+                f"<b>{loso_avg:.1f}%</b> (AUROC ≈ {auroc:.2f}). "
+                f"Figures auto-sourced from <code>metrics_report.json</code>.")
+    except Exception:
+        return "BhoomiSetu · Early warning for land acquisition · RFCTLARR 2013."
+
+
 def haversine(lat1, lon1, lat2, lon2):
     r = 6371.0
     p1, p2 = np.radians(lat1), np.radians(lat2)
@@ -194,12 +210,13 @@ def view_portfolio(df: pd.DataFrame) -> None:
     st.subheader("Portfolio risk table")
     d = filter_bar(df)
 
-    k1, k2, k3, k4, k5 = st.columns(5)
-    k1.metric("Projects", f"{d['project_id'].nunique():,}")
-    k2.metric("Live parcels", f"{len(d):,}")
-    k3.metric("RED", f"{(d['risk_level'] == 'RED').sum():,}")
-    k4.metric("YELLOW", f"{(d['risk_level'] == 'YELLOW').sum():,}")
-    k5.metric("Avg risk", f"{d['risk_score'].mean():.2f}")
+    kpi_row([
+        ("Projects", f"{d['project_id'].nunique():,}", None, ui.NAVY),
+        ("Live parcels", f"{len(d):,}", None, ui.STEEL),
+        ("RED", f"{(d['risk_level'] == 'RED').sum():,}", None, ui.RED),
+        ("YELLOW", f"{(d['risk_level'] == 'YELLOW').sum():,}", None, ui.YEL),
+        ("Avg risk", f"{d['risk_score'].mean():.2f}", None, ui.NAVY),
+    ])
 
     st.markdown("**Projects** (click a row to open)")
     project_table(d)
@@ -225,12 +242,13 @@ def view_project(df: pd.DataFrame) -> None:
     state = p0["state"]
     district = p0["district"]
 
-    c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Project", pid)
-    c2.metric("Type", f"{ptype} · {spatial}")
-    c3.metric("State / District", f"{state} / {district}")
-    c4.metric("Parcels", f"{len(sub):,}")
-    c5.metric("Aggregate risk", f"{sub['risk_score'].mean():.3f}")
+    kpi_row([
+        ("Project", pid, None, ui.NAVY),
+        ("Type", f"{ptype} · {spatial}", None, ui.STEEL),
+        ("State / District", f"{state} / {district}", None, ui.NAVY),
+        ("Parcels", f"{len(sub):,}", None, ui.STEEL),
+        ("Aggregate risk", f"{sub['risk_score'].mean():.3f}", None, ui.NAVY),
+    ])
 
     st.markdown(f"Affected families **{int(p0['affected_families']):,}** · "
                 f"compensation **{p0['compensation_status']}** · "
@@ -261,13 +279,13 @@ def view_project(df: pd.DataFrame) -> None:
         sp = {s: sub[f"{s}_prob"].mean() for s in STAGES}
         fig = go.Figure(go.Bar(x=list(sp.keys()), y=list(sp.values()), marker_color="#3498db",
                                text=[f"{v:.0%}" for v in sp.values()], textposition="outside"))
-        fig.update_layout(template="plotly_white", height=300, yaxis=dict(range=[0, 1], title="P(delay)"))
+        fig.update_layout(template="sih", height=300, yaxis=dict(range=[0, 1], title="P(delay)"))
         st.plotly_chart(fig, width="stretch")
     with right:
         st.markdown("**Segment profile** (risk by village)")
         seg = sub.groupby("village")["risk_score"].agg(["mean", "count"]).sort_values("mean", ascending=False)
         fig = go.Figure(go.Bar(x=seg["mean"], y=seg.index, orientation="h", marker_color="#e67e22"))
-        fig.update_layout(template="plotly_white", height=300, xaxis_title="avg risk")
+        fig.update_layout(template="sih", height=300, xaxis_title="avg risk")
         st.plotly_chart(fig, width="stretch")
 
     st.markdown("**Timeline analysis — statutory vs expected duration per stage**")
@@ -279,7 +297,7 @@ def view_project(df: pd.DataFrame) -> None:
                          orientation="h", marker_color="#95a5a6"))
     fig.add_trace(go.Bar(name="expected (statutory + overrun)", x=[act[s] for s in STAGES],
                          y=STAGES, orientation="h", marker_color="#2E75B6"))
-    fig.update_layout(barmode="group", template="plotly_white", height=260,
+    fig.update_layout(barmode="group", template="sih", height=260,
                       xaxis_title="days", legend=dict(orientation="h", y=1.15))
     st.plotly_chart(fig, width="stretch")
 
@@ -312,7 +330,7 @@ def _stage_bars(contract: dict) -> go.Figure:
                          yaxis="y2", opacity=0.85))
     fig.add_trace(go.Scatter(name="statutory days", x=names, y=statutory, yaxis="y2",
                              mode="lines+markers", line=dict(dash="dot", color="#555"), marker=dict(size=6)))
-    fig.update_layout(barmode="group", template="plotly_white", height=380,
+    fig.update_layout(barmode="group", template="sih", height=380,
                       yaxis=dict(title="P(delay)", range=[0, 1]),
                       yaxis2=dict(title="days", overlaying="y", side="right"),
                       legend=dict(orientation="h", y=1.12))
@@ -325,7 +343,7 @@ def _shap_bars(contract: dict) -> go.Figure:
     vals = [t[1] for t in tf][::-1]
     colors = [COLORS["RED"] if v >= 0 else "#3498db" for v in vals]
     fig = go.Figure(go.Bar(x=vals, y=names, orientation="h", marker_color=colors))
-    fig.update_layout(template="plotly_white", height=340, xaxis_title="|SHAP| impact")
+    fig.update_layout(template="sih", height=340, xaxis_title="|SHAP| impact")
     return fig
 
 
@@ -337,13 +355,15 @@ def view_detail(df: pd.DataFrame, artifacts: dict) -> None:
     timeline = load_live_timeline(pid)
     contract = score_parcel(features, artifacts=artifacts, timeline=timeline, parcel_id=pid)
 
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Risk score", f"{contract['risk_score']:.3f}")
-    c2.metric("Level", contract["risk_level"])
-    c3.metric("Expected overrun", f"{contract['expected_overrun_days']:.0f} days")
-    c4.metric("Already overrun (ongoing)",
-              f"{contract['overrun_while_ongoing_days']:.0f} d"
-              if contract["overrun_while_ongoing_days"] else "—")
+    kpi_row([
+        ("Risk score", f"{contract['risk_score']:.3f}", None, ui.NAVY),
+        ("Level", contract["risk_level"],
+         None, COLORS.get(contract["risk_level"], ui.NAVY)),
+        ("Expected overrun", f"{contract['expected_overrun_days']:.0f} days", None, ui.STEEL),
+        ("Already overrun (ongoing)",
+         f"{contract['overrun_while_ongoing_days']:.0f} d"
+         if contract["overrun_while_ongoing_days"] else "—", None, ui.RED),
+    ])
 
     left, right = st.columns([3, 2])
     with left:
@@ -378,12 +398,13 @@ def view_whatif(df: pd.DataFrame, artifacts: dict) -> None:
     after = score_parcel({**features, "court_stay": new_stay, "compensation_status": new_comp},
                          artifacts=artifacts, parcel_id=pid)
 
-    b1, b2, b3 = st.columns(3)
-    b1.metric("Risk (before)", f"{before['risk_score']:.3f}")
-    b2.metric("Risk (after)", f"{after['risk_score']:.3f}",
-              delta=f"{after['risk_score'] - before['risk_score']:+.3f}")
-    b3.metric("Expected overrun (after)", f"{after['expected_overrun_days']:.0f} d",
-              delta=f"{after['expected_overrun_days'] - before['expected_overrun_days']:+.0f} d")
+    kpi_row([
+        ("Risk (before)", f"{before['risk_score']:.3f}", None, ui.NAVY),
+        ("Risk (after)", f"{after['risk_score']:.3f}",
+         f"{after['risk_score'] - before['risk_score']:+.3f}", ui.STEEL),
+        ("Expected overrun (after)", f"{after['expected_overrun_days']:.0f} d",
+         f"{after['expected_overrun_days'] - before['expected_overrun_days']:+.0f} d", ui.NAVY),
+    ])
     if not changed:
         st.info("Change the toggles to see the risk move live.")
     else:
@@ -478,7 +499,7 @@ def view_map(df: pd.DataFrame) -> None:
             customdata=[p["project_id"]] * len(lats), text=[p["project_id"]] * len(lats),
             hovertemplate=f"{p['project_id']} ({p['project_type']})<extra></extra>"))
 
-    fig.update_layout(template="plotly_white", height=560, showlegend=False,
+    fig.update_layout(template="sih", height=560, showlegend=False,
                       xaxis_title="longitude", yaxis_title="latitude",
                       title="Point projects (markers) + linear corridors (lines), colored by risk")
 
@@ -616,11 +637,13 @@ def view_area(df: pd.DataFrame) -> None:
     d = haversine(center["lat"], center["lon"], df["lat"], df["lon"])
     subset = df[d <= radius]
 
-    k1, k2, k3, k4 = st.columns(4)
-    k1.metric("Parcels in area", f"{len(subset):,}")
-    k2.metric("RED", f"{(subset['risk_level'] == 'RED').sum():,}")
-    k3.metric("Avg risk", f"{subset['risk_score'].mean():.2f}" if len(subset) else "—")
-    k4.metric("Avg expected overrun", f"{subset['expected_overrun_days'].mean():.0f} d" if len(subset) else "—")
+    kpi_row([
+        ("Parcels in area", f"{len(subset):,}", None, ui.NAVY),
+        ("RED", f"{(subset['risk_level'] == 'RED').sum():,}", None, ui.RED),
+        ("Avg risk", f"{subset['risk_score'].mean():.2f}" if len(subset) else "—", None, ui.STEEL),
+        ("Avg expected overrun",
+         f"{subset['expected_overrun_days'].mean():.0f} d" if len(subset) else "—", None, ui.NAVY),
+    ])
 
     if len(subset):
         factors = {
@@ -632,7 +655,7 @@ def view_area(df: pd.DataFrame) -> None:
         }
         fig = go.Figure(go.Bar(x=list(factors.values()), y=list(factors.keys()),
                                orientation="h", marker_color="#8e44ad"))
-        fig.update_layout(template="plotly_white", height=260, xaxis_title="parcels affected")
+        fig.update_layout(template="sih", height=260, xaxis_title="parcels affected")
         st.markdown("**Risk-factor prevalence in the area**")
         st.plotly_chart(fig, width="stretch")
 
@@ -654,14 +677,14 @@ def view_trends(df: pd.DataFrame) -> None:
         s = df.groupby("state")["risk_score"].mean().sort_values(ascending=False)
         fig = go.Figure(go.Bar(x=s.values, y=s.index, orientation="h", marker_color="#2E75B6",
                                text=[f"{v:.2f}" for v in s.values], textposition="outside"))
-        fig.update_layout(template="plotly_white", height=220, margin=dict(l=0, r=0, t=10, b=0))
+        fig.update_layout(template="sih", height=220, margin=dict(l=0, r=0, t=10, b=0))
         st.plotly_chart(fig, width="stretch")
     with c2:
         st.markdown("**Mean delay probability per stage**")
         sp = {stg: float(df[f"{stg}_prob"].mean()) for stg in STAGES}
         fig = go.Figure(go.Bar(x=list(sp.keys()), y=list(sp.values()), marker_color="#3498db",
                                text=[f"{v:.0%}" for v in sp.values()], textposition="outside"))
-        fig.update_layout(template="plotly_white", height=220, yaxis=dict(range=[0, 1]),
+        fig.update_layout(template="sih", height=220, yaxis=dict(range=[0, 1]),
                           margin=dict(l=0, r=0, t=10, b=0))
         st.plotly_chart(fig, width="stretch")
 
@@ -671,14 +694,14 @@ def view_trends(df: pd.DataFrame) -> None:
         pt = df.groupby("project_type")["risk_score"].mean().sort_values(ascending=False)
         fig = go.Figure(go.Bar(x=pt.index, y=pt.values, marker_color="#e67e22",
                                text=[f"{v:.2f}" for v in pt.values], textposition="outside"))
-        fig.update_layout(template="plotly_white", height=220, margin=dict(l=0, r=0, t=10, b=0))
+        fig.update_layout(template="sih", height=220, margin=dict(l=0, r=0, t=10, b=0))
         st.plotly_chart(fig, width="stretch")
     with c4:
         st.markdown("**Top districts by average risk**")
         d = df.groupby("district")["risk_score"].mean().nlargest(12).sort_values()
         fig = go.Figure(go.Bar(x=d.values, y=d.index, orientation="h", marker_color="#8e44ad",
                                text=[f"{v:.2f}" for v in d.values], textposition="outside"))
-        fig.update_layout(template="plotly_white", height=320, margin=dict(l=0, r=0, t=10, b=0))
+        fig.update_layout(template="sih", height=320, margin=dict(l=0, r=0, t=10, b=0))
         st.plotly_chart(fig, width="stretch")
 
     st.markdown("**Heat map — delay probability by district × stage**")
@@ -688,7 +711,7 @@ def view_trends(df: pd.DataFrame) -> None:
     fig = go.Figure(go.Heatmap(z=heat.values, x=STAGES, y=heat.index, colorscale="YlOrRd",
                                colorbar=dict(title="P(delay)"),
                                text=np.round(heat.values, 2), texttemplate="%{text}"))
-    fig.update_layout(template="plotly_white", height=max(320, 14 * len(heat)),
+    fig.update_layout(template="sih", height=max(320, 14 * len(heat)),
                       margin=dict(l=0, r=0, t=10, b=0))
     st.plotly_chart(fig, width="stretch")
 
@@ -697,7 +720,7 @@ def view_trends(df: pd.DataFrame) -> None:
     hm = hist.groupby("stage")["delay_days"].mean().reindex(STAGES)
     fig = go.Figure(go.Bar(x=hm.index, y=hm.values, marker_color="#c0392b",
                            text=[f"{v:.0f}d" for v in hm.values], textposition="outside"))
-    fig.update_layout(template="plotly_white", height=240, margin=dict(l=0, r=0, t=10, b=0))
+    fig.update_layout(template="sih", height=240, margin=dict(l=0, r=0, t=10, b=0))
     st.plotly_chart(fig, width="stretch")
 
 
@@ -732,16 +755,17 @@ def view_compare(df: pd.DataFrame) -> None:
 
     sa, sb = summary(a), summary(b)
 
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric(f"{a} avg risk", f"{sa['risk']:.3f}")
-    m2.metric(f"{b} avg risk", f"{sb['risk']:.3f}")
-    m3.metric("Parcels (A/B)", f"{sa['n']:,} / {sb['n']:,}")
-    m4.metric("Avg overrun (A/B)", f"{sa['overrun']:.0f} / {sb['overrun']:.0f} d")
+    kpi_row([
+        (f"{a} avg risk", f"{sa['risk']:.3f}", None, ui.NAVY),
+        (f"{b} avg risk", f"{sb['risk']:.3f}", None, ui.STEEL),
+        ("Parcels (A/B)", f"{sa['n']:,} / {sb['n']:,}", None, ui.NAVY),
+        ("Avg overrun (A/B)", f"{sa['overrun']:.0f} / {sb['overrun']:.0f} d", None, ui.STEEL),
+    ])
 
     fig = go.Figure()
     fig.add_trace(go.Bar(name=a, x=STAGES, y=sa["stages"], marker_color="#2E75B6"))
     fig.add_trace(go.Bar(name=b, x=STAGES, y=sb["stages"], marker_color="#E81123"))
-    fig.update_layout(barmode="group", template="plotly_white", height=300,
+    fig.update_layout(barmode="group", template="sih", height=300,
                       yaxis=dict(range=[0, 1], title="P(delay)"), legend=dict(orientation="h", y=1.15))
     st.plotly_chart(fig, width="stretch")
 
@@ -750,7 +774,7 @@ def view_compare(df: pd.DataFrame) -> None:
         fig.add_trace(go.Bar(name=e, x=["RED", "YELLOW", "GREEN"],
                              y=[s["red"], s["yel"], s["grn"]],
                              marker_color=[COLORS["RED"], COLORS["YELLOW"], COLORS["GREEN"]]))
-    fig.update_layout(barmode="group", template="plotly_white", height=280,
+    fig.update_layout(barmode="group", template="sih", height=280,
                       yaxis_title="parcels", legend=dict(orientation="h", y=1.15))
     st.plotly_chart(fig, width="stretch")
 
@@ -760,13 +784,19 @@ def view_compare(df: pd.DataFrame) -> None:
 # --------------------------------------------------------------------------- #
 
 def main() -> None:
-    st.title("SIH26017 — Predictive Analytics for Land Acquisition Delays")
-    st.caption("Early-warning system · RFCTLARR 2013 · HP · Punjab · Uttarakhand")
+    inject_css()
+    setup_plotly()
+    hero(ui.NAME, ui.TAGLINE, ui.SUB)
 
     df = load_portfolio()
     artifacts = load_artifacts_cached()
 
     with st.sidebar:
+        brand_sidebar()
+        st.markdown(
+            "<div style='margin:-4px 0 12px 2px; font-size:.78rem; color:#5a6b7b;'>"
+            "States: " + " · ".join(f"<b>{s}</b>" for s in ui.STATES) + "</div>",
+            unsafe_allow_html=True)
         st.markdown("## Role (mock)")
         role = st.selectbox("Select role", ["Admin", "Officer", "Viewer"])
         is_admin = role == "Admin"
@@ -821,6 +851,8 @@ def main() -> None:
         view_compare(df)
     elif page == "Map":
         view_map(df)
+
+    footer(metrics_summary_footer())
 
 
 if __name__ == "__main__":

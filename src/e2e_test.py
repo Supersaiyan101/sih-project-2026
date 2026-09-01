@@ -106,6 +106,8 @@ def check_api() -> None:
     from app.api import app
     client = TestClient(app)
     ok("GET /health", client.get("/health").json().get("status") == "ok")
+    lp = client.get("/")
+    ok("GET / landing page", lp.status_code == 200 and "BhoomiSetu" in lp.text and "Launch Dashboard" in lp.text)
     r = client.post("/predict", json={"parcel_id": "E2E", "court_stay": 1,
                                       "compensation_status": "pending"})
     ok("POST /predict 200", r.status_code == 200)

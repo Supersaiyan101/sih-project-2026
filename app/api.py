@@ -13,15 +13,25 @@ import sys
 from pathlib import Path
 
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
-# allow `from predict import ...` when run from repo root
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+# allow `from predict import ...` (src) and `from landing import ...` (app)
+_APP_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(_APP_DIR))
+sys.path.insert(0, str(_APP_DIR.parent / "src"))
 
+from landing import LANDING_HTML  # noqa: E402
 from predict import load_artifacts, score_batch, score_parcel  # noqa: E402
 from predict import DEFAULTS  # noqa: E402
 
-app = FastAPI(title="SIH26017 Land Acquisition Delay Predictor", version="1.0")
+app = FastAPI(title="BhoomiSetu — Land Acquisition Delay Predictor", version="2.0")
+
+
+@app.get("/", response_class=HTMLResponse)
+def landing():
+    """BhoomiSetu product landing page (front door -> Streamlit dashboard on :8501)."""
+    return LANDING_HTML
 
 # load once at startup
 load_artifacts()

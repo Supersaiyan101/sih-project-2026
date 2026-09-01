@@ -115,8 +115,11 @@ bash scripts/bootstrap.sh --no-launch   # add no flag to also launch the dashboa
 .venv/bin/python src/train.py                 # 2. models (+ LODO + LOSO + gates)
 .venv/bin/python src/predict.py --refresh-portfolio   # 3. live portfolio cache
 .venv/bin/streamlit run app/streamlit_app.py  # 4. dashboard (http://localhost:8501)
-.venv/bin/uvicorn app.api:app --port 8000     #    API (http://localhost:8000/docs)
+.venv/bin/uvicorn app.api:app --port 8000     #    API + BhoomiSetu landing (http://localhost:8000)
 ```
+
+**BhoomiSetu front door:** run the API server and open `http://localhost:8000` — a polished
+product landing page that links into the Streamlit dashboard at `http://localhost:8501`.
 
 **Other entry points**
 
