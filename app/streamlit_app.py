@@ -592,9 +592,19 @@ def main() -> None:
         if not is_viewer:
             nav = ["Portfolio", "Project", "New Project", "Detail", "What-if", "Alerts",
                    "Area of Interest", "Map"]
-        if "nav" not in st.session_state or st.session_state["nav"] not in nav:
+        # initialize nav once; nav is NOT widget-bound, so nav_to() can update it safely
+        if "nav" not in st.session_state:
             st.session_state["nav"] = nav[0]
-        st.radio("Go to", nav, key="nav")
+        current_nav = st.session_state["nav"]
+        if current_nav not in nav:
+            current_nav = nav[0]
+            st.session_state["nav"] = current_nav
+
+        # unkeyed radio: index always follows nav (so programmatic navigation stays in
+        # sync), and a user click updates nav afterwards (no StreamlitAPIException).
+        selected = st.radio("Go to", nav, index=nav.index(current_nav))
+        if selected != current_nav:
+            st.session_state["nav"] = selected
 
         if is_admin and st.button("Refresh portfolio cache"):
             refresh()
