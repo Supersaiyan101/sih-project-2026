@@ -1,4 +1,6 @@
-# SIH26017 — Predictive Analytics for Early Detection of Land Acquisition Delays
+# BhoomiSetu — Predictive Analytics for Early Detection of Land Acquisition Delays
+
+**"Predicting delays before they cost the project."** *(Bhoomi = land · Setu = bridge)*
 
 An AI-powered **early-warning system** that predicts which land-acquisition projects will
 get delayed, *before* the delay happens — built for Ministry of Rural Development problem
@@ -135,8 +137,8 @@ The API contract is documented in [`INTERFACES.md`](INTERFACES.md).
 
 - **Portfolio** — cascading filter (State → District → Project type → Project + risk level);
   clickable project + parcel tables.
-- **Project detail** — summary strip, per-stage bottleneck bars, segment (village) profile,
-  paged parcel list.
+- **Project detail** — summary strip, per-stage bottleneck bars, timeline analysis
+  (statutory vs expected duration), segment (village) profile, paged parcel list.
 - **Parcel detail** — per-stage probability bars vs statutory clocks, SHAP "why", actions.
 - **New Project onboarding** — officials create a project and tag land parcels by uploading
   a CSV of semantic parcel IDs (records pulled automatically; unknown IDs rejected); instant
@@ -151,8 +153,13 @@ The API contract is documented in [`INTERFACES.md`](INTERFACES.md).
   a district × stage heat map, and historical per-stage overrun.
 - **Compare** — side-by-side comparative analytics for any two districts or projects.
 - **Area of Interest** — pick a center village + radius → catchment risk profile.
-- **Map** — point projects as markers, linear corridors as polylines, colored by risk.
+- **Map** — point projects as markers, linear corridors as polylines, colored by risk
+  (live/in-progress projects only).
 - **Role switcher** (mock) — Admin / Officer / Viewer with functional gating.
+
+**Frontend** — branded BhoomiSetu design system (`app/ui.py`: Gov-blue theme, "BS" monogram,
+styled KPI cards/hero/sidebar, branded Plotly template), with a product **landing page**
+(`app/landing.py`) served by FastAPI at `/`.
 
 ## 8. Data & cold-start defense (the honest framing)
 
@@ -187,6 +194,7 @@ sih-land-delay/
 ├── DEMO_SCRIPT.md          ← 90-second walkthrough
 ├── schema.json             ← multi-state schema (semantic IDs, spatial types)
 ├── requirements.txt
+├── .streamlit/config.toml  ← BhoomiSetu theme
 ├── scripts/bootstrap.sh    ← fresh-clone one-command setup
 ├── data/generated/         ← synthetic data + portfolio cache (+ user/ onboarding)
 ├── models/                 ← 10 trained models + SHAP + metrics report
@@ -196,12 +204,13 @@ sih-land-delay/
 │   ├── actions.py          ├── user_projects.py    ├── demo_numbers.py
 │   └── e2e_test.py
 └── app/
-    ├── streamlit_app.py    └── api.py
+    ├── streamlit_app.py    ├── ui.py (design system)  ├── landing.py
+    └── api.py
 ```
 
 ## 11. Verification
 
-`src/e2e_test.py` (33 checks) proves the whole pipeline end-to-end, including data
-invariants (semantic IDs, spatial validity, LOSO), the API, every dashboard view, and a
-**fresh-clone bootstrap** — copying only the source and re-running `bootstrap.sh`
-regenerates a working demo.
+`src/e2e_test.py` (36 checks) proves the whole pipeline end-to-end, including data
+invariants (semantic IDs, spatial validity, LOSO), the API + landing page, every dashboard
+view, and a **fresh-clone bootstrap** — copying only the source and re-running
+`bootstrap.sh` regenerates a working demo.

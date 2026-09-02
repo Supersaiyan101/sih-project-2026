@@ -105,7 +105,8 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 
 ## 8. Current Status
 **Phase 1 (Day 1–4, HP single-state) — DONE and committed.**
-**Phase 2 (Architecture Expansion — multi-state) — Stages 0–5 DONE, Stage 6 final gate.**
+**Phase 2 (Architecture Expansion — multi-state) — Stages 0–6 DONE.**
+**Phase 3 (post-demo) — gap-closing features + BhoomiSetu frontend — DONE.**
 
 - [x] Stage 0 — schema.json v2 (semantic IDs, spatial_type, coord_path, state+district hidden confound) + states.py
 - [x] Stage 1 — generator rebuild (3 states / 48 districts, semantic IDs, point+linear adjacency routing) + calibrated single regeneration
@@ -115,7 +116,10 @@ Delay per stage = actual − statutory. Always expose days-overrun.
 - [x] Stage 4 — new-project onboarding (CSV + record pull + parquet persistence)
 - [x] Stage 5 — Area of Interest + incremental hook
 - [x] Stage 6 — docs (README/INTERFACES/DEMO_SCRIPT) + e2e refresh
-- [x] Stage 6 — fresh-state e2e gate (38/38) + final commit (6a4be02)
+- [x] Stage 6 — fresh-state e2e gate + final commit
+- [x] Gap-closing: Trends, Compare, heat map, project timeline, notification log
+- [x] Onboarding domain fix: sanctioning-time fields only; compensation/rehab = lifecycle states
+- [x] Frontend: BhoomiSetu design system (theme, KPI cards, hero) + landing page at / (FastAPI)
 
 ### ⚠️ Historical Phase-1 results (HP single-state — SUPERSEDED by Phase 2)
 The Day 1–4 blocks below record the ORIGINAL single-state build. After Phase 2 the data
