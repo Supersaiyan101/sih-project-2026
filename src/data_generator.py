@@ -439,7 +439,7 @@ def build_live_timelines(parcels, completed, rng):
                 stage_delay = r["delay_days"]
                 duration = max(r["statutory_days"] + stage_delay, 1)
                 fraction = rng.uniform(0.05, 1.1)
-                rec.update(status="ongoing", elapsed_days=max(1, min(int(round(fraction * duration)), 2000)))
+                rec.update(status="ongoing", elapsed_days=max(1, min(round(fraction * duration), 2000)))
             else:
                 rec.update(status="pending")
             rows.append(rec)

@@ -54,6 +54,7 @@ def check_artifacts() -> None:
 def check_data_invariants() -> None:
     print("== 2. Data invariants (multi-state, IDs, spatial) ==")
     import re
+
     import pandas as pd
     pr = pd.read_parquet(ROOT / "data/generated/projects.parquet")
     pa = pd.read_parquet(ROOT / "data/generated/parcels.parquet")
@@ -86,7 +87,7 @@ def check_data_invariants() -> None:
 
 def check_contract() -> None:
     print("== 3. Prediction contract ==")
-    from predict import load_artifacts, score_parcel, DEFAULTS
+    from predict import DEFAULTS, load_artifacts, score_parcel
     artifacts = load_artifacts()
     c = score_parcel({**DEFAULTS, "court_stay": 1}, artifacts=artifacts, parcel_id="E2E")
     ok("contract keys", all(k in c for k in
@@ -103,6 +104,7 @@ def check_api() -> None:
     print("== 4. FastAPI ==")
     sys.path.insert(0, str(ROOT))
     from fastapi.testclient import TestClient
+
     from app.api import app
     client = TestClient(app)
     ok("GET /health", client.get("/health").json().get("status") == "ok")
@@ -155,7 +157,7 @@ def check_fresh_clone() -> None:
 
         proc = subprocess.run(
             ["bash", "scripts/bootstrap.sh", "--no-launch"],
-            cwd=tmp, capture_output=True, text=True, timeout=900,
+            cwd=tmp, capture_output=True, text=True, timeout=900, check=False,
         )
         ok("bootstrap exit 0", proc.returncode == 0,
            (proc.stdout + proc.stderr)[-2000:])
@@ -166,12 +168,12 @@ def check_fresh_clone() -> None:
         # models actually load + score in the fresh clone
         p = subprocess.run(
             [str(tmp / ".venv/bin/python"), "-c",
-             "import sys; sys.path.insert(0, 'src');"
+             ("import sys; sys.path.insert(0, 'src');"
              "from predict import load_artifacts, score_parcel, DEFAULTS;"
              "a = load_artifacts();"
              "c = score_parcel(dict(DEFAULTS, court_stay=1), artifacts=a, parcel_id='X');"
-             "assert 0 <= c['risk_score'] <= 1; print('fresh score OK')"],
-            cwd=tmp, capture_output=True, text=True, timeout=120,
+             "assert 0 <= c['risk_score'] <= 1; print('fresh score OK')")],
+            cwd=tmp, capture_output=True, text=True, timeout=120, check=False,
         )
         ok("fresh models score", p.returncode == 0, (p.stdout + p.stderr)[-1000:])
 

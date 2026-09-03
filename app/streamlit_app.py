@@ -25,13 +25,21 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-import predict  # noqa: E402
-import ui  # noqa: E402
-import user_projects  # noqa: E402
-from features import STAGES  # noqa: E402
-from predict import load_artifacts, score_parcel, risk_level, STATUTORY  # noqa: E402
-from ui import (COLORS, EMOJI, inject_css, setup_plotly, brand_sidebar,  # noqa: E402
-                hero, kpi_row, section, footer)
+import ui
+from ui import (
+    COLORS,
+    brand_sidebar,
+    footer,
+    hero,
+    inject_css,
+    kpi_row,
+    setup_plotly,
+)
+
+import predict
+import user_projects
+from features import STAGES
+from predict import STATUTORY, load_artifacts, risk_level, score_parcel
 
 PORTFOLIO_PATH = ROOT / "data" / "generated" / "portfolio_scores.parquet"
 PROJECTS_PATH = ROOT / "data" / "generated" / "projects.parquet"
@@ -132,7 +140,7 @@ def metrics_summary_footer() -> str:
         return (f"BhoomiSetu · Cold-start validated: leave-one-state-out avg drop "
                 f"<b>{loso_avg:.1f}%</b> (AUROC ≈ {auroc:.2f}). "
                 f"Figures auto-sourced from <code>metrics_report.json</code>.")
-    except Exception:
+    except (OSError, ValueError, KeyError, TypeError):
         return "BhoomiSetu · Early warning for land acquisition · RFCTLARR 2013."
 
 
@@ -267,7 +275,7 @@ def view_project(df: pd.DataFrame) -> None:
             comp = st.selectbox("Compensation status", comp_opts,
                                 index=comp_opts.index(cur_comp) if cur_comp in comp_opts else 0)
             rehab = st.slider("Rehab progress %", 0, 100,
-                              int(round(min(max(float(p0["rehab_progress_pct"]), 0), 100))))
+                              round(min(max(float(p0["rehab_progress_pct"]), 0), 100)))
             if st.button("Apply update"):
                 user_projects.save_override(pid, comp, rehab)
                 load_portfolio.clear()
@@ -279,7 +287,7 @@ def view_project(df: pd.DataFrame) -> None:
         sp = {s: sub[f"{s}_prob"].mean() for s in STAGES}
         fig = go.Figure(go.Bar(x=list(sp.keys()), y=list(sp.values()), marker_color="#3498db",
                                text=[f"{v:.0%}" for v in sp.values()], textposition="outside"))
-        fig.update_layout(template="sih", height=300, yaxis=dict(range=[0, 1], title="P(delay)"))
+        fig.update_layout(template="sih", height=300, yaxis={"range": [0, 1], "title": "P(delay)"})
         st.plotly_chart(fig, width="stretch")
     with right:
         st.markdown("**Segment profile** (risk by village)")
@@ -298,7 +306,7 @@ def view_project(df: pd.DataFrame) -> None:
     fig.add_trace(go.Bar(name="expected (statutory + overrun)", x=[act[s] for s in STAGES],
                          y=STAGES, orientation="h", marker_color="#2E75B6"))
     fig.update_layout(barmode="group", template="sih", height=260,
-                      xaxis_title="days", legend=dict(orientation="h", y=1.15))
+                      xaxis_title="days", legend={"orientation": "h", "y": 1.15})
     st.plotly_chart(fig, width="stretch")
 
     st.markdown("**Parcels** (click a row to open)")
@@ -329,11 +337,11 @@ def _stage_bars(contract: dict) -> go.Figure:
     fig.add_trace(go.Bar(name="expected overrun (days)", x=names, y=overruns, marker_color="#e67e22",
                          yaxis="y2", opacity=0.85))
     fig.add_trace(go.Scatter(name="statutory days", x=names, y=statutory, yaxis="y2",
-                             mode="lines+markers", line=dict(dash="dot", color="#555"), marker=dict(size=6)))
+                             mode="lines+markers", line={"dash": "dot", "color": "#555"}, marker={"size": 6}))
     fig.update_layout(barmode="group", template="sih", height=380,
-                      yaxis=dict(title="P(delay)", range=[0, 1]),
-                      yaxis2=dict(title="days", overlaying="y", side="right"),
-                      legend=dict(orientation="h", y=1.12))
+                      yaxis={"title": "P(delay)", "range": [0, 1]},
+                      yaxis2={"title": "days", "overlaying": "y", "side": "right"},
+                      legend={"orientation": "h", "y": 1.12})
     return fig
 
 
@@ -480,8 +488,8 @@ def view_map(df: pd.DataFrame) -> None:
         pt_ids.append(p["project_id"]); pt_names.append(f"{p['project_id']} ({p['project_type']})")
     fig.add_trace(go.Scatter(
         x=pt_lon, y=pt_lat, mode="markers", name="point",
-        marker=dict(size=10, color=[risk_color(r) for r in pt_risk],
-                    line=dict(width=1, color="#333")),
+        marker={"size": 10, "color": [risk_color(r) for r in pt_risk],
+                    "line": {"width": 1, "color": "#333"}},
         customdata=pt_ids, text=pt_names, hovertemplate="%{text}<br>risk: %{marker.color}",
         visible="legendonly" if False else True))
 
@@ -499,7 +507,7 @@ def view_map(df: pd.DataFrame) -> None:
         r = float(proj_risk.get(p["project_id"], 0.0))
         fig.add_trace(go.Scatter(
             x=lons, y=lats, mode="lines", name=p["project_id"],
-            line=dict(color=risk_color(r), width=3),
+            line={"color": risk_color(r), "width": 3},
             customdata=[p["project_id"]] * len(lats), text=[p["project_id"]] * len(lats),
             hovertemplate=f"{p['project_id']} ({p['project_type']})<extra></extra>"))
 
@@ -681,15 +689,15 @@ def view_trends(df: pd.DataFrame) -> None:
         s = df.groupby("state")["risk_score"].mean().sort_values(ascending=False)
         fig = go.Figure(go.Bar(x=s.values, y=s.index, orientation="h", marker_color="#2E75B6",
                                text=[f"{v:.2f}" for v in s.values], textposition="outside"))
-        fig.update_layout(template="sih", height=220, margin=dict(l=0, r=0, t=10, b=0))
+        fig.update_layout(template="sih", height=220, margin={"l": 0, "r": 0, "t": 10, "b": 0})
         st.plotly_chart(fig, width="stretch")
     with c2:
         st.markdown("**Mean delay probability per stage**")
         sp = {stg: float(df[f"{stg}_prob"].mean()) for stg in STAGES}
         fig = go.Figure(go.Bar(x=list(sp.keys()), y=list(sp.values()), marker_color="#3498db",
                                text=[f"{v:.0%}" for v in sp.values()], textposition="outside"))
-        fig.update_layout(template="sih", height=220, yaxis=dict(range=[0, 1]),
-                          margin=dict(l=0, r=0, t=10, b=0))
+        fig.update_layout(template="sih", height=220, yaxis={"range": [0, 1]},
+                          margin={"l": 0, "r": 0, "t": 10, "b": 0})
         st.plotly_chart(fig, width="stretch")
 
     c3, c4 = st.columns(2)
@@ -698,14 +706,14 @@ def view_trends(df: pd.DataFrame) -> None:
         pt = df.groupby("project_type")["risk_score"].mean().sort_values(ascending=False)
         fig = go.Figure(go.Bar(x=pt.index, y=pt.values, marker_color="#e67e22",
                                text=[f"{v:.2f}" for v in pt.values], textposition="outside"))
-        fig.update_layout(template="sih", height=220, margin=dict(l=0, r=0, t=10, b=0))
+        fig.update_layout(template="sih", height=220, margin={"l": 0, "r": 0, "t": 10, "b": 0})
         st.plotly_chart(fig, width="stretch")
     with c4:
         st.markdown("**Top districts by average risk**")
         d = df.groupby("district")["risk_score"].mean().nlargest(12).sort_values()
         fig = go.Figure(go.Bar(x=d.values, y=d.index, orientation="h", marker_color="#8e44ad",
                                text=[f"{v:.2f}" for v in d.values], textposition="outside"))
-        fig.update_layout(template="sih", height=320, margin=dict(l=0, r=0, t=10, b=0))
+        fig.update_layout(template="sih", height=320, margin={"l": 0, "r": 0, "t": 10, "b": 0})
         st.plotly_chart(fig, width="stretch")
 
     st.markdown("**Heat map — delay probability by district × stage**")
@@ -713,10 +721,10 @@ def view_trends(df: pd.DataFrame) -> None:
     heat["_m"] = heat.mean(axis=1)
     heat = heat.sort_values("_m", ascending=False).drop(columns="_m")
     fig = go.Figure(go.Heatmap(z=heat.values, x=STAGES, y=heat.index, colorscale="YlOrRd",
-                               colorbar=dict(title="P(delay)"),
+                               colorbar={"title": "P(delay)"},
                                text=np.round(heat.values, 2), texttemplate="%{text}"))
     fig.update_layout(template="sih", height=max(320, 14 * len(heat)),
-                      margin=dict(l=0, r=0, t=10, b=0))
+                      margin={"l": 0, "r": 0, "t": 10, "b": 0})
     st.plotly_chart(fig, width="stretch")
 
     st.markdown("**Historical mean overrun per stage** (completed projects)")
@@ -724,7 +732,7 @@ def view_trends(df: pd.DataFrame) -> None:
     hm = hist.groupby("stage")["delay_days"].mean().reindex(STAGES)
     fig = go.Figure(go.Bar(x=hm.index, y=hm.values, marker_color="#c0392b",
                            text=[f"{v:.0f}d" for v in hm.values], textposition="outside"))
-    fig.update_layout(template="sih", height=240, margin=dict(l=0, r=0, t=10, b=0))
+    fig.update_layout(template="sih", height=240, margin={"l": 0, "r": 0, "t": 10, "b": 0})
     st.plotly_chart(fig, width="stretch")
 
 
@@ -770,7 +778,7 @@ def view_compare(df: pd.DataFrame) -> None:
     fig.add_trace(go.Bar(name=a, x=STAGES, y=sa["stages"], marker_color="#2E75B6"))
     fig.add_trace(go.Bar(name=b, x=STAGES, y=sb["stages"], marker_color="#E81123"))
     fig.update_layout(barmode="group", template="sih", height=300,
-                      yaxis=dict(range=[0, 1], title="P(delay)"), legend=dict(orientation="h", y=1.15))
+                      yaxis={"range": [0, 1], "title": "P(delay)"}, legend={"orientation": "h", "y": 1.15})
     st.plotly_chart(fig, width="stretch")
 
     fig = go.Figure()
@@ -779,7 +787,7 @@ def view_compare(df: pd.DataFrame) -> None:
                              y=[s["red"], s["yel"], s["grn"]],
                              marker_color=[COLORS["RED"], COLORS["YELLOW"], COLORS["GREEN"]]))
     fig.update_layout(barmode="group", template="sih", height=280,
-                      yaxis_title="parcels", legend=dict(orientation="h", y=1.15))
+                      yaxis_title="parcels", legend={"orientation": "h", "y": 1.15})
     st.plotly_chart(fig, width="stretch")
 
 

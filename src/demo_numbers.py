@@ -18,7 +18,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from predict import load_artifacts, score_parcel, DEFAULTS  # noqa: E402
+from predict import DEFAULTS, load_artifacts, score_parcel
 
 REPORT = ROOT / "models" / "metrics_report.json"
 PORTFOLIO = ROOT / "data" / "generated" / "portfolio_scores.parquet"

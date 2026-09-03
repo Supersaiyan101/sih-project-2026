@@ -28,16 +28,30 @@ from pathlib import Path
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor
-from sklearn.metrics import (average_precision_score, mean_absolute_error,
-                             mean_squared_error, roc_auc_score)
+from sklearn.ensemble import (
+    HistGradientBoostingClassifier,
+    HistGradientBoostingRegressor,
+)
+from sklearn.metrics import (
+    average_precision_score,
+    mean_absolute_error,
+    mean_squared_error,
+    roc_auc_score,
+)
 from sklearn.model_selection import train_test_split
 
-from features import (DATA, MODELS, STAGES, build_features, rollup_risk,
-                      save_encoders, save_feature_columns)
+from features import (
+    DATA,
+    MODELS,
+    STAGES,
+    build_features,
+    rollup_risk,
+    save_encoders,
+    save_feature_columns,
+)
 
-CLF_PARAMS = dict(max_iter=200, learning_rate=0.1, max_leaf_nodes=31, random_state=42)
-REG_PARAMS = dict(max_iter=200, learning_rate=0.1, max_leaf_nodes=31, random_state=42)
+CLF_PARAMS = {"max_iter": 200, "learning_rate": 0.1, "max_leaf_nodes": 31, "random_state": 42}
+REG_PARAMS = {"max_iter": 200, "learning_rate": 0.1, "max_leaf_nodes": 31, "random_state": 42}
 SHAP_SAMPLES = 1000
 
 
@@ -150,7 +164,7 @@ def export_shap(X, y, models, shap_dir: Path) -> dict:
                 [c, float(np.abs(sv).mean(axis=0)[i])]
                 for i, c in enumerate(X.columns)
             ]
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 — fall back if SHAP/TreeExplainer fails
             print(f"  SHAP failed for {stage} ({e}); using permutation_importance")
             from sklearn.inspection import permutation_importance
             r = permutation_importance(clf, Xs, y.loc[Xs.index, f"{stage}_delay_flag"],
@@ -261,7 +275,7 @@ def main() -> None:
 
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "n_parcels": int(len(X)),
+        "n_parcels": len(X),
         "n_features": len(X.columns),
         "feature_columns": X.columns.tolist(),
         "stages": metrics,

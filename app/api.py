@@ -21,9 +21,14 @@ _APP_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(_APP_DIR))
 sys.path.insert(0, str(_APP_DIR.parent / "src"))
 
-from landing import LANDING_HTML  # noqa: E402
-from predict import load_artifacts, score_batch, score_parcel  # noqa: E402
-from predict import DEFAULTS  # noqa: E402
+from landing import LANDING_HTML
+
+from predict import (
+    DEFAULTS,
+    load_artifacts,
+    score_batch,
+    score_parcel,
+)
 
 app = FastAPI(title="BhoomiSetu — Land Acquisition Delay Predictor", version="2.0")
 

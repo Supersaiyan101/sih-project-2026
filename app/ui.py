@@ -7,8 +7,8 @@ badges, section/footer). Import and use from app/streamlit_app.py.
 
 from __future__ import annotations
 
+import plotly.graph_objects as go
 import plotly.io as pio
-import plotly.graph_objects as go  # noqa: F401
 import streamlit as st
 
 # --- palette (locked) ------------------------------------------------------ #
@@ -82,15 +82,15 @@ def inject_css() -> None:
 def setup_plotly() -> None:
     """Register the branded 'sih' template and make it the default."""
     t = go.layout.Template()
-    t.layout = dict(
-        font=dict(family="'Segoe UI','Helvetica Neue',Arial,sans-serif", size=13, color=TEXT),
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        colorway=[NAVY, STEEL, YEL, GRN, RED, "#8E44AD"],
-        xaxis=dict(gridcolor="#E8EDF2", zerolinecolor="#D5DCE4"),
-        yaxis=dict(gridcolor="#E8EDF2", zerolinecolor="#D5DCE4"),
-        margin=dict(l=10, r=10, t=30, b=10),
-    )
+    t.layout = {
+        "font": {"family": "'Segoe UI','Helvetica Neue',Arial,sans-serif", "size": 13, "color": TEXT},
+        "paper_bgcolor": "rgba(0,0,0,0)",
+        "plot_bgcolor": "rgba(0,0,0,0)",
+        "colorway": [NAVY, STEEL, YEL, GRN, RED, "#8E44AD"],
+        "xaxis": {"gridcolor": "#E8EDF2", "zerolinecolor": "#D5DCE4"},
+        "yaxis": {"gridcolor": "#E8EDF2", "zerolinecolor": "#D5DCE4"},
+        "margin": {"l": 10, "r": 10, "t": 30, "b": 10},
+    }
     pio.templates["sih"] = t
     pio.templates.default = "sih"
 
