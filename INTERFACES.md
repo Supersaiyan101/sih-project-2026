@@ -77,7 +77,7 @@ rollup/validation/map display.
 ## 2a. Semantic IDs (multi-state)
 
 - **Parcel ID:** `<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>` — e.g. `HP-KNG-0001-0123`.
-- **Project ID:** `<STATE>-<TYPE>-<YEAR>-<SEQ>` — e.g. `HP-DAM-2024-0001`.
+- **Project ID:** `<STATE>-<TYPE>-<SEQ>` — e.g. `HP-DAM-0001`.
 - **Home-state rule:** a cross-state linear project's `<STATE>` is the state of its first
   path parcel.
 - IDs are **derived from** the parcel's assigned geography (state/district/village codes

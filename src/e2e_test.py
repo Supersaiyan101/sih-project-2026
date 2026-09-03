@@ -62,7 +62,7 @@ def check_data_invariants() -> None:
 
     ok("3 states", len(st) == 3)
     parcel_re = re.compile(r"^(HP|PB|UK)-[A-Z]{3}-\d{4}-\d{4}$")
-    project_re = re.compile(r"^(HP|PB|UK)-(RDH|RLY|IRR|DAM|IND)-\d{4}-\d{4}$")
+    project_re = re.compile(r"^(HP|PB|UK)-(RDH|RLY|IRR|DAM|IND)-\d{4}$")
     ok("parcel ID format", bool(pa["parcel_id"].str.match(parcel_re).all()))
     ok("project ID format", bool(pr["project_id"].str.match(project_re).all()))
     ok("ID<->geo consistent",

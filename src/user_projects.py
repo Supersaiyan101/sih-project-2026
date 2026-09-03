@@ -111,7 +111,7 @@ def generate_user_project_id(state_code: str, project_type: str) -> str:
     existing = load_user_projects()
     seq = len(existing) + 1
     type_code = PROJECT_TYPE_CODES.get(project_type, "RDH")
-    return f"{state_code}-{type_code}-2025-{seq:04d}"
+    return f"{state_code}-{type_code}-{seq:04d}"
 
 
 def state_code_for(state: str) -> str:

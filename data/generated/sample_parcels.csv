@@ -1,201 +1,201 @@
 project_id,village,village_code,tehsil,district,district_code,state,state_code,court_stay,owner_count,pending_mutations,encumbrances,land_class,area_sqm,is_live,khasra_number,parcel_id
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,6,1,1,orchard,1762.0,0,0001,HP-LAS-0008-0001
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,3,2,2,residential,206.2,0,0002,HP-LAS-0008-0002
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,9,1,0,agri,21000.0,0,0003,HP-LAS-0008-0003
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,1,4,5,2,barren,5891.8,1,0004,HP-LAS-0008-0004
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,4,0,0,agri,2940.4,0,0005,HP-LAS-0008-0005
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,8,2,1,barren,5189.8,0,0006,HP-LAS-0008-0006
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,4,1,1,agri,3004.5,0,0007,HP-LAS-0008-0007
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,8,3,0,orchard,1333.6,0,0008,HP-LAS-0008-0008
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,8,2,2,orchard,5307.1,0,0009,HP-LAS-0008-0009
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,4,1,1,agri,894.1,0,0010,HP-LAS-0008-0010
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,7,1,2,agri,8660.2,0,0011,HP-LAS-0008-0011
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,7,0,0,barren,36275.6,0,0012,HP-LAS-0008-0012
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,6,1,2,agri,287.9,0,0013,HP-LAS-0008-0013
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,8,0,0,orchard,895.8,0,0014,HP-LAS-0008-0014
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,6,1,2,agri,6148.9,0,0015,HP-LAS-0008-0015
-HP-DAM-2023-0001,Lahaul and Spiti_V008,0008,Lahaul and Spiti_Tehsil_3,Lahaul and Spiti,LAS,Himachal Pradesh,HP,0,3,0,1,agri,783.2,0,0016,HP-LAS-0008-0016
-PB-RDH-2023-0001,Malerkotla_V003,0003,Malerkotla_Tehsil_1,Malerkotla,MLK,Punjab,PB,0,11,1,1,agri,4404.6,0,0001,PB-MLK-0003-0001
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,6,0,0,orchard,542.5,0,0001,PB-FGS-0002-0001
-PB-RDH-2023-0001,SBS Nagar_V005,0005,SBS Nagar_Tehsil_2,SBS Nagar,SBS,Punjab,PB,0,6,1,1,agri,2645.0,0,0001,PB-SBS-0005-0001
-PB-RDH-2023-0001,Malerkotla_V003,0003,Malerkotla_Tehsil_1,Malerkotla,MLK,Punjab,PB,0,5,3,2,orchard,733.4,0,0002,PB-MLK-0003-0002
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,6,3,0,residential,245.4,0,0002,PB-FGS-0002-0002
-PB-RDH-2023-0001,Malerkotla_V003,0003,Malerkotla_Tehsil_1,Malerkotla,MLK,Punjab,PB,0,10,1,0,barren,1354.6,0,0003,PB-MLK-0003-0003
-PB-RDH-2023-0001,Jalandhar_V004,0004,Jalandhar_Tehsil_2,Jalandhar,JAL,Punjab,PB,0,2,1,0,residential,1143.7,0,0001,PB-JAL-0004-0001
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,4,2,1,agri,1565.5,0,0003,PB-FGS-0002-0003
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,6,2,3,agri,5632.9,0,0001,PB-HSP-0002-0001
-PB-RDH-2023-0001,Malerkotla_V003,0003,Malerkotla_Tehsil_1,Malerkotla,MLK,Punjab,PB,1,4,0,1,agri,1082.6,0,0004,PB-MLK-0003-0004
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,5,2,3,barren,7146.8,0,0004,PB-FGS-0002-0004
-PB-RDH-2023-0001,Malerkotla_V003,0003,Malerkotla_Tehsil_1,Malerkotla,MLK,Punjab,PB,0,4,1,1,agri,929.7,0,0005,PB-MLK-0003-0005
-PB-RDH-2023-0001,Rupnagar_V008,0008,Rupnagar_Tehsil_3,Rupnagar,RUP,Punjab,PB,0,3,4,1,agri,3185.8,0,0001,PB-RUP-0008-0001
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,5,1,2,agri,3724.3,0,0005,PB-FGS-0002-0005
-PB-RDH-2023-0001,SBS Nagar_V005,0005,SBS Nagar_Tehsil_2,SBS Nagar,SBS,Punjab,PB,0,11,2,2,agri,3974.2,0,0002,PB-SBS-0005-0002
-PB-RDH-2023-0001,Malerkotla_V003,0003,Malerkotla_Tehsil_1,Malerkotla,MLK,Punjab,PB,0,7,2,0,barren,2061.8,1,0006,PB-MLK-0003-0006
-PB-RDH-2023-0001,Jalandhar_V004,0004,Jalandhar_Tehsil_2,Jalandhar,JAL,Punjab,PB,0,5,2,2,agri,3092.1,0,0002,PB-JAL-0004-0002
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,5,2,1,residential,291.7,0,0006,PB-FGS-0002-0006
-PB-RDH-2023-0001,Jalandhar_V004,0004,Jalandhar_Tehsil_2,Jalandhar,JAL,Punjab,PB,0,7,1,1,agri,7157.6,0,0003,PB-JAL-0004-0003
-PB-RDH-2023-0001,Rupnagar_V008,0008,Rupnagar_Tehsil_3,Rupnagar,RUP,Punjab,PB,0,7,2,1,agri,1860.9,0,0002,PB-RUP-0008-0002
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,9,4,1,residential,593.1,0,0002,PB-HSP-0002-0002
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,3,4,1,barren,6020.6,0,0007,PB-FGS-0002-0007
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,5,1,2,barren,1158.2,0,0003,PB-HSP-0002-0003
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,6,4,1,agri,979.0,0,0004,PB-HSP-0002-0004
-PB-RDH-2023-0001,SBS Nagar_V005,0005,SBS Nagar_Tehsil_2,SBS Nagar,SBS,Punjab,PB,0,7,2,3,orchard,1869.4,0,0003,PB-SBS-0005-0003
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,5,1,2,agri,1936.1,0,0008,PB-FGS-0002-0008
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,4,0,2,barren,14573.7,0,0005,PB-HSP-0002-0005
-PB-RDH-2023-0001,Rupnagar_V008,0008,Rupnagar_Tehsil_3,Rupnagar,RUP,Punjab,PB,0,5,0,1,barren,2403.1,0,0003,PB-RUP-0008-0003
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,7,2,0,orchard,954.5,0,0006,PB-HSP-0002-0006
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,5,2,1,barren,4209.4,0,0009,PB-FGS-0002-0009
-PB-RDH-2023-0001,Rupnagar_V008,0008,Rupnagar_Tehsil_3,Rupnagar,RUP,Punjab,PB,0,3,3,0,agri,932.7,1,0004,PB-RUP-0008-0004
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,8,2,1,orchard,939.9,0,0007,PB-HSP-0002-0007
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,0,3,0,0,agri,4946.8,0,0008,PB-HSP-0002-0008
-PB-RDH-2023-0001,Fatehgarh Sahib_V002,0002,Fatehgarh Sahib_Tehsil_1,Fatehgarh Sahib,FGS,Punjab,PB,0,8,1,1,orchard,372.2,0,0010,PB-FGS-0002-0010
-PB-RDH-2023-0001,Jalandhar_V004,0004,Jalandhar_Tehsil_2,Jalandhar,JAL,Punjab,PB,0,5,2,2,barren,2819.6,0,0004,PB-JAL-0004-0004
-PB-RDH-2023-0001,SBS Nagar_V005,0005,SBS Nagar_Tehsil_2,SBS Nagar,SBS,Punjab,PB,0,5,3,2,barren,5758.2,0,0004,PB-SBS-0005-0004
-PB-RDH-2023-0001,Hoshiarpur_V002,0002,Hoshiarpur_Tehsil_1,Hoshiarpur,HSP,Punjab,PB,1,5,4,0,barren,1524.0,1,0009,PB-HSP-0002-0009
-PB-RDH-2023-0001,Jalandhar_V004,0004,Jalandhar_Tehsil_2,Jalandhar,JAL,Punjab,PB,0,1,2,3,agri,624.6,1,0005,PB-JAL-0004-0005
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,3,3,1,orchard,1444.4,0,0001,HP-KUL-0008-0001
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,8,3,1,residential,414.2,0,0002,HP-KUL-0008-0002
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,3,3,0,agri,2045.0,0,0003,HP-KUL-0008-0003
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,1,6,2,0,agri,1436.8,0,0004,HP-KUL-0008-0004
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,10,2,2,agri,513.1,0,0005,HP-KUL-0008-0005
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,8,1,0,orchard,544.2,0,0006,HP-KUL-0008-0006
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,6,1,1,barren,2125.5,1,0007,HP-KUL-0008-0007
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,6,2,5,agri,2278.7,0,0008,HP-KUL-0008-0008
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,7,2,0,agri,692.2,0,0009,HP-KUL-0008-0009
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,10,2,1,agri,889.5,0,0010,HP-KUL-0008-0010
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,5,1,1,barren,11701.6,0,0011,HP-KUL-0008-0011
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,5,3,1,barren,2241.8,0,0012,HP-KUL-0008-0012
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,7,2,2,agri,2162.2,0,0013,HP-KUL-0008-0013
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,7,2,1,barren,2374.3,0,0014,HP-KUL-0008-0014
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,2,0,1,agri,1565.5,0,0015,HP-KUL-0008-0015
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,1,5,2,1,agri,28823.4,0,0016,HP-KUL-0008-0016
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,5,1,1,agri,12462.4,0,0017,HP-KUL-0008-0017
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,9,3,1,barren,3782.8,0,0018,HP-KUL-0008-0018
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,4,0,0,orchard,2890.0,0,0019,HP-KUL-0008-0019
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,3,1,2,orchard,1675.5,0,0020,HP-KUL-0008-0020
-HP-DAM-2021-0001,Kullu_V008,0008,Kullu_Tehsil_3,Kullu,KUL,Himachal Pradesh,HP,0,5,2,0,agri,1820.4,0,0021,HP-KUL-0008-0021
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,8,2,1,agri,726.8,0,0001,PB-MGA-0008-0001
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,1,4,0,1,agri,1887.3,0,0002,PB-MGA-0008-0002
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,8,3,0,agri,2129.1,0,0003,PB-MGA-0008-0003
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,6,0,1,agri,601.7,0,0004,PB-MGA-0008-0004
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,6,2,1,agri,499.1,0,0005,PB-MGA-0008-0005
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,1,5,1,0,orchard,957.0,0,0006,PB-MGA-0008-0006
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,10,3,2,agri,1967.3,0,0007,PB-MGA-0008-0007
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,3,2,0,orchard,1592.7,1,0008,PB-MGA-0008-0008
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,1,1,0,barren,2741.2,0,0009,PB-MGA-0008-0009
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,6,0,0,barren,14923.9,0,0010,PB-MGA-0008-0010
-PB-IRR-2023-0001,Moga_V008,0008,Moga_Tehsil_3,Moga,MGA,Punjab,PB,0,8,1,0,residential,179.3,0,0011,PB-MGA-0008-0011
-PB-IRR-2024-0001,Amritsar_V007,0007,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,6,2,1,barren,674.6,0,0001,PB-AMR-0007-0001
-PB-IRR-2024-0001,Amritsar_V007,0007,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,1,5,1,0,orchard,150.3,0,0002,PB-AMR-0007-0002
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,0,7,0,0,residential,173.5,1,0001,PB-AMR-0004-0001
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,0,6,1,1,barren,2592.5,0,0002,PB-AMR-0004-0002
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,0,6,2,0,residential,1274.9,0,0003,PB-AMR-0004-0003
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,0,6,1,0,agri,1319.2,0,0004,PB-AMR-0004-0004
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,0,2,3,0,residential,118.4,0,0005,PB-AMR-0004-0005
-PB-IRR-2024-0001,Amritsar_V007,0007,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,3,0,2,agri,4439.4,0,0003,PB-AMR-0007-0003
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,0,7,0,0,residential,193.3,0,0006,PB-AMR-0004-0006
-PB-IRR-2024-0001,Amritsar_V007,0007,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,4,0,1,residential,121.6,0,0004,PB-AMR-0007-0004
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,0,5,1,0,agri,1211.8,0,0007,PB-AMR-0004-0007
-PB-IRR-2024-0001,Amritsar_V004,0004,Amritsar_Tehsil_2,Amritsar,AMR,Punjab,PB,1,3,3,1,orchard,1787.5,0,0008,PB-AMR-0004-0008
-PB-IRR-2024-0001,Amritsar_V007,0007,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,4,2,0,residential,497.9,1,0005,PB-AMR-0007-0005
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,1,3,1,0,barren,512.2,0,0001,UK-UTK-0004-0001
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,5,1,0,agri,3898.4,0,0002,UK-UTK-0004-0002
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,4,2,0,agri,2167.2,0,0003,UK-UTK-0004-0003
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,3,2,1,agri,701.8,0,0004,UK-UTK-0004-0004
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,2,1,0,barren,19164.5,0,0005,UK-UTK-0004-0005
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,4,1,0,barren,442.5,0,0006,UK-UTK-0004-0006
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,5,1,0,orchard,337.6,0,0007,UK-UTK-0004-0007
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,3,1,1,agri,3606.1,1,0008,UK-UTK-0004-0008
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,5,0,2,barren,12044.0,0,0009,UK-UTK-0004-0009
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,10,1,1,barren,3004.6,0,0010,UK-UTK-0004-0010
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,5,0,0,residential,411.5,0,0011,UK-UTK-0004-0011
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,5,1,0,orchard,1600.8,1,0012,UK-UTK-0004-0012
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,6,1,0,barren,3795.4,1,0013,UK-UTK-0004-0013
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,1,0,1,barren,1925.2,0,0014,UK-UTK-0004-0014
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,3,0,1,agri,626.7,0,0015,UK-UTK-0004-0015
-UK-IND-2021-0001,Uttarkashi_V004,0004,Uttarkashi_Tehsil_2,Uttarkashi,UTK,Uttarakhand,UK,0,3,1,1,orchard,1246.5,0,0016,UK-UTK-0004-0016
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,5,0,1,agri,1916.1,0,0001,HP-UNA-0001-0001
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,5,3,0,residential,50.4,1,0002,HP-UNA-0001-0002
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,3,3,0,agri,1007.9,0,0001,HP-UNA-0003-0001
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,6,1,1,agri,958.0,0,0003,HP-UNA-0001-0003
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,9,2,1,agri,590.8,0,0002,HP-UNA-0003-0002
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,6,0,1,orchard,529.5,0,0003,HP-UNA-0003-0003
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,8,3,0,agri,7699.9,0,0004,HP-UNA-0003-0004
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,5,1,1,orchard,2204.6,0,0005,HP-UNA-0003-0005
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,2,1,0,agri,3365.3,0,0004,HP-UNA-0001-0004
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,5,0,2,orchard,5980.0,0,0006,HP-UNA-0003-0006
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,3,1,1,residential,860.4,0,0005,HP-UNA-0001-0005
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,5,1,1,agri,2536.2,0,0007,HP-UNA-0003-0007
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,3,1,1,agri,5704.4,0,0006,HP-UNA-0001-0006
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,7,0,2,agri,2572.1,0,0007,HP-UNA-0001-0007
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,4,1,0,barren,2052.0,0,0008,HP-UNA-0003-0008
-HP-DAM-2023-0002,Una_V003,0003,Una_Tehsil_2,Una,UNA,Himachal Pradesh,HP,0,3,0,0,residential,100.3,0,0009,HP-UNA-0003-0009
-HP-DAM-2023-0002,Una_V001,0001,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,3,1,0,agri,3659.2,0,0008,HP-UNA-0001-0008
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,5,2,2,orchard,506.1,0,0001,UK-USN-0001-0001
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,6,0,0,agri,1574.1,0,0002,UK-USN-0001-0002
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,5,1,2,barren,6870.2,0,0003,UK-USN-0001-0003
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,1,0,barren,2180.2,1,0004,UK-USN-0001-0004
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,3,2,1,residential,181.2,0,0005,UK-USN-0001-0005
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,1,0,agri,3651.5,0,0006,UK-USN-0001-0006
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,5,3,0,agri,3314.6,0,0007,UK-USN-0001-0007
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,8,0,0,barren,873.2,0,0008,UK-USN-0001-0008
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,3,1,2,barren,1793.3,0,0009,UK-USN-0001-0009
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,5,1,0,agri,1716.9,0,0010,UK-USN-0001-0010
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,0,0,agri,2174.7,0,0011,UK-USN-0001-0011
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,1,0,agri,10187.2,0,0012,UK-USN-0001-0012
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,6,2,0,barren,1886.4,0,0013,UK-USN-0001-0013
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,3,0,barren,14662.8,0,0014,UK-USN-0001-0014
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,3,1,barren,1364.7,1,0015,UK-USN-0001-0015
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,1,1,agri,3628.9,0,0016,UK-USN-0001-0016
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,4,3,1,residential,601.9,1,0017,UK-USN-0001-0017
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,0,5,0,0,residential,179.7,0,0018,UK-USN-0001-0018
-UK-RDH-2021-0001,Udham Singh Nagar_V001,0001,Udham Singh Nagar_Tehsil_1,Udham Singh Nagar,USN,Uttarakhand,UK,1,7,0,1,orchard,1058.6,1,0019,UK-USN-0001-0019
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,7,2,1,agri,210.0,0,0001,PB-TTR-0006-0001
-PB-RDH-2022-0001,Tarn Taran_V004,0004,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,5,2,2,residential,99.5,0,0001,PB-TTR-0004-0001
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,11,1,0,residential,1009.7,0,0002,PB-TTR-0006-0002
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,3,3,2,agri,509.4,0,0003,PB-TTR-0006-0003
-PB-RDH-2022-0001,Tarn Taran_V004,0004,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,3,1,3,agri,5266.4,0,0002,PB-TTR-0004-0002
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,11,0,3,barren,1376.1,0,0004,PB-TTR-0006-0004
-PB-RDH-2022-0001,Tarn Taran_V004,0004,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,1,6,5,1,agri,2034.5,0,0003,PB-TTR-0004-0003
-PB-RDH-2022-0001,Tarn Taran_V004,0004,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,6,1,2,residential,161.8,0,0004,PB-TTR-0004-0004
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,7,3,1,residential,884.1,1,0005,PB-TTR-0006-0005
-PB-RDH-2022-0001,Tarn Taran_V004,0004,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,4,3,0,agri,4912.4,1,0005,PB-TTR-0004-0005
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,5,1,0,residential,291.6,0,0006,PB-TTR-0006-0006
-PB-RDH-2022-0001,Tarn Taran_V004,0004,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,7,1,2,agri,60.2,0,0006,PB-TTR-0004-0006
-PB-RDH-2022-0001,Tarn Taran_V004,0004,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,4,1,1,barren,4159.4,0,0007,PB-TTR-0004-0007
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,0,10,1,2,orchard,891.7,0,0007,PB-TTR-0006-0007
-PB-RDH-2022-0001,Tarn Taran_V006,0006,Tarn Taran_Tehsil_2,Tarn Taran,TTR,Punjab,PB,1,8,2,0,barren,889.7,0,0008,PB-TTR-0006-0008
-UK-IRR-2024-0001,Pauri Garhwal_V002,0002,Pauri Garhwal_Tehsil_1,Pauri Garhwal,PGR,Uttarakhand,UK,0,4,1,1,orchard,5970.8,0,0001,UK-PGR-0002-0001
-UK-IRR-2024-0001,Pauri Garhwal_V005,0005,Pauri Garhwal_Tehsil_2,Pauri Garhwal,PGR,Uttarakhand,UK,0,3,0,1,residential,111.1,1,0001,UK-PGR-0005-0001
-UK-IRR-2024-0001,Pauri Garhwal_V002,0002,Pauri Garhwal_Tehsil_1,Pauri Garhwal,PGR,Uttarakhand,UK,0,6,1,1,agri,1969.4,0,0002,UK-PGR-0002-0002
-UK-IRR-2024-0001,Pauri Garhwal_V002,0002,Pauri Garhwal_Tehsil_1,Pauri Garhwal,PGR,Uttarakhand,UK,0,10,1,1,orchard,1634.8,0,0003,UK-PGR-0002-0003
-UK-IRR-2024-0001,Pauri Garhwal_V002,0002,Pauri Garhwal_Tehsil_1,Pauri Garhwal,PGR,Uttarakhand,UK,0,5,3,0,agri,2814.6,0,0004,UK-PGR-0002-0004
-UK-IRR-2024-0001,Pauri Garhwal_V002,0002,Pauri Garhwal_Tehsil_1,Pauri Garhwal,PGR,Uttarakhand,UK,0,10,1,1,agri,1339.7,0,0005,UK-PGR-0002-0005
-UK-IRR-2024-0001,Pauri Garhwal_V005,0005,Pauri Garhwal_Tehsil_2,Pauri Garhwal,PGR,Uttarakhand,UK,0,8,0,0,agri,264.2,0,0002,UK-PGR-0005-0002
-UK-IRR-2024-0001,Pauri Garhwal_V005,0005,Pauri Garhwal_Tehsil_2,Pauri Garhwal,PGR,Uttarakhand,UK,0,6,1,4,barren,3407.8,0,0003,UK-PGR-0005-0003
-UK-IRR-2024-0001,Pauri Garhwal_V002,0002,Pauri Garhwal_Tehsil_1,Pauri Garhwal,PGR,Uttarakhand,UK,0,11,0,1,barren,4349.7,0,0006,UK-PGR-0002-0006
-UK-IRR-2024-0001,Pauri Garhwal_V005,0005,Pauri Garhwal_Tehsil_2,Pauri Garhwal,PGR,Uttarakhand,UK,1,4,1,0,orchard,394.3,0,0004,UK-PGR-0005-0004
-UK-IRR-2024-0001,Pauri Garhwal_V005,0005,Pauri Garhwal_Tehsil_2,Pauri Garhwal,PGR,Uttarakhand,UK,0,5,4,1,barren,738.4,0,0005,UK-PGR-0005-0005
-UK-IRR-2024-0001,Pauri Garhwal_V005,0005,Pauri Garhwal_Tehsil_2,Pauri Garhwal,PGR,Uttarakhand,UK,0,6,2,0,agri,3393.2,1,0006,UK-PGR-0005-0006
-UK-IRR-2024-0001,Pauri Garhwal_V002,0002,Pauri Garhwal_Tehsil_1,Pauri Garhwal,PGR,Uttarakhand,UK,0,4,2,0,agri,2235.8,0,0007,UK-PGR-0002-0007
-UK-IRR-2024-0001,Pauri Garhwal_V005,0005,Pauri Garhwal_Tehsil_2,Pauri Garhwal,PGR,Uttarakhand,UK,0,3,1,2,agri,1143.4,1,0007,UK-PGR-0005-0007
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,3,1,0,agri,1102.9,0,0001,PB-LDH-0003-0001
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,12,0,0,barren,1779.7,0,0002,PB-LDH-0003-0002
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,4,2,2,orchard,4798.3,0,0001,PB-LDH-0004-0001
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,3,4,1,agri,878.5,0,0003,PB-LDH-0003-0003
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,9,3,0,agri,523.8,0,0002,PB-LDH-0004-0002
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,5,1,1,agri,2168.6,0,0004,PB-LDH-0003-0004
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,1,6,0,1,residential,58.2,0,0005,PB-LDH-0003-0005
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,6,1,2,barren,5442.9,0,0003,PB-LDH-0004-0003
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,4,0,0,agri,2781.8,0,0004,PB-LDH-0004-0004
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,5,1,2,agri,3308.6,0,0005,PB-LDH-0004-0005
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,2,3,0,residential,61.6,0,0006,PB-LDH-0003-0006
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,6,1,2,agri,83382.5,0,0006,PB-LDH-0004-0006
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,3,1,0,barren,1959.6,0,0007,PB-LDH-0003-0007
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,6,1,1,barren,2562.6,0,0007,PB-LDH-0004-0007
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,5,0,2,agri,3122.5,0,0008,PB-LDH-0003-0008
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,11,0,0,agri,590.7,0,0009,PB-LDH-0003-0009
-PB-IRR-2023-0002,Ludhiana_V004,0004,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,4,0,0,agri,249.2,0,0008,PB-LDH-0004-0008
-PB-IRR-2023-0002,Ludhiana_V003,0003,Ludhiana_Tehsil_1,Ludhiana,LDH,Punjab,PB,0,7,0,2,barren,1681.5,0,0010,PB-LDH-0003-0010
-PB-RDH-2021-0001,SAS Nagar_V004,0004,SAS Nagar_Tehsil_1,SAS Nagar,SAS,Punjab,PB,0,3,4,0,barren,3938.3,0,0001,PB-SAS-0004-0001
-PB-RDH-2021-0001,SAS Nagar_V004,0004,SAS Nagar_Tehsil_1,SAS Nagar,SAS,Punjab,PB,0,10,0,1,agri,4444.7,0,0002,PB-SAS-0004-0002
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,1,5,2,1,barren,6914.5,0,0001,UK-TGR-0002-0001
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,4,0,3,residential,88.6,0,0002,UK-TGR-0002-0002
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,9,1,0,agri,2363.0,0,0003,UK-TGR-0002-0003
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,5,1,1,agri,1230.0,0,0004,UK-TGR-0002-0004
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,3,1,0,residential,874.8,0,0005,UK-TGR-0002-0005
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,6,4,1,residential,499.5,0,0006,UK-TGR-0002-0006
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,5,4,1,orchard,1291.4,0,0007,UK-TGR-0002-0007
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,5,1,0,agri,1840.0,1,0008,UK-TGR-0002-0008
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,6,2,1,orchard,1728.5,0,0009,UK-TGR-0002-0009
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,9,3,2,agri,406.1,0,0010,UK-TGR-0002-0010
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,1,1,2,residential,87.7,1,0011,UK-TGR-0002-0011
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,4,2,2,residential,83.7,0,0012,UK-TGR-0002-0012
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,7,2,0,agri,1300.9,0,0013,UK-TGR-0002-0013
+UK-DAM-0001,Tehri Garhwal_V002,0002,Tehri Garhwal_Tehsil_1,Tehri Garhwal,TGR,Uttarakhand,UK,0,7,3,1,agri,1185.5,0,0014,UK-TGR-0002-0014
+PB-RDH-0001,Hamirpur_V009,0009,Hamirpur_Tehsil_3,Hamirpur,HAM,Himachal Pradesh,HP,0,6,1,0,barren,518.5,0,0001,HP-HAM-0009-0001
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,1,0,orchard,689.2,0,0001,PB-JAL-0003-0001
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,8,2,1,barren,4565.0,0,0001,HP-UNA-0002-0001
+PB-RDH-0001,SBS Nagar_V004,0004,SBS Nagar_Tehsil_1,SBS Nagar,SBS,Punjab,PB,0,6,1,0,orchard,245.1,1,0001,PB-SBS-0004-0001
+PB-RDH-0001,Ludhiana_V008,0008,Ludhiana_Tehsil_2,Ludhiana,LDH,Punjab,PB,0,4,3,0,orchard,1724.8,0,0001,PB-LDH-0008-0001
+PB-RDH-0001,SBS Nagar_V004,0004,SBS Nagar_Tehsil_1,SBS Nagar,SBS,Punjab,PB,0,3,2,1,barren,2352.6,0,0002,PB-SBS-0004-0002
+PB-RDH-0001,Hamirpur_V009,0009,Hamirpur_Tehsil_3,Hamirpur,HAM,Himachal Pradesh,HP,0,9,1,1,agri,6176.6,0,0002,HP-HAM-0009-0002
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,6,3,0,agri,1659.0,1,0002,PB-JAL-0003-0002
+PB-RDH-0001,Bilaspur_V005,0005,Bilaspur_Tehsil_2,Bilaspur,BIL,Himachal Pradesh,HP,0,9,3,0,agri,3637.6,0,0001,HP-BIL-0005-0001
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,3,1,0,agri,2128.4,0,0002,HP-UNA-0002-0002
+PB-RDH-0001,SBS Nagar_V004,0004,SBS Nagar_Tehsil_1,SBS Nagar,SBS,Punjab,PB,0,7,1,0,orchard,1789.4,0,0003,PB-SBS-0004-0003
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,2,0,1,residential,105.3,0,0003,HP-UNA-0002-0003
+PB-RDH-0001,Bilaspur_V005,0005,Bilaspur_Tehsil_2,Bilaspur,BIL,Himachal Pradesh,HP,0,1,3,0,agri,6449.7,0,0002,HP-BIL-0005-0002
+PB-RDH-0001,Hamirpur_V009,0009,Hamirpur_Tehsil_3,Hamirpur,HAM,Himachal Pradesh,HP,0,4,2,0,barren,688.0,0,0003,HP-HAM-0009-0003
+PB-RDH-0001,Bilaspur_V005,0005,Bilaspur_Tehsil_2,Bilaspur,BIL,Himachal Pradesh,HP,0,2,4,0,agri,3559.1,0,0003,HP-BIL-0005-0003
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,2,0,orchard,2238.4,0,0003,PB-JAL-0003-0003
+PB-RDH-0001,SBS Nagar_V004,0004,SBS Nagar_Tehsil_1,SBS Nagar,SBS,Punjab,PB,0,4,2,1,orchard,1302.1,0,0004,PB-SBS-0004-0004
+PB-RDH-0001,Ludhiana_V008,0008,Ludhiana_Tehsil_2,Ludhiana,LDH,Punjab,PB,1,9,1,0,barren,21934.6,0,0002,PB-LDH-0008-0002
+PB-RDH-0001,Bilaspur_V005,0005,Bilaspur_Tehsil_2,Bilaspur,BIL,Himachal Pradesh,HP,0,2,2,0,agri,809.9,1,0004,HP-BIL-0005-0004
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,9,0,0,agri,904.5,0,0004,HP-UNA-0002-0004
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,1,1,agri,2392.8,0,0004,PB-JAL-0003-0004
+PB-RDH-0001,Hamirpur_V009,0009,Hamirpur_Tehsil_3,Hamirpur,HAM,Himachal Pradesh,HP,0,5,1,0,orchard,3692.1,0,0004,HP-HAM-0009-0004
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,2,3,0,residential,135.4,0,0005,HP-UNA-0002-0005
+PB-RDH-0001,Ludhiana_V008,0008,Ludhiana_Tehsil_2,Ludhiana,LDH,Punjab,PB,0,5,0,0,barren,37435.1,0,0003,PB-LDH-0008-0003
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,9,0,1,barren,3907.1,0,0006,HP-UNA-0002-0006
+PB-RDH-0001,SBS Nagar_V004,0004,SBS Nagar_Tehsil_1,SBS Nagar,SBS,Punjab,PB,0,9,3,0,barren,447.8,0,0005,PB-SBS-0004-0005
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,4,1,3,barren,2590.8,0,0007,HP-UNA-0002-0007
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,4,2,0,agri,1994.1,0,0008,HP-UNA-0002-0008
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,8,6,3,agri,2497.8,1,0005,PB-JAL-0003-0005
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,5,2,0,agri,1676.9,0,0009,HP-UNA-0002-0009
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,1,1,agri,5005.8,0,0006,PB-JAL-0003-0006
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,5,1,2,agri,1119.4,1,0010,HP-UNA-0002-0010
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,7,0,0,residential,56.7,0,0007,PB-JAL-0003-0007
+PB-RDH-0001,SBS Nagar_V004,0004,SBS Nagar_Tehsil_1,SBS Nagar,SBS,Punjab,PB,0,5,2,2,barren,5406.2,0,0006,PB-SBS-0004-0006
+PB-RDH-0001,Bilaspur_V005,0005,Bilaspur_Tehsil_2,Bilaspur,BIL,Himachal Pradesh,HP,1,6,1,1,residential,925.1,0,0005,HP-BIL-0005-0005
+PB-RDH-0001,Una_V002,0002,Una_Tehsil_1,Una,UNA,Himachal Pradesh,HP,0,5,1,0,agri,480.4,0,0011,HP-UNA-0002-0011
+PB-RDH-0001,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,4,0,2,agri,3831.7,0,0008,PB-JAL-0003-0008
+PB-RDH-0001,Ludhiana_V008,0008,Ludhiana_Tehsil_2,Ludhiana,LDH,Punjab,PB,0,7,1,0,agri,606.5,0,0004,PB-LDH-0008-0004
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,1,5,2,1,agri,78.0,0,0001,PB-AMR-0006-0001
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,4,0,4,agri,1557.9,0,0002,PB-AMR-0006-0002
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,8,1,2,agri,684.9,1,0003,PB-AMR-0006-0003
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,5,0,1,agri,866.0,1,0004,PB-AMR-0006-0004
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,9,1,1,agri,16363.8,1,0005,PB-AMR-0006-0005
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,4,1,1,orchard,630.6,0,0006,PB-AMR-0006-0006
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,5,0,0,barren,5565.0,0,0007,PB-AMR-0006-0007
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,5,0,0,agri,1151.1,0,0008,PB-AMR-0006-0008
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,5,1,3,orchard,2112.3,0,0009,PB-AMR-0006-0009
+PB-DAM-0001,Amritsar_V006,0006,Amritsar_Tehsil_3,Amritsar,AMR,Punjab,PB,0,4,1,1,agri,1489.5,0,0010,PB-AMR-0006-0010
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,5,0,0,agri,8090.1,0,0001,UK-HRD-0005-0001
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,4,1,1,agri,11877.7,0,0002,UK-HRD-0005-0002
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,2,1,0,agri,3997.0,0,0003,UK-HRD-0005-0003
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,4,1,1,agri,2303.9,1,0004,UK-HRD-0005-0004
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,11,1,2,barren,15021.5,1,0005,UK-HRD-0005-0005
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,1,4,2,0,orchard,2305.3,0,0006,UK-HRD-0005-0006
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,1,4,0,1,orchard,976.8,0,0007,UK-HRD-0005-0007
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,5,2,2,residential,601.3,0,0008,UK-HRD-0005-0008
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,3,2,1,barren,1408.5,0,0009,UK-HRD-0005-0009
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,7,1,0,orchard,1039.9,0,0010,UK-HRD-0005-0010
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,1,4,2,0,agri,377.2,0,0011,UK-HRD-0005-0011
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,1,9,0,2,residential,608.4,1,0012,UK-HRD-0005-0012
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,7,1,0,agri,929.7,0,0013,UK-HRD-0005-0013
+UK-IRR-0001,Haridwar_V005,0005,Haridwar_Tehsil_3,Haridwar,HRD,Uttarakhand,UK,0,4,2,1,agri,584.2,0,0014,UK-HRD-0005-0014
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,7,1,1,agri,3760.9,0,0001,HP-KUL-0005-0001
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,6,1,3,orchard,4063.1,0,0002,HP-KUL-0005-0002
+HP-IRR-0001,Kullu_V006,0006,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,5,2,1,orchard,412.3,0,0001,HP-KUL-0006-0001
+HP-IRR-0001,Kullu_V006,0006,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,3,2,0,agri,1806.8,0,0002,HP-KUL-0006-0002
+HP-IRR-0001,Kullu_V006,0006,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,7,2,2,agri,1482.7,0,0003,HP-KUL-0006-0003
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,6,2,0,residential,20.0,1,0003,HP-KUL-0005-0003
+HP-IRR-0001,Kullu_V006,0006,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,1,6,0,1,residential,230.9,0,0004,HP-KUL-0006-0004
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,6,1,0,residential,160.0,0,0004,HP-KUL-0005-0004
+HP-IRR-0001,Kullu_V006,0006,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,1,3,0,1,orchard,961.0,0,0005,HP-KUL-0006-0005
+HP-IRR-0001,Kullu_V006,0006,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,6,2,1,agri,6857.4,0,0006,HP-KUL-0006-0006
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,7,0,0,agri,843.4,0,0005,HP-KUL-0005-0005
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,10,1,0,residential,1251.5,0,0006,HP-KUL-0005-0006
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,9,3,1,agri,5404.0,0,0007,HP-KUL-0005-0007
+HP-IRR-0001,Kullu_V006,0006,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,3,0,0,orchard,1579.3,1,0007,HP-KUL-0006-0007
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,5,2,3,orchard,413.2,0,0008,HP-KUL-0005-0008
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,6,3,1,barren,15570.2,0,0009,HP-KUL-0005-0009
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,2,0,0,orchard,1159.0,0,0010,HP-KUL-0005-0010
+HP-IRR-0001,Kullu_V005,0005,Kullu_Tehsil_2,Kullu,KUL,Himachal Pradesh,HP,0,9,2,1,agri,989.0,0,0011,HP-KUL-0005-0011
+PB-IND-0001,Kapurthala_V004,0004,Kapurthala_Tehsil_2,Kapurthala,KPT,Punjab,PB,0,4,0,0,residential,769.8,0,0001,PB-KPT-0004-0001
+PB-IND-0001,Kapurthala_V004,0004,Kapurthala_Tehsil_2,Kapurthala,KPT,Punjab,PB,0,5,3,2,agri,2756.6,0,0002,PB-KPT-0004-0002
+PB-IND-0001,Kapurthala_V004,0004,Kapurthala_Tehsil_2,Kapurthala,KPT,Punjab,PB,0,3,2,0,residential,440.4,0,0003,PB-KPT-0004-0003
+PB-IND-0001,Kapurthala_V002,0002,Kapurthala_Tehsil_1,Kapurthala,KPT,Punjab,PB,0,5,2,0,barren,780.6,0,0001,PB-KPT-0002-0001
+PB-IND-0001,Kapurthala_V002,0002,Kapurthala_Tehsil_1,Kapurthala,KPT,Punjab,PB,1,3,1,0,agri,5553.3,0,0002,PB-KPT-0002-0002
+PB-IND-0001,Kapurthala_V002,0002,Kapurthala_Tehsil_1,Kapurthala,KPT,Punjab,PB,0,4,2,1,orchard,463.1,0,0003,PB-KPT-0002-0003
+PB-IND-0001,Kapurthala_V002,0002,Kapurthala_Tehsil_1,Kapurthala,KPT,Punjab,PB,0,9,1,2,agri,1700.8,0,0004,PB-KPT-0002-0004
+PB-IND-0001,Kapurthala_V004,0004,Kapurthala_Tehsil_2,Kapurthala,KPT,Punjab,PB,0,7,1,1,barren,1082.9,0,0004,PB-KPT-0004-0004
+PB-IND-0001,Kapurthala_V004,0004,Kapurthala_Tehsil_2,Kapurthala,KPT,Punjab,PB,0,7,3,1,barren,5074.5,1,0005,PB-KPT-0004-0005
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,5,1,0,barren,1947.4,1,0001,PB-MKT-0002-0001
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,1,7,4,1,agri,1718.6,0,0002,PB-MKT-0002-0002
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,3,0,0,orchard,1281.7,0,0003,PB-MKT-0002-0003
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,2,1,2,orchard,637.2,0,0004,PB-MKT-0002-0004
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,9,1,1,orchard,5903.4,0,0005,PB-MKT-0002-0005
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,2,0,0,orchard,2548.2,0,0006,PB-MKT-0002-0006
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,9,0,0,agri,1101.0,1,0007,PB-MKT-0002-0007
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,4,1,1,residential,158.8,0,0008,PB-MKT-0002-0008
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,7,1,1,agri,3264.2,0,0009,PB-MKT-0002-0009
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,6,1,0,barren,2470.6,1,0010,PB-MKT-0002-0010
+PB-DAM-0002,Sri Muktsar Sahib_V002,0002,Sri Muktsar Sahib_Tehsil_1,Sri Muktsar Sahib,MKT,Punjab,PB,0,8,0,0,agri,766.3,0,0011,PB-MKT-0002-0011
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,7,1,0,orchard,1073.0,0,0009,PB-JAL-0003-0009
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,10,2,0,agri,809.0,0,0010,PB-JAL-0003-0010
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,1,5,1,3,barren,4889.1,0,0011,PB-JAL-0003-0011
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,3,2,1,agri,829.9,0,0012,PB-JAL-0003-0012
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,7,4,1,barren,3731.1,0,0013,PB-JAL-0003-0013
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,0,1,agri,5244.2,0,0014,PB-JAL-0003-0014
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,7,1,0,residential,145.8,1,0015,PB-JAL-0003-0015
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,8,2,1,agri,1495.5,0,0016,PB-JAL-0003-0016
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,0,2,residential,42.6,0,0017,PB-JAL-0003-0017
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,6,1,1,orchard,989.1,1,0018,PB-JAL-0003-0018
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,9,0,1,agri,6201.3,0,0019,PB-JAL-0003-0019
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,6,1,0,barren,7488.0,0,0020,PB-JAL-0003-0020
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,0,0,barren,3735.4,0,0021,PB-JAL-0003-0021
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,13,1,0,barren,2855.4,0,0022,PB-JAL-0003-0022
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,5,2,0,residential,659.2,0,0023,PB-JAL-0003-0023
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,2,1,2,orchard,9810.2,0,0024,PB-JAL-0003-0024
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,9,1,0,agri,2286.8,1,0025,PB-JAL-0003-0025
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,10,1,1,barren,6588.5,0,0026,PB-JAL-0003-0026
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,6,3,0,barren,2638.8,0,0027,PB-JAL-0003-0027
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,4,4,1,agri,3101.1,1,0028,PB-JAL-0003-0028
+PB-RDH-0002,Jalandhar_V003,0003,Jalandhar_Tehsil_1,Jalandhar,JAL,Punjab,PB,0,8,1,1,barren,921.8,0,0029,PB-JAL-0003-0029
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,1,0,2,agri,704.7,0,0001,UK-RDP-0003-0001
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,3,1,1,agri,407.6,0,0002,UK-RDP-0003-0002
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,2,0,0,residential,46.4,0,0003,UK-RDP-0003-0003
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,3,1,1,agri,6031.0,0,0004,UK-RDP-0003-0004
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,5,0,0,barren,3425.5,0,0005,UK-RDP-0003-0005
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,2,3,0,agri,1573.1,0,0006,UK-RDP-0003-0006
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,5,0,0,orchard,483.8,1,0007,UK-RDP-0003-0007
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,5,4,1,agri,7651.2,0,0008,UK-RDP-0003-0008
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,6,1,0,orchard,2372.8,0,0009,UK-RDP-0003-0009
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,3,1,1,agri,451.2,0,0010,UK-RDP-0003-0010
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,7,1,1,orchard,1241.4,0,0011,UK-RDP-0003-0011
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,7,2,2,agri,637.1,0,0012,UK-RDP-0003-0012
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,6,0,0,orchard,4685.4,0,0013,UK-RDP-0003-0013
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,5,1,1,agri,3591.4,0,0014,UK-RDP-0003-0014
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,4,0,0,barren,21044.5,0,0015,UK-RDP-0003-0015
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,5,0,0,agri,1343.0,0,0016,UK-RDP-0003-0016
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,4,1,2,residential,310.3,0,0017,UK-RDP-0003-0017
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,4,2,0,agri,2953.2,0,0018,UK-RDP-0003-0018
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,5,2,1,orchard,196.9,0,0019,UK-RDP-0003-0019
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,4,3,0,orchard,1053.1,0,0020,UK-RDP-0003-0020
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,6,0,0,agri,4732.1,0,0021,UK-RDP-0003-0021
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,7,2,0,agri,1507.8,1,0022,UK-RDP-0003-0022
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,7,0,0,residential,433.3,0,0023,UK-RDP-0003-0023
+UK-RDH-0001,Rudraprayag_V003,0003,Rudraprayag_Tehsil_1,Rudraprayag,RDP,Uttarakhand,UK,0,5,0,0,barren,516.8,0,0024,UK-RDP-0003-0024
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,3,1,2,agri,16711.9,1,0001,PB-FZK-0001-0001
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,3,2,0,barren,2758.1,0,0002,PB-FZK-0001-0002
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,4,3,2,barren,5252.6,0,0003,PB-FZK-0001-0003
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,7,0,0,agri,2102.2,0,0004,PB-FZK-0001-0004
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,2,1,0,barren,20504.7,0,0005,PB-FZK-0001-0005
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,5,3,0,barren,894.4,0,0006,PB-FZK-0001-0006
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,5,1,0,orchard,840.4,0,0007,PB-FZK-0001-0007
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,4,3,0,orchard,1424.5,0,0008,PB-FZK-0001-0008
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,4,0,3,agri,1663.0,0,0009,PB-FZK-0001-0009
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,5,2,0,barren,10997.5,0,0010,PB-FZK-0001-0010
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,5,3,0,agri,2258.7,1,0011,PB-FZK-0001-0011
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,1,6,2,1,orchard,418.6,0,0012,PB-FZK-0001-0012
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,0,5,0,1,barren,3180.3,0,0013,PB-FZK-0001-0013
+PB-IRR-0001,Fazilka_V001,0001,Fazilka_Tehsil_1,Fazilka,FZK,Punjab,PB,1,4,5,3,barren,9412.1,0,0014,PB-FZK-0001-0014
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,6,2,1,agri,446.0,0,0001,HP-KIN-0011-0001
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,9,1,1,residential,136.2,0,0002,HP-KIN-0011-0002
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,1,9,1,0,agri,14256.9,0,0003,HP-KIN-0011-0003
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,1,4,2,0,residential,171.7,1,0004,HP-KIN-0011-0004
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,5,1,2,agri,1976.4,0,0005,HP-KIN-0011-0005
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,1,1,0,agri,2617.1,0,0006,HP-KIN-0011-0006
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,8,0,2,barren,16869.2,1,0007,HP-KIN-0011-0007
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,6,3,1,agri,4974.8,0,0008,HP-KIN-0011-0008
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,4,2,1,orchard,1715.2,0,0009,HP-KIN-0011-0009
+HP-IRR-0002,Kinnaur_V011,0011,Kinnaur_Tehsil_3,Kinnaur,KIN,Himachal Pradesh,HP,0,6,2,1,orchard,163.5,0,0010,HP-KIN-0011-0010
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,2,0,2,agri,501.3,0,0001,HP-SOL-0003-0001
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,7,1,2,residential,887.0,0,0002,HP-SOL-0003-0002
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,6,1,0,orchard,886.6,0,0003,HP-SOL-0003-0003
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,4,2,3,residential,181.6,1,0004,HP-SOL-0003-0004
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,5,1,2,residential,459.7,0,0005,HP-SOL-0003-0005
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,7,0,1,agri,1499.5,1,0006,HP-SOL-0003-0006
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,5,3,2,barren,306.1,0,0007,HP-SOL-0003-0007
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,4,0,1,agri,1621.6,0,0008,HP-SOL-0003-0008
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,1,3,2,1,agri,768.8,0,0009,HP-SOL-0003-0009
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,6,2,2,barren,2283.6,0,0010,HP-SOL-0003-0010
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,6,3,1,barren,11735.0,1,0011,HP-SOL-0003-0011
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,5,1,1,agri,961.8,0,0012,HP-SOL-0003-0012
+HP-RDH-0001,Solan_V003,0003,Solan_Tehsil_1,Solan,SOL,Himachal Pradesh,HP,0,9,1,1,orchard,2279.5,0,0013,HP-SOL-0003-0013
+HP-RLY-0001,Kinnaur_V006,0006,Kinnaur_Tehsil_2,Kinnaur,KIN,Himachal Pradesh,HP,1,5,1,0,barren,721.3,0,0001,HP-KIN-0006-0001
+HP-RLY-0001,Kinnaur_V006,0006,Kinnaur_Tehsil_2,Kinnaur,KIN,Himachal Pradesh,HP,0,5,0,1,residential,45.0,0,0002,HP-KIN-0006-0002
+HP-RLY-0001,Kinnaur_V006,0006,Kinnaur_Tehsil_2,Kinnaur,KIN,Himachal Pradesh,HP,0,6,2,2,residential,398.6,0,0003,HP-KIN-0006-0003
+HP-RLY-0001,Kinnaur_V006,0006,Kinnaur_Tehsil_2,Kinnaur,KIN,Himachal Pradesh,HP,0,6,1,0,barren,2003.4,0,0004,HP-KIN-0006-0004

@@ -4,7 +4,7 @@
   "description": "Pan-India (multi-state) schema. Mirrors HimBhoomi-style land records + RFCTLARR lifecycle timelines. Semantic IDs encode geography; models never see geo/identifier columns.",
   "id_formats": {
     "parcel_id": "<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>",
-    "project_id": "<STATE>-<TYPE>-<YEAR>-<SEQ>",
+    "project_id": "<STATE>-<TYPE>-<SEQ>",
     "home_state_rule": "For cross-state linear projects, the STATE in the project_id is the state of the first parcel on the path.",
     "consistency": "Parcel IDs are DERIVED from the parcel's assigned state/district/village (never independent)."
   },
@@ -68,7 +68,7 @@
     "projects": {
       "description": "Project-level record. One acquisition project aggregates many parcels. point or linear spatial type.",
       "fields": [
-        {"name": "project_id", "dtype": "string", "role": "identifier", "domain": "<STATE>-<TYPE>-<YEAR>-<SEQ>", "description": "Semantic project key (e.g. HP-DAM-2024-0001)"},
+        {"name": "project_id", "dtype": "string", "role": "identifier", "domain": "<STATE>-<TYPE>-<SEQ>", "description": "Semantic project key (e.g. HP-DAM-0001)"},
         {"name": "project_type", "dtype": "category", "role": "feature", "domain": ["road", "rail", "irrigation", "dam", "industrial"], "description": "Infrastructure type; drives base pace"},
         {"name": "spatial_type", "dtype": "category", "role": "support", "domain": ["point", "linear"], "description": "Spatial geometry of the project"},
         {"name": "coord_path", "dtype": "list[float,float]", "role": "geo_only", "domain": "ordered [lat,lon] village coords (linear only)", "description": "Ordered village coordinate path for linear projects"},

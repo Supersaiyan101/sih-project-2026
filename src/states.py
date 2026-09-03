@@ -74,7 +74,7 @@ STATES = {
     },
 }
 
-# project type -> short code (used in project ID <STATE>-<TYPE>-<YEAR>-<SEQ>)
+# project type -> short code (used in project ID <STATE>-<TYPE>-<SEQ>)
 PROJECT_TYPE_CODES = {
     "road": "RDH",
     "rail": "RLY",

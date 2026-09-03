@@ -4,7 +4,7 @@ Generates a HimBhoomi-style land-record dataset + RFCTLARR lifecycle timelines a
 three states (HP, Punjab, Uttarakhand) with:
 
   - semantic IDs: parcel `<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>`,
-                  project `<STATE>-<TYPE>-<YEAR>-<SEQ>` (home-state rule for cross-state)
+                  project `<STATE>-<TYPE>-<SEQ>` (home-state rule for cross-state)
   - spatial types: point projects (1 district) and linear projects (ordered village path
     via centroid-adjacency routing, may cross district/state borders)
   - hidden confounds: state_admin_capacity + district_admin_capacity; both partially
@@ -63,9 +63,6 @@ LAND_CLASS_W = [0.45, 0.20, 0.20, 0.15]
 
 COMPENSATION_STATUSES = ["paid", "partial", "pending"]
 COMPENSATION_W = [0.60, 0.25, 0.15]
-
-YEARS = [2021, 2022, 2023, 2024]
-YEAR_W = [0.15, 0.20, 0.30, 0.35]
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "data" / "generated"
 
@@ -195,8 +192,7 @@ def generate_projects(states_df, districts_df, villages_df, adjacency, rng):
     compensation = rng.choice(COMPENSATION_STATUSES, size=n, p=COMPENSATION_W)
     rehab = np.clip(100.0 - (affected / 5000.0) * 40.0 - rng.normal(10, 8, size=n), 0, 100)
 
-    # seq counter for project_id per (state, type, year)
-    year = rng.choice(YEARS, size=n, p=YEAR_W)
+    # seq counter for project_id per (state, type)
     seq_counter = {}
 
     rows = []
@@ -237,10 +233,9 @@ def generate_projects(states_df, districts_df, villages_df, adjacency, rng):
 
         # --- semantic project id ---
         type_code = PROJECT_TYPE_CODES[ptype]
-        y = int(year[i])
-        key = (home_state_code, type_code, y)
+        key = (home_state_code, type_code)
         seq_counter[key] = seq_counter.get(key, 0) + 1
-        pid = f"{home_state_code}-{type_code}-{y}-{seq_counter[key]:04d}"
+        pid = f"{home_state_code}-{type_code}-{seq_counter[key]:04d}"
 
         # --- institutional features proxy (state x district x individual) ---
         base_resp = rng.beta(4, 2)

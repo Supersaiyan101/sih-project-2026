@@ -215,7 +215,7 @@ Execute in order (dependency-sequenced). See README/DEMO_SCRIPT after Stage 6.
    historical_performance_score proxy BOTH; calibrated on a small sample before the one
    full regeneration.
 2. **IDs:** parcel `<STATE>-<DISTRICT_CODE>-<VILLAGE_CODE>-<KHASRA_NO>`; project
-   `<STATE>-<TYPE>-<YEAR>-<SEQ>`; cross-state project's STATE = home state (first path
+   `<STATE>-<TYPE>-<SEQ>`; cross-state project's STATE = home state (first path
    parcel). IDs derived from assigned geography (never independent).
 3. **Spatial:** point projects (1 district, 1–2 villages); linear projects via
    centroid-adjacency routing (nearest-village walk across district/state borders).

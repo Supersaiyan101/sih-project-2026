@@ -22,7 +22,7 @@ import pandas as pd
 GEN = Path(__file__).resolve().parent.parent / "data" / "generated"
 
 PARCEL_ID_RE = re.compile(r"^(HP|PB|UK)-[A-Z]{3}-\d{4}-\d{4}$")
-PROJECT_ID_RE = re.compile(r"^(HP|PB|UK)-(RDH|RLY|IRR|DAM|IND)-\d{4}-\d{4}$")
+PROJECT_ID_RE = re.compile(r"^(HP|PB|UK)-(RDH|RLY|IRR|DAM|IND)-\d{4}$")
 
 
 def load():
